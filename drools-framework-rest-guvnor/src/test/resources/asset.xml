@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<atom:entry xmlns:atom="http://www.w3.org/2005/Atom"
+            xml:base="http://localhost:8080/drools-guvnor/rest/packages/mortgages/assets/Underage">
+    <atom:title>Underage</atom:title>
+    <atom:id>http://localhost:8080/drools-guvnor/rest/packages/mortgages/assets/Underage</atom:id>
+    <atom:published>2008-10-01T04:54:34.716+02:00</atom:published>
+    <atom:author>
+        <atom:name>mic</atom:name>
+    </atom:author>
+    <atom:content src="http://localhost:8080/drools-guvnor/rest/packages/mortgages/assets/Underage/binary"
+                  type="application/octet-stream"/>
+    <atom:summary/>
+    <metadata>
+        <uuid>
+            <value>dffeb086-38e6-4ec0-aa2a-f7693fe2a6ef</value>
+        </uuid>
+        <format>
+            <value>brl</value>
+        </format>
+        <state>
+            <value>ESSAI</value>
+        </state>
+        <versionNumber>
+            <value>2</value>
+        </versionNumber>
+        <checkinComment>
+            <value/>
+        </checkinComment>
+        <archived>
+            <value>false</value>
+        </archived>
+    </metadata>
+</atom:entry>

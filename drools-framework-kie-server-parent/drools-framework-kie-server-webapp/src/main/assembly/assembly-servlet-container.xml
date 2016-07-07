@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2012 Red Hat, Inc. and/or its affiliates
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<assembly xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+
+    <!-- including a . in the id will modify the *classifier* of the artifact, instead of the name/id of the artifact -->
+    <id>webc</id><!-- 'webc' for Web Container (aka Servlet Container) -->
+    <formats>
+        <format>war</format>
+        <format>dir</format>
+    </formats>
+
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/src/main/webc-resources</directory>
+            <outputDirectory>.</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/docs</directory>
+            <outputDirectory>docs</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/rest-api-doc</directory>
+            <outputDirectory>docs</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+            <includes>
+                <include>org.drools:drools-core</include>
+                <include>org.drools:drools-compiler</include>
+                <include>org.eclipse.jdt.core.compiler:ecj</include>
+                <include>org.kie:kie-api</include>
+                <include>org.jbpm:jbpm-bpmn2</include>
+                <include>org.kie.server:kie-server-api</include>
+                <include>org.chtijbug.kieserver:drools-framework-kie-server-rest-drools</include>
+                <include>org.kie:kie-internal</include>
+                <include>org.chtijbug.kieserver:drools-framework-kie-server-services-drools</include>
+                <include>org.kie.server:kie-server-services-common</include>
+                <include>org.kie.server:kie-server-services-drools</include>
+                <include>org.kie.server:kie-server-services-jbpm</include>
+                <include>org.kie.server:kie-server-services-jbpm-ui</include>
+                <include>org.kie.server:kie-server-services-optaplanner</include>
+                <include>org.kie.server:kie-server-rest-common</include>
+                <include>org.kie.server:kie-server-rest-drools</include>
+                <include>org.kie.server:kie-server-rest-jbpm</include>
+                <include>org.kie.server:kie-server-rest-jbpm-ui</include>
+                <include>org.kie.server:kie-server-rest-optaplanner</include>
+                <include>org.kie:jbpm-process-svg</include>
+
+                <include>org.slf4j:slf4j-jdk14</include>
+
+                <include>org.hibernate.common:hibernate-commons-annotations</include>
+                <include>org.hibernate:hibernate-entitymanager</include>
+                <include>org.hibernate:hibernate-core</include>
+                <include>org.hibernate:hibernate-validator</include>
+                <include>dom4j:dom4j</include>
+                <include>xerces:xercesImpl</include>
+
+                <include>org.jboss.spec.javax.jms:jboss-jms-api_1.1_spec</include>
+
+                <include>org.quartz-scheduler:quartz</include>
+
+                <include>org.sonatype.sisu.inject:guice-servlet</include>
+                <include>org.codehaus.jackson:jackson-core-asl</include>
+            </includes>
+            <outputDirectory>WEB-INF/lib</outputDirectory>
+            <useTransitiveFiltering>true</useTransitiveFiltering>
+        </dependencySet>
+    </dependencySets>
+
+</assembly>

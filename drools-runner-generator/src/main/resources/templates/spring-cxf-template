@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+    <!--Needed Import for CXF Servlet-->
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+
+    <!-- Import spring beans from the current application -->
+    <import resource="classpath:spring/chtijbug-spring.xml" />
+
+
+    <!-- Web service endpoint definition -->
+    <jaxws:endpoint
+            id="ruleRunner"
+            implementor="#ruleRunnerService"
+            address="/ruleEngineService" />
+</beans>

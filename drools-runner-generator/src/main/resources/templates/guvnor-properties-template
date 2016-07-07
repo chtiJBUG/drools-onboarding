@@ -1,0 +1,6 @@
+chtijbug.guvnor.host=#HOSTNAME#
+chtijbug.guvnor.app=#WEBAPPNAME#
+chtijbug.guvnor.package=#PACKAGE#
+chtijbug.guvnor.version=LATEST
+chtijbug.guvnor.username=#USERNAME#
+chtijbug.guvnor.password=#PASSWORD#

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <action>
+        <actionName>run</actionName>
+        <goals>
+            <goal>process-classes</goal>
+            <goal>org.codehaus.mojo:exec-maven-plugin:1.2:exec</goal>
+        </goals>
+        <properties>
+            <exec.args>-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false
+                -Dcom.sun.management.jmxremote.port=20000 -Dcom.sun.management.jmxremote.ssl=false
+                -Djava.rmi.server.hostname=localhost -classpath %classpath org.chtijbug.drools.runtime.Main
+            </exec.args>
+            <exec.executable>java</exec.executable>
+            <exec.classpathScope>runtime</exec.classpathScope>
+        </properties>
+    </action>
+    <action>
+        <actionName>debug</actionName>
+        <goals>
+            <goal>process-classes</goal>
+            <goal>org.codehaus.mojo:exec-maven-plugin:1.2:exec</goal>
+        </goals>
+        <properties>
+            <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address}
+                -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false
+                -Dcom.sun.management.jmxremote.port=20000 -Dcom.sun.management.jmxremote.ssl=false
+                -Djava.rmi.server.hostname=localhost -classpath %classpath org.chtijbug.drools.runtime.Main
+            </exec.args>
+            <exec.executable>java</exec.executable>
+            <exec.classpathScope>runtime</exec.classpathScope>
+            <jpda.listen>true</jpda.listen>
+        </properties>
+    </action>
+    <action>
+        <actionName>profile</actionName>
+        <goals>
+            <goal>process-classes</goal>
+            <goal>org.codehaus.mojo:exec-maven-plugin:1.2:exec</goal>
+        </goals>
+        <properties>
+            <exec.args>${profiler.args} -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false
+                -Dcom.sun.management.jmxremote.port=20000 -Dcom.sun.management.jmxremote.ssl=false
+                -Djava.rmi.server.hostname=localhost -classpath %classpath org.chtijbug.drools.runtime.Main
+            </exec.args>
+            <exec.executable>${profiler.java}</exec.executable>
+            <profiler.action>profile</profiler.action>
+        </properties>
+    </action>
+</actions>

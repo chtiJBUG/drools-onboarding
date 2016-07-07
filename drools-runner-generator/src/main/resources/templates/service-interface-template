@@ -1,0 +1,32 @@
+
+package org.chtijbug.drools.ws;
+
+#INPUT_CLASS_IMPORT#
+#OUTPUT_CLASS_IMPORT#
+
+import javax.jws.WebParam;
+import javax.jws.WebService;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: smangot
+ * Date: 14/09/12
+ * Time: 09:00
+ */
+@WebService
+public interface RulesRunnerService {
+
+    /**
+     * @param input
+     * @return
+     */
+    #OUTPUT_CLASS_NAME# executeRuleEngine(@WebParam(name="#INPUT_PARAM_NAME#") #INPUT_CLASS_NAME# input);
+
+    /**
+     * The method starts the specified process with the input element fact argument
+     * @param input The input object
+     * @param processName The process name to start
+     * @return the input object updated through the rule engine execution
+     */
+    #OUTPUT_CLASS_NAME# executeProcess(@WebParam(name="#INPUT_PARAM_NAME#") #INPUT_CLASS_NAME# input, @WebParam(name="processName") String processName);
+}

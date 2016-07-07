@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>drools-framework-parent</artifactId>
+        <groupId>org.chtijbug.drools</groupId>
+        <version>2.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>drools-framework-examples</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>drools-framework-loyalty-model</module>
+        <module>drools-framework-swimming-pool-model</module>
+        <module>swimming-pool-kie-server</module>
+        <module>drools-framework-swimming-pool-rest-connector</module>
+        <module>drools-framework-swimmingpool-web-ui</module>
+
+
+    </modules>
+
+</project>

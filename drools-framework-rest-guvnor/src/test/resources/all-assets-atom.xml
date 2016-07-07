@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<atom:feed xmlns:atom="http://www.w3.org/2005/Atom">
+    <atom:title type="text">amag-asset-feed</atom:title>
+    <atom:entry xml:base="pojoModel">
+        <atom:title type="text">pojoModel</atom:title>
+        <atom:id>pojoModel</atom:id>
+        <atom:published>2013-02-25T09:22:42.523+01:00</atom:published>
+        <atom:author>
+            <atom:name>admin</atom:name>
+        </atom:author>
+        <atom:content type="application/octet-stream" src="assets/pojoModel/binary"/>
+        <atom:summary type="text"/>
+        <metadata>
+            <uuid>
+                <value>8b170c88-d3c9-4a63-b2d7-358ed127a1c7</value>
+            </uuid>
+            <categories/>
+            <format>
+                <value>jar</value>
+            </format>
+            <state>
+                <value>Draft</value>
+            </state>
+            <versionNumber>
+                <value>187</value>
+            </versionNumber>
+            <checkinComment>
+                <value/>
+            </checkinComment>
+            <archived>
+                <value>false</value>
+            </archived>
+        </metadata>
+    </atom:entry>
+    <atom:entry xml:base="assets/drools">
+        <atom:title type="text">drools</atom:title>
+        <atom:id>assets/drools</atom:id>
+        <atom:published>2013-02-25T09:22:00.394+01:00</atom:published>
+        <atom:author>
+            <atom:name>admin</atom:name>
+        </atom:author>
+        <atom:content type="application/octet-stream" src="assets/drools/binary"/>
+        <atom:summary type="text"/>
+        <metadata>
+            <uuid>
+                <value>8358064c-137f-4e1a-8d1b-94632dd13e8b</value>
+            </uuid>
+            <categories/>
+            <format>
+                <value>package</value>
+            </format>
+            <state>
+                <value>Draft</value>
+            </state>
+            <versionNumber>
+                <value>174</value>
+            </versionNumber>
+            <checkinComment>
+                <value/>
+            </checkinComment>
+            <archived>
+                <value>false</value>
+            </archived>
+        </metadata>
+    </atom:entry>
+    <atom:entry xml:base="assets/YellowredRule_31.06">
+        <atom:title type="text">YellowredRule_31.06</atom:title>
+        <atom:id>assets/YellowredRule_31.06</atom:id>
+        <atom:published>2012-11-30T12:07:10.155+01:00</atom:published>
+        <atom:author>
+            <atom:name>admin</atom:name>
+        </atom:author>
+        <atom:content type="application/octet-stream" src="assets/YellowredRule_31.06/binary"/>
+        <atom:summary type="text"/>
+        <metadata>
+            <uuid>
+                <value>5eee3169-c67f-4c7b-b5bf-1d802621f21b</value>
+            </uuid>
+            <categories>
+                <value>yellowred_rules</value>
+            </categories>
+            <format>
+                <value>brl</value>
+            </format>
+            <state>
+                <value>Draft</value>
+            </state>
+            <versionNumber>
+                <value>10</value>
+            </versionNumber>
+            <checkinComment>
+                <value/>
+            </checkinComment>
+            <archived>
+                <value>false</value>
+            </archived>
+        </metadata>
+    </atom:entry>
+</atom:feed>
