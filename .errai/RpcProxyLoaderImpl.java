@@ -637,42 +637,6 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
         return new org_kie_workbench_common_screens_datamodeller_service_DataModelerServiceImpl();
       }
     });
-    class org_uberfire_ext_editor_commons_service_DeleteServiceImpl extends AbstractRpcProxy implements DeleteService { public void deleteIfExists(final Collection a0, final String a1) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.uberfire.ext.editor.commons.service.DeleteService").endpoint("deleteIfExists:java.util.Collection:java.lang.String:", qualifiers, new Object[] { a0, a1 }).respondTo(void.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.uberfire.ext.editor.commons.service.DeleteService").endpoint("deleteIfExists:java.util.Collection:java.lang.String:", qualifiers, new Object[] { a0, a1 }).respondTo(void.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_uberfire_ext_editor_commons_service_DeleteServiceImpl.this.sendRequest(bus, sendable);
-      }
-
-      public boolean hasRestriction(final Path a0) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.uberfire.ext.editor.commons.service.DeleteService").endpoint("hasRestriction:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(Boolean.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.uberfire.ext.editor.commons.service.DeleteService").endpoint("hasRestriction:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(Boolean.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_uberfire_ext_editor_commons_service_DeleteServiceImpl.this.sendRequest(bus, sendable);
-        return false;
-      }
-
-      public void delete(final Path a0, final String a1) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.uberfire.ext.editor.commons.service.DeleteService").endpoint("delete:org.uberfire.backend.vfs.Path:java.lang.String:", qualifiers, new Object[] { a0, a1 }).respondTo(void.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.uberfire.ext.editor.commons.service.DeleteService").endpoint("delete:org.uberfire.backend.vfs.Path:java.lang.String:", qualifiers, new Object[] { a0, a1 }).respondTo(void.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_uberfire_ext_editor_commons_service_DeleteServiceImpl.this.sendRequest(bus, sendable);
-      }
-    }
-    RemoteServiceProxyFactory.addRemoteProxy(DeleteService.class, new ProxyProvider() {
-      public Object getProxy() {
-        return new org_uberfire_ext_editor_commons_service_DeleteServiceImpl();
-      }
-    });
     class org_kie_workbench_common_screens_datamodeller_service_PersistenceDescriptorServiceImpl extends AbstractRpcProxy implements PersistenceDescriptorService { public PersistenceDescriptorModel createProjectDefaultDescriptor(final Path a0) {
         RemoteCallSendable sendable = null;
         if (errorCallback == null) {
@@ -755,6 +719,42 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
         return new org_kie_workbench_common_screens_datamodeller_service_PersistenceDescriptorServiceImpl();
       }
     });
+    class org_uberfire_ext_editor_commons_service_DeleteServiceImpl extends AbstractRpcProxy implements DeleteService { public void deleteIfExists(final Collection a0, final String a1) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.uberfire.ext.editor.commons.service.DeleteService").endpoint("deleteIfExists:java.util.Collection:java.lang.String:", qualifiers, new Object[] { a0, a1 }).respondTo(void.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.uberfire.ext.editor.commons.service.DeleteService").endpoint("deleteIfExists:java.util.Collection:java.lang.String:", qualifiers, new Object[] { a0, a1 }).respondTo(void.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_uberfire_ext_editor_commons_service_DeleteServiceImpl.this.sendRequest(bus, sendable);
+      }
+
+      public boolean hasRestriction(final Path a0) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.uberfire.ext.editor.commons.service.DeleteService").endpoint("hasRestriction:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(Boolean.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.uberfire.ext.editor.commons.service.DeleteService").endpoint("hasRestriction:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(Boolean.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_uberfire_ext_editor_commons_service_DeleteServiceImpl.this.sendRequest(bus, sendable);
+        return false;
+      }
+
+      public void delete(final Path a0, final String a1) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.uberfire.ext.editor.commons.service.DeleteService").endpoint("delete:org.uberfire.backend.vfs.Path:java.lang.String:", qualifiers, new Object[] { a0, a1 }).respondTo(void.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.uberfire.ext.editor.commons.service.DeleteService").endpoint("delete:org.uberfire.backend.vfs.Path:java.lang.String:", qualifiers, new Object[] { a0, a1 }).respondTo(void.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_uberfire_ext_editor_commons_service_DeleteServiceImpl.this.sendRequest(bus, sendable);
+      }
+    }
+    RemoteServiceProxyFactory.addRemoteProxy(DeleteService.class, new ProxyProvider() {
+      public Object getProxy() {
+        return new org_uberfire_ext_editor_commons_service_DeleteServiceImpl();
+      }
+    });
     class org_uberfire_backend_plugin_RuntimePluginsServiceImpl extends AbstractRpcProxy implements RuntimePluginsService { public Collection listFramworksContent() {
         RemoteCallSendable sendable = null;
         if (errorCallback == null) {
@@ -793,6 +793,33 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
         return new org_uberfire_backend_plugin_RuntimePluginsServiceImpl();
       }
     });
+    class org_jbpm_console_ng_ht_service_TaskFormManagementServiceImpl extends AbstractRpcProxy implements TaskFormManagementService { public List getAvailableDeployments() {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.ht.service.TaskFormManagementService").endpoint("getAvailableDeployments:", qualifiers, new Object[] { }).respondTo(List.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.ht.service.TaskFormManagementService").endpoint("getAvailableDeployments:", qualifiers, new Object[] { }).respondTo(List.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_jbpm_console_ng_ht_service_TaskFormManagementServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+
+      public List getFormsByDeployment(final String a0) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.ht.service.TaskFormManagementService").endpoint("getFormsByDeployment:java.lang.String:", qualifiers, new Object[] { a0 }).respondTo(List.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.ht.service.TaskFormManagementService").endpoint("getFormsByDeployment:java.lang.String:", qualifiers, new Object[] { a0 }).respondTo(List.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_jbpm_console_ng_ht_service_TaskFormManagementServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+    }
+    RemoteServiceProxyFactory.addRemoteProxy(TaskFormManagementService.class, new ProxyProvider() {
+      public Object getProxy() {
+        return new org_jbpm_console_ng_ht_service_TaskFormManagementServiceImpl();
+      }
+    });
     class org_uberfire_ext_editor_commons_version_VersionServiceImpl extends AbstractRpcProxy implements VersionService { public List getVersions(final Path a0) {
         RemoteCallSendable sendable = null;
         if (errorCallback == null) {
@@ -829,33 +856,6 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
     RemoteServiceProxyFactory.addRemoteProxy(VersionService.class, new ProxyProvider() {
       public Object getProxy() {
         return new org_uberfire_ext_editor_commons_version_VersionServiceImpl();
-      }
-    });
-    class org_jbpm_console_ng_ht_service_TaskFormManagementServiceImpl extends AbstractRpcProxy implements TaskFormManagementService { public List getAvailableDeployments() {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.ht.service.TaskFormManagementService").endpoint("getAvailableDeployments:", qualifiers, new Object[] { }).respondTo(List.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.ht.service.TaskFormManagementService").endpoint("getAvailableDeployments:", qualifiers, new Object[] { }).respondTo(List.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_jbpm_console_ng_ht_service_TaskFormManagementServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-
-      public List getFormsByDeployment(final String a0) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.ht.service.TaskFormManagementService").endpoint("getFormsByDeployment:java.lang.String:", qualifiers, new Object[] { a0 }).respondTo(List.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.ht.service.TaskFormManagementService").endpoint("getFormsByDeployment:java.lang.String:", qualifiers, new Object[] { a0 }).respondTo(List.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_jbpm_console_ng_ht_service_TaskFormManagementServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-    }
-    RemoteServiceProxyFactory.addRemoteProxy(TaskFormManagementService.class, new ProxyProvider() {
-      public Object getProxy() {
-        return new org_jbpm_console_ng_ht_service_TaskFormManagementServiceImpl();
       }
     });
     class org_jbpm_console_ng_ga_forms_service_FormServiceEntryPointImpl extends AbstractRpcProxy implements FormServiceEntryPoint { public String getFormDisplayTask(final long a0) {
@@ -3537,22 +3537,6 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
         return new org_drools_workbench_screens_enums_service_EnumServiceImpl();
       }
     });
-    class org_kie_workbench_common_services_shared_rulename_RuleNamesServiceImpl extends AbstractRpcProxy implements RuleNamesService { public Collection getRuleNames(final Path a0, final String a1) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.kie.workbench.common.services.shared.rulename.RuleNamesService").endpoint("getRuleNames:org.uberfire.backend.vfs.Path:java.lang.String:", qualifiers, new Object[] { a0, a1 }).respondTo(Collection.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.kie.workbench.common.services.shared.rulename.RuleNamesService").endpoint("getRuleNames:org.uberfire.backend.vfs.Path:java.lang.String:", qualifiers, new Object[] { a0, a1 }).respondTo(Collection.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_kie_workbench_common_services_shared_rulename_RuleNamesServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-    }
-    RemoteServiceProxyFactory.addRemoteProxy(RuleNamesService.class, new ProxyProvider() {
-      public Object getProxy() {
-        return new org_kie_workbench_common_services_shared_rulename_RuleNamesServiceImpl();
-      }
-    });
     class org_jboss_errai_security_shared_service_AuthenticationServiceImpl extends AbstractRpcProxy implements AuthenticationService { public User login(final String a0, final String a1) {
         try {
           final CallContextStatus status = new CallContextStatus(AuthenticationServiceInterceptor.class);
@@ -3883,6 +3867,22 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
     RemoteServiceProxyFactory.addRemoteProxy(AuthenticationService.class, new ProxyProvider() {
       public Object getProxy() {
         return new org_jboss_errai_security_shared_service_AuthenticationServiceImpl();
+      }
+    });
+    class org_kie_workbench_common_services_shared_rulename_RuleNamesServiceImpl extends AbstractRpcProxy implements RuleNamesService { public Collection getRuleNames(final Path a0, final String a1) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.kie.workbench.common.services.shared.rulename.RuleNamesService").endpoint("getRuleNames:org.uberfire.backend.vfs.Path:java.lang.String:", qualifiers, new Object[] { a0, a1 }).respondTo(Collection.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.kie.workbench.common.services.shared.rulename.RuleNamesService").endpoint("getRuleNames:org.uberfire.backend.vfs.Path:java.lang.String:", qualifiers, new Object[] { a0, a1 }).respondTo(Collection.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_kie_workbench_common_services_shared_rulename_RuleNamesServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+    }
+    RemoteServiceProxyFactory.addRemoteProxy(RuleNamesService.class, new ProxyProvider() {
+      public Object getProxy() {
+        return new org_kie_workbench_common_services_shared_rulename_RuleNamesServiceImpl();
       }
     });
     class org_guvnor_inbox_service_InboxServiceImpl extends AbstractRpcProxy implements InboxService { public PageResponse loadInbox(final InboxPageRequest a0) {
@@ -4957,66 +4957,6 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
         return new org_kie_uberfire_social_activities_service_SocialTypeTimelinePagedRepositoryAPIImpl();
       }
     });
-    class org_uberfire_backend_vfs_VFSLockServiceImpl extends AbstractRpcProxy implements VFSLockService { public LockResult acquireLock(final Path a0) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("acquireLock:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockResult.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("acquireLock:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockResult.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_uberfire_backend_vfs_VFSLockServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-
-      public LockResult releaseLock(final Path a0) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("releaseLock:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockResult.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("releaseLock:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockResult.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_uberfire_backend_vfs_VFSLockServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-
-      public LockResult forceReleaseLock(final Path a0) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("forceReleaseLock:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockResult.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("forceReleaseLock:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockResult.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_uberfire_backend_vfs_VFSLockServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-
-      public LockInfo retrieveLockInfo(final Path a0) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("retrieveLockInfo:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockInfo.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("retrieveLockInfo:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockInfo.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_uberfire_backend_vfs_VFSLockServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-
-      public List retrieveLockInfos(final Path a0, final boolean a1) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("retrieveLockInfos:org.uberfire.backend.vfs.Path:boolean:", qualifiers, new Object[] { a0, a1 }).respondTo(List.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("retrieveLockInfos:org.uberfire.backend.vfs.Path:boolean:", qualifiers, new Object[] { a0, a1 }).respondTo(List.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_uberfire_backend_vfs_VFSLockServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-    }
-    RemoteServiceProxyFactory.addRemoteProxy(VFSLockService.class, new ProxyProvider() {
-      public Object getProxy() {
-        return new org_uberfire_backend_vfs_VFSLockServiceImpl();
-      }
-    });
     class org_kie_workbench_common_services_shared_project_KieProjectServiceImpl extends AbstractRpcProxy implements KieProjectService { public KieProject resolveProject(final Path a0) {
         RemoteCallSendable sendable = null;
         if (errorCallback == null) {
@@ -5225,6 +5165,66 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
     RemoteServiceProxyFactory.addRemoteProxy(KieProjectService.class, new ProxyProvider() {
       public Object getProxy() {
         return new org_kie_workbench_common_services_shared_project_KieProjectServiceImpl();
+      }
+    });
+    class org_uberfire_backend_vfs_VFSLockServiceImpl extends AbstractRpcProxy implements VFSLockService { public LockResult acquireLock(final Path a0) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("acquireLock:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockResult.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("acquireLock:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockResult.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_uberfire_backend_vfs_VFSLockServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+
+      public LockResult releaseLock(final Path a0) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("releaseLock:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockResult.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("releaseLock:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockResult.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_uberfire_backend_vfs_VFSLockServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+
+      public LockResult forceReleaseLock(final Path a0) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("forceReleaseLock:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockResult.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("forceReleaseLock:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockResult.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_uberfire_backend_vfs_VFSLockServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+
+      public LockInfo retrieveLockInfo(final Path a0) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("retrieveLockInfo:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockInfo.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("retrieveLockInfo:org.uberfire.backend.vfs.Path:", qualifiers, new Object[] { a0 }).respondTo(LockInfo.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_uberfire_backend_vfs_VFSLockServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+
+      public List retrieveLockInfos(final Path a0, final boolean a1) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("retrieveLockInfos:org.uberfire.backend.vfs.Path:boolean:", qualifiers, new Object[] { a0, a1 }).respondTo(List.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.uberfire.backend.vfs.VFSLockService").endpoint("retrieveLockInfos:org.uberfire.backend.vfs.Path:boolean:", qualifiers, new Object[] { a0, a1 }).respondTo(List.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_uberfire_backend_vfs_VFSLockServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+    }
+    RemoteServiceProxyFactory.addRemoteProxy(VFSLockService.class, new ProxyProvider() {
+      public Object getProxy() {
+        return new org_uberfire_backend_vfs_VFSLockServiceImpl();
       }
     });
     class org_uberfire_ext_apps_api_AppsPersistenceAPIImpl extends AbstractRpcProxy implements AppsPersistenceAPI { public Directory getRootDirectory() {
@@ -6806,44 +6806,6 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
         return new org_guvnor_structure_repositories_RepositoryServiceEditorImpl();
       }
     });
-    class org_jbpm_console_ng_pr_service_ProcessInstanceServiceImpl extends AbstractRpcProxy implements ProcessInstanceService { public PageResponse getData(final QueryFilter a0) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.pr.service.ProcessInstanceService").endpoint("getData:org.jbpm.console.ng.ga.model.QueryFilter:", qualifiers, new Object[] { a0 }).respondTo(PageResponse.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.pr.service.ProcessInstanceService").endpoint("getData:org.jbpm.console.ng.ga.model.QueryFilter:", qualifiers, new Object[] { a0 }).respondTo(PageResponse.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_jbpm_console_ng_pr_service_ProcessInstanceServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-
-      public ProcessInstanceSummary getItem(final ProcessInstanceKey a0) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.pr.service.ProcessInstanceService").endpoint("getItem:org.jbpm.console.ng.pr.model.ProcessInstanceKey:", qualifiers, new Object[] { a0 }).respondTo(ProcessInstanceSummary.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.pr.service.ProcessInstanceService").endpoint("getItem:org.jbpm.console.ng.pr.model.ProcessInstanceKey:", qualifiers, new Object[] { a0 }).respondTo(ProcessInstanceSummary.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_jbpm_console_ng_pr_service_ProcessInstanceServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-
-      public List getAll(final QueryFilter a0) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.pr.service.ProcessInstanceService").endpoint("getAll:org.jbpm.console.ng.ga.model.QueryFilter:", qualifiers, new Object[] { a0 }).respondTo(List.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.pr.service.ProcessInstanceService").endpoint("getAll:org.jbpm.console.ng.ga.model.QueryFilter:", qualifiers, new Object[] { a0 }).respondTo(List.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_jbpm_console_ng_pr_service_ProcessInstanceServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-    }
-    RemoteServiceProxyFactory.addRemoteProxy(ProcessInstanceService.class, new ProxyProvider() {
-      public Object getProxy() {
-        return new org_jbpm_console_ng_pr_service_ProcessInstanceServiceImpl();
-      }
-    });
     class org_uberfire_ext_security_management_api_service_UserManagerServiceImpl extends AbstractRpcProxy implements UserManagerService { public void assignGroups(final String a0, final Collection a1) {
         RemoteCallSendable sendable = null;
         if (errorCallback == null) {
@@ -6997,6 +6959,44 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
     RemoteServiceProxyFactory.addRemoteProxy(TaskLifeCycleService.class, new ProxyProvider() {
       public Object getProxy() {
         return new org_jbpm_console_ng_ht_service_TaskLifeCycleServiceImpl();
+      }
+    });
+    class org_jbpm_console_ng_pr_service_ProcessInstanceServiceImpl extends AbstractRpcProxy implements ProcessInstanceService { public PageResponse getData(final QueryFilter a0) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.pr.service.ProcessInstanceService").endpoint("getData:org.jbpm.console.ng.ga.model.QueryFilter:", qualifiers, new Object[] { a0 }).respondTo(PageResponse.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.pr.service.ProcessInstanceService").endpoint("getData:org.jbpm.console.ng.ga.model.QueryFilter:", qualifiers, new Object[] { a0 }).respondTo(PageResponse.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_jbpm_console_ng_pr_service_ProcessInstanceServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+
+      public ProcessInstanceSummary getItem(final ProcessInstanceKey a0) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.pr.service.ProcessInstanceService").endpoint("getItem:org.jbpm.console.ng.pr.model.ProcessInstanceKey:", qualifiers, new Object[] { a0 }).respondTo(ProcessInstanceSummary.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.pr.service.ProcessInstanceService").endpoint("getItem:org.jbpm.console.ng.pr.model.ProcessInstanceKey:", qualifiers, new Object[] { a0 }).respondTo(ProcessInstanceSummary.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_jbpm_console_ng_pr_service_ProcessInstanceServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+
+      public List getAll(final QueryFilter a0) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.pr.service.ProcessInstanceService").endpoint("getAll:org.jbpm.console.ng.ga.model.QueryFilter:", qualifiers, new Object[] { a0 }).respondTo(List.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.jbpm.console.ng.pr.service.ProcessInstanceService").endpoint("getAll:org.jbpm.console.ng.ga.model.QueryFilter:", qualifiers, new Object[] { a0 }).respondTo(List.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_jbpm_console_ng_pr_service_ProcessInstanceServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+    }
+    RemoteServiceProxyFactory.addRemoteProxy(ProcessInstanceService.class, new ProxyProvider() {
+      public Object getProxy() {
+        return new org_jbpm_console_ng_pr_service_ProcessInstanceServiceImpl();
       }
     });
     class org_drools_workbench_screens_guided_scorecard_service_GuidedScoreCardEditorServiceImpl extends AbstractRpcProxy implements GuidedScoreCardEditorService { public ScoreCardModelContent loadContent(final Path a0) {
@@ -7342,6 +7342,22 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
         return new org_kie_workbench_common_screens_social_hp_config_SocialConfigurationServiceImpl();
       }
     });
+    class org_kie_workbench_common_screens_home_service_HomeServiceImpl extends AbstractRpcProxy implements HomeService { public Collection getOrganizationalUnits() {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.kie.workbench.common.screens.home.service.HomeService").endpoint("getOrganizationalUnits:", qualifiers, new Object[] { }).respondTo(Collection.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.kie.workbench.common.screens.home.service.HomeService").endpoint("getOrganizationalUnits:", qualifiers, new Object[] { }).respondTo(Collection.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_kie_workbench_common_screens_home_service_HomeServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+    }
+    RemoteServiceProxyFactory.addRemoteProxy(HomeService.class, new ProxyProvider() {
+      public Object getProxy() {
+        return new org_kie_workbench_common_screens_home_service_HomeServiceImpl();
+      }
+    });
     class org_jbpm_console_ng_bd_service_KieSessionEntryPointImpl extends AbstractRpcProxy implements KieSessionEntryPoint { public long startProcess(final String a0, final String a1) {
         RemoteCallSendable sendable = null;
         if (errorCallback == null) {
@@ -7462,20 +7478,20 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
         return new org_jbpm_console_ng_bd_service_KieSessionEntryPointImpl();
       }
     });
-    class org_kie_workbench_common_screens_home_service_HomeServiceImpl extends AbstractRpcProxy implements HomeService { public Collection getOrganizationalUnits() {
+    class org_guvnor_common_services_shared_config_ResourceConfigServiceImpl extends AbstractRpcProxy implements ResourceConfigService { public Map configAttrs(final Map a0) {
         RemoteCallSendable sendable = null;
         if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.kie.workbench.common.screens.home.service.HomeService").endpoint("getOrganizationalUnits:", qualifiers, new Object[] { }).respondTo(Collection.class, remoteCallback).defaultErrorHandling();
+          sendable = MessageBuilder.createCall().call("org.guvnor.common.services.shared.config.ResourceConfigService").endpoint("configAttrs:java.util.Map:", qualifiers, new Object[] { a0 }).respondTo(Map.class, remoteCallback).defaultErrorHandling();
         } else {
-          sendable = MessageBuilder.createCall().call("org.kie.workbench.common.screens.home.service.HomeService").endpoint("getOrganizationalUnits:", qualifiers, new Object[] { }).respondTo(Collection.class, remoteCallback).errorsHandledBy(errorCallback);
+          sendable = MessageBuilder.createCall().call("org.guvnor.common.services.shared.config.ResourceConfigService").endpoint("configAttrs:java.util.Map:", qualifiers, new Object[] { a0 }).respondTo(Map.class, remoteCallback).errorsHandledBy(errorCallback);
         }
-        org_kie_workbench_common_screens_home_service_HomeServiceImpl.this.sendRequest(bus, sendable);
+        org_guvnor_common_services_shared_config_ResourceConfigServiceImpl.this.sendRequest(bus, sendable);
         return null;
       }
     }
-    RemoteServiceProxyFactory.addRemoteProxy(HomeService.class, new ProxyProvider() {
+    RemoteServiceProxyFactory.addRemoteProxy(ResourceConfigService.class, new ProxyProvider() {
       public Object getProxy() {
-        return new org_kie_workbench_common_screens_home_service_HomeServiceImpl();
+        return new org_guvnor_common_services_shared_config_ResourceConfigServiceImpl();
       }
     });
     class org_kie_workbench_common_screens_server_management_service_SpecManagementServiceImpl extends AbstractRpcProxy implements SpecManagementService { public void saveContainerSpec(final String a0, final ContainerSpec a1) {
@@ -7649,22 +7665,6 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
         return new org_kie_workbench_common_screens_server_management_service_SpecManagementServiceImpl();
       }
     });
-    class org_guvnor_common_services_shared_config_ResourceConfigServiceImpl extends AbstractRpcProxy implements ResourceConfigService { public Map configAttrs(final Map a0) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.guvnor.common.services.shared.config.ResourceConfigService").endpoint("configAttrs:java.util.Map:", qualifiers, new Object[] { a0 }).respondTo(Map.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.guvnor.common.services.shared.config.ResourceConfigService").endpoint("configAttrs:java.util.Map:", qualifiers, new Object[] { a0 }).respondTo(Map.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_guvnor_common_services_shared_config_ResourceConfigServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-    }
-    RemoteServiceProxyFactory.addRemoteProxy(ResourceConfigService.class, new ProxyProvider() {
-      public Object getProxy() {
-        return new org_guvnor_common_services_shared_config_ResourceConfigServiceImpl();
-      }
-    });
     class org_kie_workbench_common_services_shared_whitelist_PackageNameWhiteListServiceImpl extends AbstractRpcProxy implements PackageNameWhiteListService { public WhiteList filterPackageNames(final Project a0, final Collection a1) {
         RemoteCallSendable sendable = null;
         if (errorCallback == null) {
@@ -7799,6 +7799,22 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
         return new org_uberfire_ext_editor_commons_service_CopyServiceImpl();
       }
     });
+    class org_kie_workbench_common_services_datamodel_service_IncrementalDataModelServiceImpl extends AbstractRpcProxy implements IncrementalDataModelService { public PackageDataModelOracleIncrementalPayload getUpdates(final Path a0, final Imports a1, final String a2) {
+        RemoteCallSendable sendable = null;
+        if (errorCallback == null) {
+          sendable = MessageBuilder.createCall().call("org.kie.workbench.common.services.datamodel.service.IncrementalDataModelService").endpoint("getUpdates:org.uberfire.backend.vfs.Path:org.drools.workbench.models.datamodel.imports.Imports:java.lang.String:", qualifiers, new Object[] { a0, a1, a2 }).respondTo(PackageDataModelOracleIncrementalPayload.class, remoteCallback).defaultErrorHandling();
+        } else {
+          sendable = MessageBuilder.createCall().call("org.kie.workbench.common.services.datamodel.service.IncrementalDataModelService").endpoint("getUpdates:org.uberfire.backend.vfs.Path:org.drools.workbench.models.datamodel.imports.Imports:java.lang.String:", qualifiers, new Object[] { a0, a1, a2 }).respondTo(PackageDataModelOracleIncrementalPayload.class, remoteCallback).errorsHandledBy(errorCallback);
+        }
+        org_kie_workbench_common_services_datamodel_service_IncrementalDataModelServiceImpl.this.sendRequest(bus, sendable);
+        return null;
+      }
+    }
+    RemoteServiceProxyFactory.addRemoteProxy(IncrementalDataModelService.class, new ProxyProvider() {
+      public Object getProxy() {
+        return new org_kie_workbench_common_services_datamodel_service_IncrementalDataModelServiceImpl();
+      }
+    });
     class org_kie_workbench_common_screens_explorer_service_ExplorerServiceImpl extends AbstractRpcProxy implements ExplorerService { public ProjectExplorerContent getContent(final String a0, final ActiveOptions a1) {
         RemoteCallSendable sendable = null;
         if (errorCallback == null) {
@@ -7898,22 +7914,6 @@ public class RpcProxyLoaderImpl implements RpcProxyLoader { public void loadProx
     RemoteServiceProxyFactory.addRemoteProxy(ExplorerService.class, new ProxyProvider() {
       public Object getProxy() {
         return new org_kie_workbench_common_screens_explorer_service_ExplorerServiceImpl();
-      }
-    });
-    class org_kie_workbench_common_services_datamodel_service_IncrementalDataModelServiceImpl extends AbstractRpcProxy implements IncrementalDataModelService { public PackageDataModelOracleIncrementalPayload getUpdates(final Path a0, final Imports a1, final String a2) {
-        RemoteCallSendable sendable = null;
-        if (errorCallback == null) {
-          sendable = MessageBuilder.createCall().call("org.kie.workbench.common.services.datamodel.service.IncrementalDataModelService").endpoint("getUpdates:org.uberfire.backend.vfs.Path:org.drools.workbench.models.datamodel.imports.Imports:java.lang.String:", qualifiers, new Object[] { a0, a1, a2 }).respondTo(PackageDataModelOracleIncrementalPayload.class, remoteCallback).defaultErrorHandling();
-        } else {
-          sendable = MessageBuilder.createCall().call("org.kie.workbench.common.services.datamodel.service.IncrementalDataModelService").endpoint("getUpdates:org.uberfire.backend.vfs.Path:org.drools.workbench.models.datamodel.imports.Imports:java.lang.String:", qualifiers, new Object[] { a0, a1, a2 }).respondTo(PackageDataModelOracleIncrementalPayload.class, remoteCallback).errorsHandledBy(errorCallback);
-        }
-        org_kie_workbench_common_services_datamodel_service_IncrementalDataModelServiceImpl.this.sendRequest(bus, sendable);
-        return null;
-      }
-    }
-    RemoteServiceProxyFactory.addRemoteProxy(IncrementalDataModelService.class, new ProxyProvider() {
-      public Object getProxy() {
-        return new org_kie_workbench_common_services_datamodel_service_IncrementalDataModelServiceImpl();
       }
     });
     class org_jbpm_formModeler_api_client_FormRenderContextManagerImpl extends AbstractRpcProxy implements FormRenderContextManager { public FormRenderContext newContext(final Form a0, final String a1, final Map a2) {

@@ -262,11 +262,6 @@
             </dependency>
             <dependency>
                 <groupId>org.chtijbug.drools</groupId>
-                <artifactId>drools-framework-kie-server-services-drools</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.chtijbug.drools</groupId>
                 <artifactId>kie-drools-framework-wb-webapp</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>
@@ -916,12 +911,7 @@
                 <version>1.1</version>
             </dependency>
 
-            <!--JUnit for Test scenarios -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.11</version>
-            </dependency>
+
 
             <!--
                     <dependency>
@@ -1971,27 +1961,14 @@
                 <version>4.11</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.codehaus.jettison</groupId>
-                <artifactId>jettison</artifactId>
-                <version>1.3</version>
-            </dependency>
+
             <dependency>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-bundle-jaxrs</artifactId>
                 <version>2.7.10</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-                <version>2.7.10</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-transports-http-hc</artifactId>
-                <!-- 2.7.8 or 3.0.0-milestone1 -->
-                <version>2.7.10</version>
-            </dependency>
+
+
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
