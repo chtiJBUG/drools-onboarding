@@ -15,8 +15,6 @@
  */
 package org.chtijbug.drools.logging;
 
-import org.chtijbug.drools.platform.persistence.pojo.RuleExecution;
-
 import java.util.Date;
 import java.util.LinkedList;
 

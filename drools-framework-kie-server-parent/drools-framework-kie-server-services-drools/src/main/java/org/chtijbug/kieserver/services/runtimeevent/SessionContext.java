@@ -1,7 +1,7 @@
 package org.chtijbug.kieserver.services.runtimeevent;
 
 import org.chtijbug.drools.logging.*;
-import org.chtijbug.drools.platform.persistence.pojo.RuleExecution;
+import org.chtijbug.drools.logging.RuleExecution;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -21,7 +21,7 @@ import org.chtijbug.drools.entity.history.fact.UpdatedFactHistoryEvent;
 import org.chtijbug.drools.logging.Fact;
 import org.chtijbug.drools.logging.FactType;
 import org.chtijbug.drools.logging.SessionExecution;
-import org.chtijbug.drools.platform.persistence.pojo.RuleExecution;
+import org.chtijbug.drools.logging.RuleExecution;
 import org.chtijbug.kieserver.services.runtimeevent.AbstractMemoryEventHandlerStrategy;
 import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
 
@@ -35,13 +35,13 @@ public class UpdatedFactEventStrategy implements AbstractMemoryEventHandlerStrat
         Fact factOldValue = new Fact();
         factOldValue.setFullClassName(updatedFactHistoryEvent.getObjectOldValue().getFullClassName());
         factOldValue.setObjectVersion(updatedFactHistoryEvent.getObjectOldValue().getObjectVersion());
-        factOldValue.setJsonFact(updatedFactHistoryEvent.getObjectOldValue().getRealObject_JSON());
+        factOldValue.setRealFact(updatedFactHistoryEvent.getObjectOldValue().getRealObject());
         factOldValue.setModificationDate(updatedFactHistoryEvent.getDateEvent());
         factOldValue.setFactType(FactType.UPDATED_OLDVALUE);
         Fact factNewValue = new Fact();
         factNewValue.setFullClassName(updatedFactHistoryEvent.getObjectNewValue().getFullClassName());
         factNewValue.setObjectVersion(updatedFactHistoryEvent.getObjectNewValue().getObjectVersion());
-        factNewValue.setJsonFact(updatedFactHistoryEvent.getObjectNewValue().getRealObject_JSON());
+        factNewValue.setRealFact(updatedFactHistoryEvent.getObjectNewValue().getRealObject());
         factNewValue.setModificationDate(updatedFactHistoryEvent.getDateEvent());
         factNewValue.setFactType(FactType.UPDATED_NEWVALUE);
         RuleExecution existingInSessionRuleExecution = null;

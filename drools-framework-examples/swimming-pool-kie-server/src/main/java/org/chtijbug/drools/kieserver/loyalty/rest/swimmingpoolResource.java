@@ -56,9 +56,8 @@ public class swimmingpoolResource {
             ChtijbugObjectRequest chtijbugObjectRequest = new ChtijbugObjectRequest();
             chtijbugObjectRequest.setObjectRequest(quoteRequest);
             ChtijbugObjectRequest chtijbutObjectResponse = (ChtijbugObjectRequest) rulesExecutionService.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, "swimmingpool.P000");
-            SessionContext log = chtijbutObjectResponse.getSessionLogging();
             ObjectMapper mapper = new ObjectMapper();
-            String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getObjectRequest());
+            String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getSessionLogging());
             Quote response = (Quote) chtijbutObjectResponse.getObjectRequest();
             response.setSessionLogging(jsonInString);
             logger.debug("Returning OK response with content '{}'", quoteRequest);

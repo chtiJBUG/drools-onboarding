@@ -18,7 +18,6 @@ package org.chtijbug.drools.logging;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import org.chtijbug.drools.platform.persistence.pojo.RuleExecution;
 
 import java.util.ArrayList;
 import java.util.Date;

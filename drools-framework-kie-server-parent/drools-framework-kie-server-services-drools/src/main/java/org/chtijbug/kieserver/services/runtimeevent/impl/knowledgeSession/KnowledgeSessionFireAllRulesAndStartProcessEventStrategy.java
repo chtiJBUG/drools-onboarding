@@ -38,7 +38,7 @@ public class KnowledgeSessionFireAllRulesAndStartProcessEventStrategy implements
                 inputFact.setEventid(sessionFireAllRulesAndStartProcess.getEventID());
                 inputFact.setFactType(FactType.INPUTDATA);
                 inputFact.setFullClassName(inputObject.getFullClassName());
-                inputFact.setJsonFact(inputObject.getRealObject_JSON());
+                inputFact.setRealFact(inputObject.getRealObject());
                 inputFact.setModificationDate(sessionFireAllRulesAndStartProcess.getDateEvent());
                 inputFact.setObjectVersion(inputObject.getObjectVersion());
                 existingSessionRutime.getFacts().add(inputFact);
@@ -49,7 +49,7 @@ public class KnowledgeSessionFireAllRulesAndStartProcessEventStrategy implements
                 outputFact.setEventid(sessionFireAllRulesAndStartProcess.getEventID());
                 outputFact.setFactType(FactType.OUTPUTDATA);
                 outputFact.setFullClassName(outputObject.getFullClassName());
-                outputFact.setJsonFact(outputObject.getRealObject_JSON());
+                outputFact.setRealFact(outputObject.getRealObject());
                 outputFact.setModificationDate(sessionFireAllRulesAndStartProcess.getDateEvent());
                 outputFact.setObjectVersion(outputObject.getObjectVersion());
                 existingSessionRutime.getFacts().add(outputFact);

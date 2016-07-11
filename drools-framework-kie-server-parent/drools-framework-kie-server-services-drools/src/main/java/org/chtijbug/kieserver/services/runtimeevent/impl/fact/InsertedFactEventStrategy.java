@@ -20,7 +20,7 @@ import org.chtijbug.drools.entity.history.fact.InsertedFactHistoryEvent;
 import org.chtijbug.drools.logging.Fact;
 import org.chtijbug.drools.logging.FactType;
 import org.chtijbug.drools.logging.SessionExecution;
-import org.chtijbug.drools.platform.persistence.pojo.RuleExecution;
+import org.chtijbug.drools.logging.RuleExecution;
 import org.chtijbug.kieserver.services.runtimeevent.AbstractMemoryEventHandlerStrategy;
 import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
 
@@ -33,7 +33,7 @@ public class InsertedFactEventStrategy implements AbstractMemoryEventHandlerStra
         Fact fact = new Fact();
         fact.setFullClassName(insertedFactHistoryEvent.getInsertedObject().getFullClassName());
         fact.setObjectVersion(insertedFactHistoryEvent.getInsertedObject().getObjectVersion());
-        fact.setJsonFact(insertedFactHistoryEvent.getInsertedObject().getRealObject_JSON());
+        fact.setRealFact(insertedFactHistoryEvent.getInsertedObject().getRealObject());
         fact.setModificationDate(insertedFactHistoryEvent.getDateEvent());
         fact.setFactType(FactType.INSERTED);
         RuleExecution existingInSessionRuleExecution = null;

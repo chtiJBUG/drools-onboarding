@@ -21,7 +21,7 @@ import java.util.Date;
 public class Fact {
 
 
-    private String jsonFact;
+    private Object realFact;
 
     private Integer objectVersion;
 
@@ -38,13 +38,12 @@ public class Fact {
     public Fact() {
     }
 
-
-    public String getJsonFact() {
-        return jsonFact;
+    public Object getRealFact() {
+        return realFact;
     }
 
-    public void setJsonFact(String jsonFact) {
-        this.jsonFact = jsonFact;
+    public void setRealFact(Object realFact) {
+        this.realFact = realFact;
     }
 
     public Integer getObjectVersion() {
@@ -91,7 +90,7 @@ public class Fact {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Fact{");
-        sb.append(", jsonFact='").append(jsonFact).append('\'');
+        sb.append(", jsonFact='").append(realFact).append('\'');
         sb.append(", objectVersion=").append(objectVersion);
         sb.append(", fullClassName='").append(fullClassName).append('\'');
         sb.append(", modificationDate=").append(modificationDate);

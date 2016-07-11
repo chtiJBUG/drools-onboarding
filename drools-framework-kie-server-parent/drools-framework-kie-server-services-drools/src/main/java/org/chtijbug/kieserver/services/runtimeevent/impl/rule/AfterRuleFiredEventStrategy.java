@@ -18,7 +18,7 @@ package org.chtijbug.kieserver.services.runtimeevent.impl.rule;
 
 import org.chtijbug.drools.entity.history.HistoryEvent;
 import org.chtijbug.drools.entity.history.rule.AfterRuleFiredHistoryEvent;
-import org.chtijbug.drools.platform.persistence.pojo.RuleExecution;
+import org.chtijbug.drools.logging.RuleExecution;
 import org.chtijbug.kieserver.services.runtimeevent.AbstractMemoryEventHandlerStrategy;
 import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
 

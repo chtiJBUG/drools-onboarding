@@ -118,7 +118,7 @@
     <filter-mapping>
         <filter-name>HTTP Basic Auth Filter</filter-name>
         <url-pattern>/rest/*</url-pattern>
-        <url-pattern>/maven2/*</url-pattern>
+        <!--url-pattern>/maven2/*</url-pattern-->
     </filter-mapping>
 
     <servlet>

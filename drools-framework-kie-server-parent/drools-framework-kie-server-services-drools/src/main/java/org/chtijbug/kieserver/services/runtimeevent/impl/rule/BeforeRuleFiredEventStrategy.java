@@ -23,7 +23,7 @@ import org.chtijbug.drools.logging.Fact;
 import org.chtijbug.drools.logging.FactType;
 import org.chtijbug.drools.logging.RuleflowGroup;
 import org.chtijbug.drools.logging.SessionExecution;
-import org.chtijbug.drools.platform.persistence.pojo.RuleExecution;
+import org.chtijbug.drools.logging.RuleExecution;
 import org.chtijbug.kieserver.services.runtimeevent.AbstractMemoryEventHandlerStrategy;
 import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
 
@@ -56,7 +56,7 @@ public class BeforeRuleFiredEventStrategy implements AbstractMemoryEventHandlerS
         for (DroolsFactObject droolsFactObject : beforeRuleFiredHistoryEvent.getWhenObjects()) {
             if (droolsFactObject != null) {
                 Fact fact = new Fact();
-                fact.setJsonFact(droolsFactObject.getRealObject_JSON());
+                fact.setRealFact(droolsFactObject.getRealObject());
                 fact.setFactType(FactType.WHEN);
                 fact.setObjectVersion(droolsFactObject.getObjectVersion());
                 fact.setFullClassName(droolsFactObject.getFullClassName());

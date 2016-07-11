@@ -19,8 +19,8 @@ import org.chtijbug.drools.entity.history.HistoryEvent;
 import org.chtijbug.drools.entity.history.fact.DeletedFactHistoryEvent;
 import org.chtijbug.drools.logging.Fact;
 import org.chtijbug.drools.logging.FactType;
+import org.chtijbug.drools.logging.RuleExecution;
 import org.chtijbug.drools.logging.SessionExecution;
-import org.chtijbug.drools.platform.persistence.pojo.RuleExecution;
 import org.chtijbug.kieserver.services.runtimeevent.AbstractMemoryEventHandlerStrategy;
 import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
 
@@ -34,7 +34,7 @@ public class DeleteFactEventStrategy implements AbstractMemoryEventHandlerStrate
         Fact fact = new Fact();
         fact.setFullClassName(deletedFactHistoryEvent.getDeletedObject().getFullClassName());
         fact.setObjectVersion(deletedFactHistoryEvent.getDeletedObject().getObjectVersion());
-        fact.setJsonFact(deletedFactHistoryEvent.getDeletedObject().getRealObject_JSON());
+        fact.setRealFact(deletedFactHistoryEvent.getDeletedObject().getRealObject());
         fact.setModificationDate(deletedFactHistoryEvent.getDateEvent());
         fact.setFactType(FactType.DELETED);
         RuleExecution existingInSessionRuleExecution = null;
