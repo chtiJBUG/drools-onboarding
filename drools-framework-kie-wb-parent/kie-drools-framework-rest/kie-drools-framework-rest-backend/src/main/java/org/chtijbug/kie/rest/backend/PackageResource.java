@@ -13,12 +13,13 @@ import org.slf4j.LoggerFactory;
 import org.uberfire.backend.server.util.Paths;
 import org.uberfire.io.IOService;
 import org.uberfire.java.nio.base.options.CommentedOption;
-import org.uberfire.java.nio.file.DirectoryStream;
+import org.uberfire.java.nio.file.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.*;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
@@ -123,6 +124,22 @@ public class PackageResource {
         return null;
     }
 
+
+    private void  getContentSource(DirectoryStream<org.uberfire.java.nio.file.Path> directoryStream, Asset asset,List<org.uberfire.java.nio.file.Path> pathLinkedList) {
+        for (org.uberfire.java.nio.file.Path elementPath : directoryStream) {
+            if (org.uberfire.java.nio.file.Files.isDirectory(elementPath)) {
+                DirectoryStream<org.uberfire.java.nio.file.Path> adirectoryStream = ioService.newDirectoryStream(elementPath);
+                getContentSource(adirectoryStream, asset,pathLinkedList);
+            } else {
+                if (dotFileFilter.accept(Paths.convert(elementPath))) {
+                    Map<String, Object> listAttributes = ioService.readAttributes(elementPath);
+                    if (asset.getTitle().equals(elementPath.getFileName().toString())){
+                        pathLinkedList.add(elementPath);
+                    }
+                }
+            }
+        }
+    }
     private void getContent(DirectoryStream<org.uberfire.java.nio.file.Path> directoryStream, Collection<Asset> contentList) {
         for (org.uberfire.java.nio.file.Path elementPath : directoryStream) {
             if (org.uberfire.java.nio.file.Files.isDirectory(elementPath)) {
@@ -177,7 +194,6 @@ public class PackageResource {
     @GET
     @Path("{organizationalUnitName}/{repositoryName}/{packageName}/assets/{assetName}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-
     public Collection<Asset> getAssetAsJaxB(
             @PathParam("organizationalUnitName") String organizationalUnitName, @PathParam("repositoryName") String repositoryName,
             @PathParam("packageName") String packageName, @PathParam("assetName") String assetName) {
@@ -197,6 +213,41 @@ public class PackageResource {
                 }
             }
             return resultList;
+        } catch (RuntimeException e) {
+            throw new WebApplicationException(e);
+        }
+
+    }
+
+    @GET
+    @Path("{organizationalUnitName}/{repositoryName}/{packageName}/assets/{assetName}/source")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public String getAssetSource(
+            @PathParam("organizationalUnitName") String organizationalUnitName, @PathParam("repositoryName") String repositoryName,
+            @PathParam("packageName") String packageName, @PathParam("assetName") String assetName) {
+        List<Asset> resultList = new LinkedList<>();
+        String result="";
+        try {
+            Project project = getProject(organizationalUnitName, repositoryName, packageName);
+            if (project != null && project.getProjectName().equals(packageName)) {
+                List<Asset> contentList = new LinkedList<>();
+                List<org.uberfire.java.nio.file.Path> pathLinkedList = new LinkedList<>();
+                org.uberfire.backend.vfs.Path rootPath = project.getRootPath();
+                org.uberfire.java.nio.file.Path goodRootPath = Paths.convert(rootPath);
+                DirectoryStream<org.uberfire.java.nio.file.Path> directoryStream = ioService.newDirectoryStream(goodRootPath);
+                getContent(directoryStream, contentList);
+                for (Asset asset : contentList) {
+                    if (asset.getTitle().equals(assetName)) {
+                        resultList.add(asset);
+                        DirectoryStream<org.uberfire.java.nio.file.Path> directoryStream2 = ioService.newDirectoryStream(goodRootPath);
+                         getContentSource(directoryStream2, asset,pathLinkedList);
+                        if (pathLinkedList.size()==1) {
+                            result = ioService.readAllString(pathLinkedList.get(0));
+                        }
+                    }
+                }
+            }
+            return result;
         } catch (RuntimeException e) {
             throw new WebApplicationException(e);
         }

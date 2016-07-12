@@ -1374,7 +1374,7 @@
 
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>kie-wb</finalName>
         <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
         <testResources>
             <testResource>
