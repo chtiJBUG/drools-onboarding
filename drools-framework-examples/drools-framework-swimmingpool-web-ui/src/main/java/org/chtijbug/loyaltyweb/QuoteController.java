@@ -19,12 +19,10 @@ package org.chtijbug.loyaltyweb;
 import org.chtijbug.drools.swimmingpool.restclient.rest.SwimmingPoolRestAPI;
 import org.chtijbug.example.swimmingpool.Quote;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.ws.rs.PathParam;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,11 +36,11 @@ public class QuoteController {
     @Resource
     private SwimmingPoolRestAPI serviceCalculate;
 
-    @Value(value="${url.swimmingpool.calculate.containerId}")
-    private String containerid;
 
-    @RequestMapping(value = "/calculate", method = RequestMethod.PUT)
-    public Quote storeTicket(@RequestBody Quote quoteRequest) {
+
+    @RequestMapping(value = "/calculate/{containerId}", method = RequestMethod.PUT)
+    public Quote storeTicket(@PathVariable("containerId") String containerid,
+                             @RequestBody Quote quoteRequest) {
         Quote response = null;
         try {
             response = serviceCalculate.runSession(containerid,quoteRequest);

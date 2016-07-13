@@ -66,6 +66,7 @@ productManagerModule.controller('quoteManagerController', function ($scope, $htt
     $scope.productSearch = "";
     $http.defaults.headers.post["Content-Type"] = "application/json";
     $scope.allSessionExecutionDetails=[];
+    $scope.containerid="dev";
     var _lastGoodResult = '';
     $scope.toPrettyJSON = function (objStr, tabWidth) {
         try {
@@ -105,7 +106,7 @@ productManagerModule.controller('quoteManagerController', function ($scope, $htt
 
     $scope.calculatePrice = function () {
         var myQuote = $scope.quote;
-        $http.put(urlBase + "/swimmingpool-web/quote/calculate", myQuote).success(function (data) {
+        $http.put(urlBase + "/swimmingpool-web/quote/calculate/"+$scope.containerid, myQuote).success(function (data) {
             $scope.quoteResult = data;
             $scope.allSessionExecutionDetails=JSON.parse(data.sessionLogging);
             $scope.sessionLogging=JSON.stringify($scope.allSessionExecutionDetails, null, 3);
