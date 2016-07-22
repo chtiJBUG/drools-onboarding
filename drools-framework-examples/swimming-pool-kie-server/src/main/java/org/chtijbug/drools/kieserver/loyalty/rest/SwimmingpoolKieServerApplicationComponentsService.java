@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class LoyaltyKieServerApplicationComponentsService implements KieServerApplicationComponentsService {
+public class SwimmingpoolKieServerApplicationComponentsService implements KieServerApplicationComponentsService {
 
     private static final String OWNER_EXTENSION = "DroolsFramework";
 

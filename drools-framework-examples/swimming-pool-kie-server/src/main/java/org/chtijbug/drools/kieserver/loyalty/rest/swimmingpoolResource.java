@@ -36,15 +36,6 @@ public class swimmingpoolResource {
         this.registry = registry;
     }
 
-
-    @GET
-    @Path("/test")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public String toto() {
-        return "Swimming pool rest service Alive ";
-    }
-
     @POST
     @Path("/run/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
