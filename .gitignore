@@ -4,3 +4,4 @@ target
 .classpath
 .idea
 .errai
+node_modules
