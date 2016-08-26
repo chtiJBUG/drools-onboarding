@@ -66,7 +66,10 @@
             <groupId>org.jbpm</groupId>
             <artifactId>jbpm-bpmn2</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.kie.server</groupId>
+            <artifactId>kie-server-client</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -81,7 +84,10 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.kie.server</groupId>
+            <artifactId>kie-server-api</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.chtijbug.drools</groupId>

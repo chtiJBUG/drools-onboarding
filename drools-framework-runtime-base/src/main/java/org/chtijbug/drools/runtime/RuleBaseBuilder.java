@@ -15,6 +15,7 @@
  */
 package org.chtijbug.drools.runtime;
 
+import org.chtijbug.drools.runtime.impl.RuleBaseCommandSingleton;
 import org.chtijbug.drools.runtime.impl.RuleBaseSingleton;
 import org.chtijbug.drools.runtime.listener.HistoryListener;
 import org.chtijbug.drools.runtime.resource.FileKnowledgeResource;
@@ -32,6 +33,18 @@ public abstract class RuleBaseBuilder {
      * Class Logger
      */
     private static Logger logger = LoggerFactory.getLogger(RuleBaseBuilder.class);
+
+    public static RuleBasePackage createRemoteStandardRestBasePackage(String containerId, String url,String username,String password) throws DroolsChtijbugException {
+        logger.debug(">> createWorkbenchRuleBasePackage()");
+        RuleBaseCommandSingleton newRuleBasePackage = new RuleBaseCommandSingleton(RuleBaseSingleton.DEFAULT_RULE_THRESHOLD,containerId,url,username,password);
+        try {
+            newRuleBasePackage.connectKBase();
+            //_____ Returning the result
+            return newRuleBasePackage;
+        } finally {
+            logger.debug("<< createWorkbenchRuleBasePackage", newRuleBasePackage);
+        }
+    }
 
 
     public static RuleBasePackage createWorkbenchRuleBasePackage(Long ruleBaseId, HistoryListener historyListener, String groupId, String artifactId, String version, String workbenchUrl, String username, String password) throws DroolsChtijbugException {

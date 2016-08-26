@@ -7,11 +7,17 @@ import org.chtijbug.drools.entity.history.HistoryContainer;
 import org.chtijbug.drools.runtime.DroolsChtijbugException;
 import org.chtijbug.drools.runtime.RuleBaseSession;
 import org.kie.api.KieServices;
+import org.kie.api.command.BatchExecutionCommand;
 import org.kie.api.command.Command;
 import org.kie.api.command.KieCommands;
+import org.kie.api.runtime.ExecutionResults;
 import org.kie.api.runtime.ObjectFilter;
 import org.kie.api.runtime.process.ProcessInstance;
 import org.kie.api.runtime.process.WorkItemHandler;
+import org.kie.server.api.commands.CommandScript;
+import org.kie.server.api.model.ServiceResponse;
+import org.kie.server.client.KieServicesClient;
+import org.kie.server.client.RuleServicesClient;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -28,8 +34,14 @@ public class RuleBaseCommandSession implements RuleBaseSession {
     private KieCommands commandsFactory = KieServices.Factory.get().getCommands();
     private int maxNumberRuleToExecute = 2000;
 
-    public RuleBaseCommandSession(int maxNumberRuleToExecute) {
+    private KieServicesClient kieServicesClient;
+
+    private String containerId;
+
+    public RuleBaseCommandSession(int maxNumberRuleToExecute,KieServicesClient kieServicesClient,String containerId) {
         this.maxNumberRuleToExecute = maxNumberRuleToExecute;
+        this.kieServicesClient=kieServicesClient;
+        this.containerId = containerId;
     }
 
     @Override
@@ -43,7 +55,7 @@ public class RuleBaseCommandSession implements RuleBaseSession {
         if (newObject.getClass().getPackage().getName().startsWith("java.")) {
             return;
         }
-        this.insertObject(newObject);
+
         //____ Then foreach getters insert item by reflection
         for (Method method : newObject.getClass().getMethods()) {
             //____ only manage getters
@@ -68,7 +80,7 @@ public class RuleBaseCommandSession implements RuleBaseSession {
                 }
             }
         }
-
+        this.insertObject(newObject);
     }
 
     @Override
@@ -93,23 +105,33 @@ public class RuleBaseCommandSession implements RuleBaseSession {
 
     @Override
     public Object fireAllRulesAndStartProcess(Object inputObject, String processName) throws DroolsChtijbugException {
-
+        Object outputObject=null;
         if (inputObject != null) {
-            this.insertByReflection(inputObject);
+            this.insertObject(inputObject);
+           // this.insertByReflection(inputObject);
         }
         if (processName != null && processName.length() > 0) {
             this.startProcess(processName);
         }
         this.fireAllRules();
-
-
-        return inputObject;
+        //commands.add(commandsFactory.newGetObjects(inputObject.getClass().getName()));
+        RuleServicesClient ruleClient = kieServicesClient.getServicesClient(RuleServicesClient.class);
+        BatchExecutionCommand batchCommand = commandsFactory.newBatchExecution(commands);
+        ServiceResponse<ExecutionResults> response = ruleClient.executeCommandsWithResults(this.containerId, batchCommand);
+        if (response.equals(ServiceResponse.ResponseType.SUCCESS)){
+            ExecutionResults actualData = response.getResult();
+            Collection<String> identifiers = actualData.getIdentifiers();
+            for (String id : identifiers){
+                outputObject=actualData.getValue(id);
+            }
+         }
+        return outputObject;
     }
 
     @Override
     public Object fireAllRulesAndStartProcessWithParam(Object inputObject, String processName) throws DroolsChtijbugException {
-        commands.add(commandsFactory.newFireAllRules(maxNumberRuleToExecute));
-        return null;
+        //commands.add(commandsFactory.newFireAllRules(maxNumberRuleToExecute));
+        return this.fireAllRulesAndStartProcess(inputObject,processName);
     }
 
     @Override

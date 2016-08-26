@@ -224,11 +224,7 @@
                 <artifactId>drools-framework-swimming-pool-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.chtijbug.drools</groupId>
-                <artifactId>swimming-pool-kie-server</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>org.chtijbug.drools</groupId>
                 <artifactId>drools-framework-kie-server-services-drools</artifactId>
@@ -1698,6 +1694,11 @@
             <dependency>
                 <groupId>org.kie</groupId>
                 <artifactId>kie-api</artifactId>
+                <version>${kie.wb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.kie.server</groupId>
+                <artifactId>kie-server-client</artifactId>
                 <version>${kie.wb.version}</version>
             </dependency>
             <dependency>

@@ -6,6 +6,10 @@ import org.chtijbug.drools.runtime.RuleBasePackage;
 import org.chtijbug.drools.runtime.RuleBaseSession;
 import org.chtijbug.drools.runtime.listener.HistoryListener;
 import org.kie.api.runtime.KieContainer;
+import org.kie.server.api.marshalling.MarshallingFormat;
+import org.kie.server.client.KieServicesClient;
+import org.kie.server.client.KieServicesConfiguration;
+import org.kie.server.client.KieServicesFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,12 +40,22 @@ public class RuleBaseCommandSingleton implements RuleBasePackage {
     /**
      * History Listener
      */
-    private HistoryListener historyListener = null;
-    private KieContainer kieContainer;
-    private long ruleBaseid;
+    private String containerId;
+    private String url;
+    private String username;
+    private String password;
+    private KieServicesClient kieServicesClient;
 
     public RuleBaseCommandSingleton(int maxNumberRuleToExecute) {
         this.maxNumberRuleToExecute = maxNumberRuleToExecute;
+    }
+
+    public RuleBaseCommandSingleton(int defaultRuleThreshold, String containerId,String url, String username, String password) {
+        this(defaultRuleThreshold);
+        this.containerId=containerId;
+        this.url=url;
+        this.username=username;
+        this.password=password;
     }
 
 
@@ -58,7 +72,7 @@ public class RuleBaseCommandSingleton implements RuleBasePackage {
 
     @Override
     public RuleBaseSession createRuleBaseSession(int maxNumberRulesToExecute) throws DroolsChtijbugException {
-        return this.createRuleBaseSession(maxNumberRulesToExecute, this.historyListener);
+        return this.createRuleBaseSession(maxNumberRulesToExecute, null);
     }
 
     @Override
@@ -68,7 +82,7 @@ public class RuleBaseCommandSingleton implements RuleBasePackage {
         try {
 
             //_____ Wrapping the knowledge Session
-            newRuleBaseSession = new RuleBaseCommandSession(maxNumberRulesToExecute);
+            newRuleBaseSession = new RuleBaseCommandSession(maxNumberRulesToExecute,this.kieServicesClient,this.containerId);
             //_____ Release semaphore
             lockKbase.release();
 
@@ -85,20 +99,25 @@ public class RuleBaseCommandSingleton implements RuleBasePackage {
 
     @Override
     public HistoryListener getHistoryListener() {
-        return historyListener;
+        return null;
     }
 
     @Override
     public Long getRuleBaseID() {
-        return this.ruleBaseid;
+        return null;
     }
 
-    public void setRuleBaseid(long ruleBaseid) {
-        this.ruleBaseid = ruleBaseid;
-    }
 
     @Override
     public void dispose() {
 
+    }
+
+    public void connectKBase() {
+        KieServicesConfiguration config;
+        config = KieServicesFactory.newRestConfiguration(url, username, password);
+        MarshallingFormat marshallingFormat = MarshallingFormat.JSON;
+        config.setMarshallingFormat(marshallingFormat);
+        this.kieServicesClient = KieServicesFactory.newKieServicesClient(config);
     }
 }

@@ -17,6 +17,7 @@
         <module>swimming-pool-kie-server</module>
         <module>drools-framework-swimming-pool-rest-connector</module>
         <module>drools-framework-swimmingpool-web-ui</module>
+        <module>drools-framework-swimmingpool-web-ui-standard</module>
 
 
     </modules>
