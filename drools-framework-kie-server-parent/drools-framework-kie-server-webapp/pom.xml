@@ -22,10 +22,7 @@
             <artifactId>swimming-pool-kie-server</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.chtijbug.drools</groupId>
-            <artifactId>swimming-pool-kie-server</artifactId>
-        </dependency>
+
         <!--dependency>
             <groupId>org.chtijbug.drools</groupId>
             <artifactId>drools-framework-kie-server-rest-drools</artifactId>

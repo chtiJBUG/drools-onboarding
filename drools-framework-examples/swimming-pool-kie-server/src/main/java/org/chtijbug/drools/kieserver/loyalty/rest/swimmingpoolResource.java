@@ -1,13 +1,9 @@
 package org.chtijbug.drools.kieserver.loyalty.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.chtijbug.drools.runtime.RuleBasePackage;
 import org.chtijbug.example.swimmingpool.Quote;
 import org.chtijbug.kieserver.services.drools.ChtijbugObjectRequest;
 import org.chtijbug.kieserver.services.drools.DroolsFrameworkRulesExecutionService;
-import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
-import org.kie.api.KieServices;
-import org.kie.api.command.KieCommands;
 import org.kie.server.services.api.KieContainerInstance;
 import org.kie.server.services.api.KieServerRegistry;
 import org.slf4j.Logger;
@@ -21,11 +17,8 @@ public class swimmingpoolResource {
 
     private static final Logger logger = LoggerFactory.getLogger(swimmingpoolResource.class);
 
-    private KieCommands commandsFactory = KieServices.Factory.get().getCommands();
-
     private DroolsFrameworkRulesExecutionService rulesExecutionService;
     private KieServerRegistry registry;
-    private RuleBasePackage ruleBasePackage = null;
 
     public swimmingpoolResource() {
 
