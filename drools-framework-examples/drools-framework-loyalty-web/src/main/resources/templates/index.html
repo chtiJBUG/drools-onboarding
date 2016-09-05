@@ -1,0 +1,226 @@
+<html ng-app="productManagerApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <title>Chtijbug web site</title>
+    <link href='./css/style.css' rel="stylesheet" type="text/css"/>
+    <link href='./components/bootstrap/dist/css/bootstrap.min.css' rel="stylesheet" type="text/css"/>
+    <script src="./components/jquery/dist/jquery.min.js"></script>
+    <script src="./components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href='./css/css/font-awesome.css' rel="stylesheet" type="text/css"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <script data-require="angular.js@*" data-semver="1.3.0-beta.14"
+            src="./components/angular/angular.js"></script>
+    <script data-require="angular-animate@*" data-semver="1.3.0-beta.14"
+            src="./components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+</head>
+<body>
+
+<div class="container" ng-controller="productManagerController">
+<div class="row">
+    <h2 class="page-title">ChtiJBUG Loyalty Test server </h2>
+    <a href="http://www.chtijbug.org" class="button-red"
+       style="text-align:center;width:70px;margin-left:45%;margin-right:40%">Chtjbug</a>
+
+</div>
+
+<div class="row top-row-20" id="product-panel">
+    <div class="col-md-3"></div>
+
+    <div class="col-md-7">
+        <div class="input-group">
+            <input type="text" class="form-control" ng-model="productSearch"/>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="searchProducts()">Search</button>
+              </span>
+        </div>
+        <!-- /input-group -->
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+<div class="row top-row-20">
+
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Provider</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="product in products">
+                <td>{{product.id}}</td>
+                <td>{{product.productName}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.providerName}}</td>
+                <td>
+                    <button class="btn-panel" ng-click="addToShoppingCard(product)">Add To Shopping
+                        Card
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-1">
+        <button class="btn btn-primary" type="button" ng-click="calculateLoyalty()"
+                ng-show="ticket.ticketLines.length > 0"
+                data-toggle="modal" data-target="#myModal">
+            Calculate Price
+        </button>
+    </div>
+</div>
+
+
+<div class="row top-row-20">
+
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <table class="table table-bordered">
+            <tr>
+                <td><label for="ticket-date" class="control-label">Date of ticket :</label></td>
+                <td><input id="ticket-date" type="date" ng-model="ticket.dateTicket" ng-maxlength="10"/></td>
+                <td><label for="ticket-amount" class="control-label">Ticket amount :</label></td>
+                <td><input id="ticket-amount" type="text" ng-model="ticket.amount" ng-maxlength="10"/></td>
+            </tr>
+            <tr>
+                <td><label for="card-number" class="control-label">Card Number :</label></td>
+                <td><input id="card-number" type="text" ng-model="ticket.loyaltyCard.number" ng-maxlength="10"/>
+                </td>
+                <td><label for="card-name" class="control-label">Card Name :</label></td>
+                <td><input id="card-name" type="text" ng-model="ticket.loyaltyCard.name" ng-maxlength="10"/></td>
+            </tr>
+            <tr>
+                <td><label for="customer-id" class="control-label">Customer ID :</label></td>
+                <td><input id="customer-id" type="text" ng-model="ticket.loyaltyCard.customer.customerID"
+                           ng-maxlength="10"/></td>
+                <td><label for="customer-surname" class="control-label">Customer surname :</label></td>
+                <td><input id="customer-surname" type="text" ng-model="ticket.loyaltyCard.customer.surName"
+                           ng-maxlength="20"/></td>
+            </tr>
+            <tr>
+                <td><label for="customer-name" class="control-label">Customer name :</label></td>
+                <td><input id="customer-name" type="text" ng-model="ticket.loyaltyCard.customer.name"
+                           ng-maxlength="20"/></td>
+                <td><label for="customer-marital-name" class="control-label"> Customer marital name :</label></td>
+                <td><input id="customer-marital-name" type="text" ng-model="ticket.loyaltyCard.customer.maritalName"
+                           ng-maxlength="20"/></td>
+            </tr>
+            <tr>
+                <td><label for="customer-gender" class="control-label"> Customer gender :</label></td>
+                <td><select id="customer-gender" ng-model="ticket.loyaltyCard.customer.gender">
+                    <option value="MR">Mr</option>
+                    <option value="MRS">Mrs</option>
+                    <option value="MISS">Miss</option>
+                </select></td>
+                <td><label for="customer-birthdate" class="control-label">Customer birthdate :</label></td>
+                <td><input id="customer-birthdate" type="date" ng-model="ticket.loyaltyCard.customer.birthDate"
+                           ng-maxlength="10"/></td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<div class="row top-row-20">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>product name</th>
+                <th>product price</th>
+                <th>quantity</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="ticketline in ticket.ticketLines">
+
+                <td>{{ticketline.product.id}}</td>
+                <td>{{ticketline.product.name}}</td>
+                <td>{{ticketline.product.price.price}}</td>
+                <td><input type="number" ng-model="ticketline.quantity" ng-maxlength="10"/></td>
+                <td>
+                    <button class="btn-panel" ng-click="deleteline(ticketline)">
+                        <span class="glyphicon glyphicon-trash"></span> Remove
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="page-wrap ">
+                    <div class="row top-row-20">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>Date of ticket :</td>
+                                    <td>{{ticketResult.dateTicket | date : 'dd-MM-yyyy' }} |</td>
+                                    <td>Ticket amount :</td>
+                                    <td>{{ticketResult.amount}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Card Number :</td>
+                                    <td>{{ticketResult.loyaltyCard.number}}</td>
+                                    <td>Card Name :</td>
+                                    <td>{{ticketResult.loyaltyCard.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Customer ID :</td>
+                                    <td>{{ticketResult.loyaltyCard.customer.customerID}}</td>
+                                    <td>Customer surname :</td>
+                                    <td>{{ticketResult.loyaltyCard.customer.surName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Customer name :</td>
+                                    <td>{{ticketResult.loyaltyCard.customer.name}}</td>
+                                    <td>Customer marital name :</td>
+                                    <td>{{ticketResult.loyaltyCard.customer.maritalName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Customer gender :</td>
+                                    <td>{{ticketResult.loyaltyCard.customer.gender}}</td>
+                                    <td>Customer birthdate :</td>
+                                    <td>{{ticketResult.loyaltyCard.customer.birthDate | date : 'dd-MM-yyyy'}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row top-row-20">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>#</th>
+                                    <th>product name</th>
+                                    <th>product price</th>
+                                    <th>quantity</th>
+                                    <th>Line Total</th>
+                                    <th>Operation name</th>
+                                    <th>Operation reduction</th>
+                                </tr>
+                                <tr ng-repeat="ticketline in ticketResult.ticketLines">
+                                    <td>{{ticketline.product.id}}</td>
+                                    <td>{{ticketline.product.name}}</td>
+                                    <td>{{ticketline.product.price.price}}</td>
+                                    <td>{{ticketline.quantity}}</td>
+                                    <td>{{ticketline.lineTotal}}</td>
+                                    <td>{{ticketline.op.nomOP}}</td>
+                                    <td>{{ticketline.op.montantReduction}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

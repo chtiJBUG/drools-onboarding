@@ -1,0 +1,138 @@
+<html ng-app="productManagerApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <title>Chtijbug web site</title>
+    <link href='./css/style.css' rel="stylesheet" type="text/css"/>
+    <link href='./components/bootstrap/dist/js/bootstrap.min.css' rel="stylesheet" type="text/css"/>
+    <link href='./css/css/font-awesome.css' rel="stylesheet" type="text/css"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <script data-require="angular.js@*" data-semver="1.3.0-beta.14"
+            src="./components/angular/angular.js"></script>
+    <script data-require="angular-animate@*" data-semver="1.3.0-beta.14"
+            src="./components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+</head>
+<body>
+
+<div ng-controller="productManagerController">
+    <h2 class="page-title">ChtiJBUG Loyalty Test server </h2>
+    <a href="http://www.chtijbug.org" class="button-red"
+       style="text-align:center;width:70px;margin-left:45%;margin-right:40%">Chtjbug</a>
+
+    <div id="product-panel" class="fadein fadeout showpanel panel">
+        <div class="panel-heading">
+            <i class="panel-title-icon fa fa-tasks"></i>
+            <span class="panel-title">Product list</span>
+
+            <div class="panel-heading-controls">
+                Product Name :
+                <input type="text" ng-model="productSearch" ng-maxlength="10"/>
+
+                <button class="btn-panel" ng-click="searchProducts()">Search</button>
+
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <table class="table">
+                <tr>
+                    <td>ProductID</td>
+                    <td>Product Name</td>
+                    <td>price</td>
+                    <td>provider</td>
+                    <td>
+
+                    </td>
+                </tr>
+
+                <tr class="product" ng-repeat="product in products">
+                    <td>{{product.id}}</td>
+                    <td>{{product.productName}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.providerName }}</td>
+                    <td>
+                        <button class="btn-panel" ng-click="addToShoppingCard(product)">Add To Shopping
+                            Card
+                        </button>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+    </div>
+    <div id="ticket-panel" class="fadein fadeout addpanel panel">
+        <div class="panel-heading">
+            <i class="panel-title-icon fa fa-plus"></i>
+            <span class="panel-title">Shopping Card</span>
+
+            <div class="panel-heading-controls">
+                <button class="btn-panel" ng-click="calculateLoyalty()">Calculate Price</button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <tr>
+                    <td> Date of ticket :</td>
+                    <td><input type="date" ng-model="ticket.dateTicket" ng-maxlength="10"/></td>
+                    <td> Ticket amount :</td>
+                    <td><input type="text" ng-model="ticket.amount" ng-maxlength="10"/></td>
+                </tr>
+                <tr>
+                    <td> Card Number:</td>
+                    <td><input type="text" ng-model="ticket.loyaltyCard.number" ng-maxlength="10"/></td>
+                    <td> Card Name</td>
+                    <td><input type="text" ng-model="ticket.loyaltyCard.name" ng-maxlength="10"/></td>
+                </tr>
+                <tr>
+                    <td> Customer ID</td>
+                    <td><input type="text" ng-model="ticket.loyaltyCard.customer.customerID" ng-maxlength="10"/></td>
+                    <td> Customer surname</td>
+                    <td><input type="text" ng-model="ticket.loyaltyCard.customer.surName" ng-maxlength="20"/></td>
+                </tr>
+                <tr>
+                    <td> Customer name</td>
+                    <td><input type="text" ng-model="ticket.loyaltyCard.customer.name" ng-maxlength="20"/></td>
+                    <td> Customer marital name</td>
+                    <td><input type="text" ng-model="ticket.loyaltyCard.customer.maritalName" ng-maxlength="20"/></td>
+                </tr>
+                <tr>
+                    <td> Customer gender</td>
+                    <td><select ng-model="ticket.loyaltyCard.customer.gender">
+                      <option value="MR">Mr</option>
+                      <option value="MRS">Mrs</option>
+                      <option value="MISS">Miss</option>
+                    </select></td>
+                    <td>Customer birthdate</td>
+                    <td><input type="date" ng-model="ticket.loyaltyCard.customer.birthDate" ng-maxlength="10"/></td>
+                </tr>
+            </table>
+            <hr/>
+            <table class="table table-bordered">
+                <tr>
+                    <td>productID</td>
+                    <td>product name</td>
+                    <td>product price</td>
+                    <td>quantity</td>
+                    <td>Line Total</td>
+                    <td>Operation name</td>
+                    <td>Operation reduction</td>
+                </tr>
+                <tr ng-repeat="ticketline in ticket.ticketLines">
+
+                    <td>{{ticketline.product.Id}}</td>
+                    <td>{{ticketline.product.Name}}</td>
+                    <td>{{ticketline.product.price.price}}</td>
+                    <td><input type="number" ng-model="ticketline.quantity" ng-maxlength="10"/></td>
+                    <td>{{ticketline.price}}</td>
+                    <td>{{ticketline.op.nomOP}}</td>
+                    <td>{{ticketline.op.montantReduction}}</td>
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
