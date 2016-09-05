@@ -22,7 +22,14 @@
             <artifactId>swimming-pool-kie-server</artifactId>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.chtijbug.drools</groupId>
+            <artifactId>insurance-car-kie-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.chtijbug.drools</groupId>
+            <artifactId>loyalty-kie-server</artifactId>
+        </dependency>
         <!--dependency>
             <groupId>org.chtijbug.drools</groupId>
             <artifactId>drools-framework-kie-server-rest-drools</artifactId>

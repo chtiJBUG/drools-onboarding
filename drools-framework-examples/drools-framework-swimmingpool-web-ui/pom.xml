@@ -15,35 +15,8 @@
     <description>This projects is a tiny web site to call loyalty drools soap service</description>
 
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <id>nheron</id>
-            <name>Nicolas Héron</name>
-            <email>nicolas.heron@chtijbug.org</email>
-        </developer>
-        <developer>
-            <id>smangot</id>
-            <name>Samuel Mangot</name>
-            <email>samuel.mangot@pymma-software.com</email>
-        </developer>
-    </developers>
 
-    <scm>
-        <connection>scm:git:git@bitbucket.org:pymma/loyalty-web.git</connection>
-        <url>scm:git:git@bitbucket.org:pymma/loyalty-web.git</url>
-        <developerConnection>scm:git:git@bitbucket.org:pymma/loyalty-web.git</developerConnection>
-    </scm>
-    <issueManagement>
-        <system>Jira</system>
-        <url>https://chtijbug.atlassian.net/</url>
-    </issueManagement>
+
 
     <dependencyManagement>
         <dependencies>
@@ -171,14 +144,7 @@
 
             </exclusions>
         </dependency>
-        <!--dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-rest</artifactId>
-        </dependency-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

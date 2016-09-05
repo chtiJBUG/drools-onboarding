@@ -116,7 +116,7 @@ public class RuleBaseCommandSingleton implements RuleBasePackage {
     public void connectKBase() {
         KieServicesConfiguration config;
         config = KieServicesFactory.newRestConfiguration(url, username, password);
-        MarshallingFormat marshallingFormat = MarshallingFormat.JSON;
+        MarshallingFormat marshallingFormat = MarshallingFormat.XSTREAM;
         config.setMarshallingFormat(marshallingFormat);
         this.kieServicesClient = KieServicesFactory.newKieServicesClient(config);
     }

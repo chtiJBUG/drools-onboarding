@@ -107,14 +107,14 @@ public class RuleBaseCommandSession implements RuleBaseSession {
     public Object fireAllRulesAndStartProcess(Object inputObject, String processName) throws DroolsChtijbugException {
         Object outputObject=null;
         if (inputObject != null) {
-            this.insertObject(inputObject);
-           // this.insertByReflection(inputObject);
+            //this.insertObject(inputObject);
+            this.insertByReflection(inputObject);
         }
         if (processName != null && processName.length() > 0) {
             this.startProcess(processName);
         }
         this.fireAllRules();
-        //commands.add(commandsFactory.newGetObjects(inputObject.getClass().getName()));
+        commands.add(commandsFactory.newGetObjects(inputObject.getClass().getName()));
         RuleServicesClient ruleClient = kieServicesClient.getServicesClient(RuleServicesClient.class);
         BatchExecutionCommand batchCommand = commandsFactory.newBatchExecution(commands);
         ServiceResponse<ExecutionResults> response = ruleClient.executeCommandsWithResults(this.containerId, batchCommand);
