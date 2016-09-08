@@ -13,20 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.chtijbug.loyaltyweb;
+package org.chtijbug.loyalty.web;
 
-
-import org.chtijbug.drools.swimmingpool.restclient.SwimmingPoolConnexionConfiguration;
-import org.chtijbug.drools.swimmingpool.restclient.rest.SwimmingPoolRestAPI;
+import org.chtijbug.drools.loyalty.restclient.LoyaltyConnexionConfiguration;
+import org.chtijbug.drools.loyalty.restclient.rest.LoyaltyRestAPI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.*;
-
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
 @Configuration
 @ComponentScan
-
+@EnableJpaRepositories
+@Import(RepositoryRestMvcConfiguration.class)
 @EnableAutoConfiguration
 @PropertySource("classpath:application.properties")
 public class Application {
@@ -35,19 +36,19 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Value(value="${url.swimmingpool.calculate}")
+    @Value(value="${url.loyalty.calculate}")
     private String url;
 
-    @Value(value="${url.swimmingpool.calculate.username}")
+    @Value(value="${url.loyalty.calculate.username}")
     private String username;
-    @Value(value="${url.swimmingpool.calculate.password}")
+    @Value(value="${url.loyalty.calculate.password}")
     private String password;
 
     @Bean
-    public SwimmingPoolRestAPI serviceCalculate() {
-        SwimmingPoolConnexionConfiguration swimmingPoolConnexionConfiguration = new SwimmingPoolConnexionConfiguration(url, username, password);
+    public LoyaltyRestAPI serviceCalculate() {
+        LoyaltyConnexionConfiguration loyaltyConnexionConfiguration = new LoyaltyConnexionConfiguration(url, username, password);
 
-        return swimmingPoolConnexionConfiguration.getSwimmingPoolRestAPI();
+        return loyaltyConnexionConfiguration.getLoyaltyRestAPI();
 
     }
 }

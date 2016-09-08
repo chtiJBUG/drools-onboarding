@@ -1,4 +1,4 @@
-package org.chtijbug.loyaltyweb;
+package org.chtijbug.swimmingpool.web;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 

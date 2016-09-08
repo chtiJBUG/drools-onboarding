@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.chtijbug.loyaltyweb;
+package org.chtijbug.swimmingpool.web;
 
 
 import org.chtijbug.drools.swimmingpool.restclient.rest.SwimmingPoolRestAPI;

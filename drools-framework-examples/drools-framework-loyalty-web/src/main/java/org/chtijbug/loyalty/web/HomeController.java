@@ -13,20 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.chtijbug.loyaltyweb;
+package org.chtijbug.loyalty.web;
 
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- * Created by IntelliJ IDEA.
- * Date: 07/10/14
- * Time: 14:07
- * To change this template use File | Settings | File Templates.
- */
-public class WebInitializer extends SpringBootServletInitializer {
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(Application.class);
-    }
+@Controller
+public class HomeController {
+
+    @RequestMapping("/")
+    public String home() {
+		return "index";
+	}
+
 }

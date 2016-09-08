@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.chtijbug.loyaltyweb.persistence.model;
+package org.chtijbug.loyalty.web.persistence.model;
 
 import javax.persistence.*;
 
