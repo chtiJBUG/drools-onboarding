@@ -21,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>org.chtijbug.drools</groupId>
-            <artifactId>drools-framework-swimming-pool-model</artifactId>
+            <artifactId>drools-framework-car-insurance-model</artifactId>
         </dependency>
 
         <dependency>

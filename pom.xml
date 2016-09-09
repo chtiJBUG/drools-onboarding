@@ -216,6 +216,11 @@
             </dependency>
             <dependency>
                 <groupId>org.chtijbug.drools</groupId>
+                <artifactId>drools-framework-car-insurance-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.chtijbug.drools</groupId>
                 <artifactId>swimming-pool-kie-server</artifactId>
                 <version>${project.version}</version>
             </dependency>

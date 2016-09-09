@@ -1,7 +1,7 @@
 package org.chtijbug.drools.kieserver.carinsurance.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.chtijbug.example.swimmingpool.Quote;
+import org.chtijbug.drools.carinsurance.model.QuoteRequest;
 import org.chtijbug.kieserver.services.drools.ChtijbugObjectRequest;
 import org.chtijbug.kieserver.services.drools.DroolsFrameworkRulesExecutionService;
 import org.kie.server.services.api.KieContainerInstance;
@@ -33,8 +33,8 @@ public class CarInsuranceResource {
     @Path("/run/{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Quote runSession(@PathParam("id") String id,
-                            Quote quoteRequest) {
+    public QuoteRequest runSession(@PathParam("id") String id,
+                                   QuoteRequest quoteRequest) {
         try {
             KieContainerInstance kci = registry.getContainer(id);
             ChtijbugObjectRequest chtijbugObjectRequest = new ChtijbugObjectRequest();
@@ -42,8 +42,8 @@ public class CarInsuranceResource {
             ChtijbugObjectRequest chtijbutObjectResponse = (ChtijbugObjectRequest) rulesExecutionService.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, "swimmingpool.P000");
             ObjectMapper mapper = new ObjectMapper();
             String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getSessionLogging());
-            Quote response = (Quote) chtijbutObjectResponse.getObjectRequest();
-            response.setSessionLogging(jsonInString);
+            QuoteRequest response = (QuoteRequest) chtijbutObjectResponse.getObjectRequest();
+            //response.setSessionLogging(jsonInString);
             logger.debug("Returning OK response with content '{}'", quoteRequest);
             return response;
         } catch (Exception e) {
