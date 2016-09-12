@@ -226,6 +226,11 @@
             </dependency>
             <dependency>
                 <groupId>org.chtijbug.drools</groupId>
+                <artifactId>drools-framework-carinsurance-rest-connector</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.chtijbug.drools</groupId>
                 <artifactId>insurance-car-kie-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
