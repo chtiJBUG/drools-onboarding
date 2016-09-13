@@ -15,6 +15,7 @@ public class QuoteRequest {
     private List<Car> cars = new ArrayList<>();
     private Date quoteDate;
     private Date desiredInsuranceStartDate;
+    private List<Rule> ruleLists = new ArrayList<>();
 
     public List<Driver> getDrivers() {
         return drivers;
@@ -46,5 +47,13 @@ public class QuoteRequest {
 
     public void setDesiredInsuranceStartDate(Date desiredInsuranceStartDate) {
         this.desiredInsuranceStartDate = desiredInsuranceStartDate;
+    }
+
+    public List<Rule> getRuleLists() {
+        return ruleLists;
+    }
+
+    public void setRuleLists(List<Rule> ruleLists) {
+        this.ruleLists = ruleLists;
     }
 }
