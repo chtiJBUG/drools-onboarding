@@ -40,4 +40,15 @@ public class Rule {
     public void setValue(String value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Rule{");
+        sb.append("ruleLevel=").append(ruleLevel);
+        sb.append(", ruleName='").append(ruleName).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", value='").append(value).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

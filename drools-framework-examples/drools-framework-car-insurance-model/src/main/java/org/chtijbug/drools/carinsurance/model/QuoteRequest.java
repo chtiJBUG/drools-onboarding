@@ -17,6 +17,20 @@ public class QuoteRequest {
     private Date desiredInsuranceStartDate;
     private List<Rule> ruleLists = new ArrayList<>();
 
+    private List<CalculatedElement> calculatedElements = new ArrayList<>();
+
+    private void addCalculatedElement(CalculatedElement calculatedElement){
+        this.calculatedElements.add(calculatedElement);
+    }
+
+    public List<CalculatedElement> getCalculatedElements() {
+        return calculatedElements;
+    }
+
+    public void setCalculatedElements(List<CalculatedElement> calculatedElements) {
+        this.calculatedElements = calculatedElements;
+    }
+
     public List<Driver> getDrivers() {
         return drivers;
     }
@@ -55,5 +69,18 @@ public class QuoteRequest {
 
     public void setRuleLists(List<Rule> ruleLists) {
         this.ruleLists = ruleLists;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("QuoteRequest{");
+        sb.append("drivers=").append(drivers);
+        sb.append(", cars=").append(cars);
+        sb.append(", quoteDate=").append(quoteDate);
+        sb.append(", desiredInsuranceStartDate=").append(desiredInsuranceStartDate);
+        sb.append(", ruleLists=").append(ruleLists);
+        sb.append(", calculatedElements=").append(calculatedElements);
+        sb.append('}');
+        return sb.toString();
     }
 }
