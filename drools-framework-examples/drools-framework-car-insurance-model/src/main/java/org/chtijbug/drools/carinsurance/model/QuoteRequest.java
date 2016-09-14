@@ -19,7 +19,7 @@ public class QuoteRequest {
 
     private List<CalculatedElement> calculatedElements = new ArrayList<>();
 
-    private void addCalculatedElement(CalculatedElement calculatedElement){
+    public void addCalculatedElement(CalculatedElement calculatedElement){
         this.calculatedElements.add(calculatedElement);
     }
 

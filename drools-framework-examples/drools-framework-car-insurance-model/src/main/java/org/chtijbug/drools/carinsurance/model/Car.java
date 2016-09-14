@@ -17,7 +17,7 @@ public class Car {
 
     private Cost cost;
 
-    private List<CalculatedElement> calculatedElements = new ArrayList<>();
+    public List<CalculatedElement> calculatedElements = new ArrayList<>();
 
     public Cost getCost() {
         return cost;
