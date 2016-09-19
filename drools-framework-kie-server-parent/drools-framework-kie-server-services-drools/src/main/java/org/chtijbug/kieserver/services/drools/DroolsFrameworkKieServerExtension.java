@@ -95,8 +95,18 @@ public class DroolsFrameworkKieServerExtension implements KieServerExtension {
             }
         }
 
-        kieContainerInstance.addJaxbClasses(extraClasses);
+        kieContainerInstance.addExtraClasses(extraClasses);
 
+    }
+
+    @Override
+    public void updateContainer(String s, KieContainerInstance kieContainerInstance, Map<String, Object> map) {
+
+    }
+
+    @Override
+    public boolean isUpdateContainerAllowed(String s, KieContainerInstance kieContainerInstance, Map<String, Object> map) {
+        return false;
     }
 
     @Override
