@@ -61,4 +61,17 @@ public class CalculatedElement {
     public void setDoubleValue(Double doubleValue) {
         this.doubleValue = doubleValue;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("CalculatedElement{");
+        sb.append("objectName='").append(objectName).append('\'');
+        sb.append(", key='").append(key).append('\'');
+        sb.append(", Description='").append(Description).append('\'');
+        sb.append(", bigDecimalValue=").append(bigDecimalValue);
+        sb.append(", longValue=").append(longValue);
+        sb.append(", doubleValue=").append(doubleValue);
+        sb.append('}');
+        return sb.toString();
+    }
 }
