@@ -101,17 +101,18 @@ public class DroolsFrameworkKieServerExtension implements KieServerExtension {
 
     @Override
     public void updateContainer(String s, KieContainerInstance kieContainerInstance, Map<String, Object> map) {
-
+        System.out.println("updateContainer");
     }
 
     @Override
     public boolean isUpdateContainerAllowed(String s, KieContainerInstance kieContainerInstance, Map<String, Object> map) {
+        System.out.println("isUpdateContainerAllowed");
         return false;
     }
 
     @Override
     public void disposeContainer(String id, KieContainerInstance kieContainerInstance, Map<String, Object> parameters) {
-
+        System.out.println("disposeContainer");
     }
 
     @Override
