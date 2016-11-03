@@ -34,16 +34,6 @@
         </developer>
     </developers>
 
-    <scm>
-        <connection>scm:git:git@bitbucket.org:pymma/loyalty-web.git</connection>
-        <url>scm:git:git@bitbucket.org:pymma/loyalty-web.git</url>
-        <developerConnection>scm:git:git@bitbucket.org:pymma/loyalty-web.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
-    <issueManagement>
-        <system>Jira</system>
-        <url>https://chtijbug.atlassian.net/</url>
-    </issueManagement>
 
     <dependencyManagement>
         <dependencies>
