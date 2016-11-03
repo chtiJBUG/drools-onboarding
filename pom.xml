@@ -52,9 +52,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git@github.com:chtiJBUG/drools-onboarding.git</connection>
-        <url>scm:git:git@github.com:chtiJBUG/drools-onboarding.git</url>
-        <developerConnection>scm:git:git@github.com:chtiJBUG/drools-onboarding.git</developerConnection>
+        <connection>scm:git:https://github.com/chtiJBUG/drools-onboarding.git</connection>
+        <url>scm:git:https://github.com/chtiJBUG/drools-onboarding.git</url>
+        <developerConnection>scm:git:https://github.com/chtiJBUG/drools-onboarding.git</developerConnection>
   </scm>
     <issueManagement>
         <system>Jira</system>
