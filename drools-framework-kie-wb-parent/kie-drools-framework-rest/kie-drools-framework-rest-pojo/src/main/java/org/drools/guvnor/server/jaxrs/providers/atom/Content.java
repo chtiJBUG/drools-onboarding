@@ -170,7 +170,7 @@ public class Content extends CommonAttributes {
      * @param text
      */
     public void setText(String text) {
-        if (value == null) value = new ArrayList();
+        if (value == null) value = new ArrayList<>();
         if (this.text != null && value != null) value.clear();
         this.text = text;
         value.add(text);

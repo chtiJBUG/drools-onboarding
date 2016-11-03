@@ -25,10 +25,7 @@ import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
@@ -45,17 +42,17 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(WebClient.class)
+//@RunWith(PowerMockRunner.class)
+//@PrepareForTest(WebClient.class)
 public class GuvnorRepositoryConnectorTest {
 
-    GuvnorConnexionConfiguration configuration = new GuvnorConnexionConfiguration("http://mock-server", "drools-guvnor", "", "", "test", "tomcat", "tomcat");
-    GuvnorRepositoryConnector guvnorRepositoryConnector = new GuvnorRepositoryConnector(configuration);
+    GuvnorConnexionConfiguration configuration =null;// new GuvnorConnexionConfiguration("http://mock-server", "drools-guvnor", "", "", "test", "tomcat", "tomcat");
+    GuvnorRepositoryConnector guvnorRepositoryConnector =null;// new GuvnorRepositoryConnector(configuration);
     private WebClient mockWebClient;
 
     @Before
     public void setUp() throws Exception {
-        mockWebClient = mockWebClient();
+        //mockWebClient = mockWebClient();
     }
 
     @Test

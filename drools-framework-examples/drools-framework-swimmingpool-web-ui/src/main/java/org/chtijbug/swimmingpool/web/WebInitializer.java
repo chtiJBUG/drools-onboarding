@@ -16,7 +16,7 @@
 package org.chtijbug.swimmingpool.web;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 /**
  * Created by IntelliJ IDEA.

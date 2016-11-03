@@ -103,10 +103,10 @@ public class RuleHistoryEventTest {
         assertThat(afterRuleFlowActivatedHistoryEvent.getTypeEvent()).isEqualTo(HistoryEvent.TypeEvent.RuleFlowGroup);
         assertThat(afterRuleFlowActivatedHistoryEvent.getDroolsRuleFlowGroupObject().getName()).isEqualTo("Group1");
 
-        assertThat(historyEvents.get(21)).isInstanceOfAny(AfterRuleFiredHistoryEvent.class);
-        AfterRuleFiredHistoryEvent afterRuleFiredHistoryEvent = (AfterRuleFiredHistoryEvent) historyEvents.get(21);
+        assertThat(historyEvents.get(15)).isInstanceOfAny(AfterRuleFiredHistoryEvent.class);
+        AfterRuleFiredHistoryEvent afterRuleFiredHistoryEvent = (AfterRuleFiredHistoryEvent) historyEvents.get(15);
         assertThat(afterRuleFiredHistoryEvent.getRuleBaseID()).isEqualTo(rulePackageID);
-        assertThat(afterRuleFiredHistoryEvent.getEventID()).isEqualTo(17);
+        assertThat(afterRuleFiredHistoryEvent.getEventID()).isEqualTo(11);
         assertThat(afterRuleFiredHistoryEvent.getSessionId()).isEqualTo(1);
         assertThat(afterRuleFiredHistoryEvent.getTypeEvent()).isEqualTo(HistoryEvent.TypeEvent.Rule);
         DroolsRuleObject droolsRuleObject2 = afterRuleFiredHistoryEvent.getRule();
@@ -115,10 +115,10 @@ public class RuleHistoryEventTest {
         assertThat(afterRuleFiredHistoryEvent.getRuleInstanceId()).isEqualTo(1);
 
 
-        assertThat(historyEvents.get(31)).isInstanceOf(AfterRuleFlowDeactivatedHistoryEvent.class);
-        AfterRuleFlowDeactivatedHistoryEvent afterRuleFlowDeactivatedHistoryEvent = (AfterRuleFlowDeactivatedHistoryEvent) historyEvents.get(31);
+        assertThat(historyEvents.get(23)).isInstanceOf(AfterRuleFlowDeactivatedHistoryEvent.class);
+        AfterRuleFlowDeactivatedHistoryEvent afterRuleFlowDeactivatedHistoryEvent = (AfterRuleFlowDeactivatedHistoryEvent) historyEvents.get(23);
         assertThat(afterRuleFlowDeactivatedHistoryEvent.getRuleBaseID()).isEqualTo(rulePackageID);
-        assertThat(afterRuleFlowDeactivatedHistoryEvent.getEventID()).isEqualTo(27);
+        assertThat(afterRuleFlowDeactivatedHistoryEvent.getEventID()).isEqualTo(19);
         assertThat(afterRuleFlowDeactivatedHistoryEvent.getSessionId()).isEqualTo(1);
         assertThat(afterRuleFlowDeactivatedHistoryEvent.getTypeEvent()).isEqualTo(HistoryEvent.TypeEvent.RuleFlowGroup);
         assertThat(afterRuleFlowDeactivatedHistoryEvent.getDroolsRuleFlowGroupObject().getName()).isEqualTo("Group2");
