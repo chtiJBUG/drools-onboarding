@@ -173,6 +173,7 @@
                 <configuration>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <pushChanges>true</pushChanges>
                 </configuration>
             </plugin>
             <plugin>
