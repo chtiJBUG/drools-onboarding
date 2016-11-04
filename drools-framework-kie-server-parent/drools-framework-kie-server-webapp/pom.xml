@@ -141,10 +141,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>org.kie.server</groupId>
             <artifactId>kie-server-jms</artifactId>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>org.kie.server</groupId>
             <artifactId>kie-server-rest-common</artifactId>

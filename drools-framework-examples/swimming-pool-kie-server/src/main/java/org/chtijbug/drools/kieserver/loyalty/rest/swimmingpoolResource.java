@@ -21,7 +21,7 @@ public class swimmingpoolResource {
     private KieServerRegistry registry;
 
     public swimmingpoolResource() {
-
+        System.out.println("Swimming Pool ressources started");
     }
 
     public swimmingpoolResource(DroolsFrameworkRulesExecutionService rulesExecutionService, KieServerRegistry registry) {
