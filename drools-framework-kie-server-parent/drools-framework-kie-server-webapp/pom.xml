@@ -29,10 +29,6 @@
             <groupId>org.chtijbug.drools</groupId>
             <artifactId>loyalty-kie-server</artifactId>
         </dependency>
-        <!--dependency>
-            <groupId>org.chtijbug.drools</groupId>
-            <artifactId>drools-framework-kie-server-rest-drools</artifactId>
-        </dependency-->
         <dependency>
             <groupId>org.chtijbug.drools</groupId>
             <artifactId>drools-framework-kie-server-services-drools</artifactId>
