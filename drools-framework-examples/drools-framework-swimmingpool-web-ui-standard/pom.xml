@@ -3,7 +3,7 @@
     <parent>
         <artifactId>drools-framework-examples</artifactId>
         <groupId>org.chtijbug.drools</groupId>
-        <version>2.0.1</version>
+        <version>2.0.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>drools-framework-swimmingpool-web-ui-standard</artifactId>
