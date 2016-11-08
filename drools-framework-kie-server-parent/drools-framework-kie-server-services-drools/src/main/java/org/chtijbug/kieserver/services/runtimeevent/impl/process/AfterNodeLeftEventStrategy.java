@@ -18,6 +18,7 @@ package org.chtijbug.kieserver.services.runtimeevent.impl.process;
 import org.chtijbug.drools.entity.DroolsNodeType;
 import org.chtijbug.drools.entity.history.HistoryEvent;
 import org.chtijbug.drools.entity.history.process.AfterNodeLeftHistoryEvent;
+import org.chtijbug.drools.logging.ProcessExecution;
 import org.chtijbug.drools.logging.RuleflowGroup;
 import org.chtijbug.drools.logging.RuleflowGroupStatus;
 import org.chtijbug.kieserver.services.runtimeevent.AbstractMemoryEventHandlerStrategy;
@@ -31,6 +32,13 @@ public class AfterNodeLeftEventStrategy implements AbstractMemoryEventHandlerStr
         if (afterNodeLeftHistoryEvent.getNodeInstance().getNode().getNodeType() == DroolsNodeType.RuleNode) {
             String ruleFlowName = afterNodeLeftHistoryEvent.getNodeInstance().getNode().getRuleflowGroupName();
             RuleflowGroup ruleflowGroup = sessionContext.findRuleFlowGroup(ruleFlowName);
+            ProcessExecution processExecution = sessionContext.getProcessExecution();
+            if (ruleflowGroup == null) {
+                ruleflowGroup = new RuleflowGroup();
+                ruleflowGroup.setRuleflowGroup(ruleFlowName);
+                sessionContext.getRuleflowGroups().add(ruleflowGroup);
+                processExecution.getRuleflowGroups().add(ruleflowGroup);
+            }
             ruleflowGroup.setEndDate(afterNodeLeftHistoryEvent.getDateEvent());
             ruleflowGroup.setStopEventID(afterNodeLeftHistoryEvent.getEventID());
             ruleflowGroup.setRuleflowGroupStatus(RuleflowGroupStatus.STOPPED);
