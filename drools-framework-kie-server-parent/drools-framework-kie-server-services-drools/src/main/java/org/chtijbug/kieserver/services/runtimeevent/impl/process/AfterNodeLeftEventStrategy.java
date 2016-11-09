@@ -33,15 +33,12 @@ public class AfterNodeLeftEventStrategy implements AbstractMemoryEventHandlerStr
             String ruleFlowName = afterNodeLeftHistoryEvent.getNodeInstance().getNode().getRuleflowGroupName();
             RuleflowGroup ruleflowGroup = sessionContext.findRuleFlowGroup(ruleFlowName);
             ProcessExecution processExecution = sessionContext.getProcessExecution();
-            if (ruleflowGroup == null) {
-                ruleflowGroup = new RuleflowGroup();
-                ruleflowGroup.setRuleflowGroup(ruleFlowName);
-                sessionContext.getRuleflowGroups().add(ruleflowGroup);
-                processExecution.getRuleflowGroups().add(ruleflowGroup);
+            if (ruleflowGroup != null) {
+                ruleflowGroup.setEndDate(afterNodeLeftHistoryEvent.getDateEvent());
+                ruleflowGroup.setStopEventID(afterNodeLeftHistoryEvent.getEventID());
+                ruleflowGroup.setRuleflowGroupStatus(RuleflowGroupStatus.STOPPED);
             }
-            ruleflowGroup.setEndDate(afterNodeLeftHistoryEvent.getDateEvent());
-            ruleflowGroup.setStopEventID(afterNodeLeftHistoryEvent.getEventID());
-            ruleflowGroup.setRuleflowGroupStatus(RuleflowGroupStatus.STOPPED);
+
         }
 
     }
