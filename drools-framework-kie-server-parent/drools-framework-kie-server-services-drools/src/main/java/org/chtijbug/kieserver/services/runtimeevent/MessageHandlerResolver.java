@@ -23,6 +23,8 @@ import org.chtijbug.kieserver.services.runtimeevent.impl.rule.AfterRuleFiredEven
 import org.chtijbug.kieserver.services.runtimeevent.impl.rule.AfterRuleflowGroupActivatedEventStrategy;
 import org.chtijbug.kieserver.services.runtimeevent.impl.rule.AfterRuleflowGroupDeactivatedEventStrategy;
 import org.chtijbug.kieserver.services.runtimeevent.impl.rule.BeforeRuleFiredEventStrategy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ import java.util.List;
 
 public class MessageHandlerResolver {
 
+    private static final Logger logger = LoggerFactory.getLogger(MessageHandlerResolver.class);
 
     @Resource
     private List<AbstractMemoryEventHandlerStrategy> allMemoryStrategies = new ArrayList<>();
@@ -72,7 +75,11 @@ public class MessageHandlerResolver {
         for (HistoryEvent historyEvent : historyEvents) {
             AbstractMemoryEventHandlerStrategy strategy = this.resolveMessageHandlerMemory(historyEvent);
             if (strategy != null) {
-                strategy.handleMessageInternally(historyEvent, sessionContext);
+                try {
+                    strategy.handleMessageInternally(historyEvent, sessionContext);
+                }catch (Exception e){
+                    logger.error("MessageHandle for class"+historyEvent.getClass().toString(),historyEvent);
+                }
             }
         }
         return sessionContext;
