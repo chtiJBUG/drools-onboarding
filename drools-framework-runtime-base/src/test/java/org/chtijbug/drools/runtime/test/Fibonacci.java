@@ -11,12 +11,20 @@ package org.chtijbug.drools.runtime.test;
  * Source: http://legacy.drools.codehaus.org/Fibonacci+Example
  */
 public class Fibonacci {
-    private final int sequence;
+    private  int sequence;
     private long value;
 
     public Fibonacci(int sequence) {
         this.sequence = sequence;
         this.value = -1;
+    }
+
+    public Fibonacci(int sequence, long value) {
+        this.sequence = sequence;
+        this.value = value;
+    }
+
+    public Fibonacci() {
     }
 
     public int getSequence() {

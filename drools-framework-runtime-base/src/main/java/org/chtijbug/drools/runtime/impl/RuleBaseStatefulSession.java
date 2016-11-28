@@ -42,6 +42,7 @@ import org.kie.api.runtime.rule.FactHandle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -186,7 +187,15 @@ public class RuleBaseStatefulSession implements RuleBaseSession {
 
     public DroolsFactObject getLastFactObjectVersion(Object searchO) {
         int lastVersion = listFactObjects.get(searchO).size() - 1;
-        return getFactObjectVersion(searchO, lastVersion);
+        DroolsFactObject result = getFactObjectVersion(searchO, lastVersion);
+        try {
+            result.updateRealObjectFromJSON();
+        } catch (ClassNotFoundException e) {
+            logger.error("getLastFactObjectVersion",e);
+        } catch (IOException e) {
+            logger.error("getLastFactObjectVersion",e);
+        }
+        return result;
     }
 
     public DroolsFactObject getFactObjectVersion(Object search0, int version) {

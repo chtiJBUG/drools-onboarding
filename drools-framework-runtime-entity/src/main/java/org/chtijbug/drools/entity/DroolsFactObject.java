@@ -16,11 +16,10 @@
 package org.chtijbug.drools.entity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,17 +28,19 @@ import java.util.List;
  */
 public class DroolsFactObject implements Serializable {
 
+    private static Logger logger = LoggerFactory.getLogger(DroolsFactObject.class);
+
     /**
      *
      */
     private static final long serialVersionUID = 8185674445343213645L;
-    private final transient Object realObject;
+    private  transient Object realObject;
     protected int version;
     private String fullClassName;
     private int hashCode;
     private List<DroolsFactObjectAttribute> listfactObjectAttributes = new ArrayList<DroolsFactObjectAttribute>();
     private String realObject_JSON;
-
+    private static ObjectMapper mapper = new ObjectMapper();
     /**
      *
      */
@@ -50,11 +51,30 @@ public class DroolsFactObject implements Serializable {
     public DroolsFactObject(Object realObject, int version) throws IOException {
         this.realObject = realObject;
         this.version = version;
-        ObjectMapper mapper = new ObjectMapper();
         Writer strWriter = new StringWriter();
         mapper.writeValue(strWriter, realObject);
         this.realObject_JSON = strWriter.toString();
     }
+
+    public void updateRealObjectFromJSON() throws ClassNotFoundException, IOException{
+        if (this.realObject_JSON!= null ) {
+            Object result = null;
+            result = mapper.readValue(this.realObject_JSON, Class.forName(this.fullClassName));
+            this.realObject = result;
+        }
+    }
+
+    public Object getRealObjectFromJSON()  {
+        try {
+            this.updateRealObjectFromJSON();
+        } catch (ClassNotFoundException e) {
+            logger.error("getRealObjectFromJSON");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return realObject;
+    };
+
 
     public String getRealObject_JSON() {
         return realObject_JSON;
