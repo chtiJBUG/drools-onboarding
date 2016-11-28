@@ -1,6 +1,7 @@
 package org.chtijbug.drools.kieserver.loyalty.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import loyalty.domains.Ticket;
 import org.chtijbug.kieserver.services.drools.ChtijbugObjectRequest;
 import org.chtijbug.kieserver.services.drools.DroolsFrameworkRulesExecutionService;
@@ -19,7 +20,7 @@ public class LoyaltyResource {
 
     private DroolsFrameworkRulesExecutionService rulesExecutionService;
     private KieServerRegistry registry;
-
+    private ObjectMapper mapper = new ObjectMapper();
     public LoyaltyResource() {
 
     }
@@ -27,6 +28,7 @@ public class LoyaltyResource {
     public LoyaltyResource(DroolsFrameworkRulesExecutionService rulesExecutionService, KieServerRegistry registry) {
         this.rulesExecutionService = rulesExecutionService;
         this.registry = registry;
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
     @POST
@@ -40,7 +42,6 @@ public class LoyaltyResource {
             ChtijbugObjectRequest chtijbugObjectRequest = new ChtijbugObjectRequest();
             chtijbugObjectRequest.setObjectRequest(quoteRequest);
             ChtijbugObjectRequest chtijbutObjectResponse = (ChtijbugObjectRequest) rulesExecutionService.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, "swimmingpool.P000");
-            ObjectMapper mapper = new ObjectMapper();
             String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getSessionLogging());
             Ticket response = (Ticket) chtijbutObjectResponse.getObjectRequest();
 
