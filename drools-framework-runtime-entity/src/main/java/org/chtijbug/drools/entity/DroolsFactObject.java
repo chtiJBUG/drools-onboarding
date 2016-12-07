@@ -19,7 +19,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.Serializable;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,13 +37,15 @@ public class DroolsFactObject implements Serializable {
      *
      */
     private static final long serialVersionUID = 8185674445343213645L;
-    private  transient Object realObject;
+    private transient Object realObject;
     protected int version;
     private String fullClassName;
     private int hashCode;
     private List<DroolsFactObjectAttribute> listfactObjectAttributes = new ArrayList<DroolsFactObjectAttribute>();
     private String realObject_JSON;
     private static ObjectMapper mapper = new ObjectMapper();
+    private ClassLoader classLoader = null;
+
     /**
      *
      */
@@ -54,17 +59,50 @@ public class DroolsFactObject implements Serializable {
         Writer strWriter = new StringWriter();
         mapper.writeValue(strWriter, realObject);
         this.realObject_JSON = strWriter.toString();
-    }
-
-    public void updateRealObjectFromJSON() throws ClassNotFoundException, IOException{
-        if (this.realObject_JSON!= null ) {
-            Object result = null;
-            result = mapper.readValue(this.realObject_JSON, Class.forName(this.fullClassName));
-            this.realObject = result;
+        if (realObject != null) {
+            this.classLoader = realObject.getClass().getClassLoader();
         }
     }
 
-    public Object getRealObjectFromJSON()  {
+    public void updateRealObjectFromJSON() throws ClassNotFoundException, IOException {
+        if (this.realObject_JSON != null) {
+            ClassLoader localClassLoader=null;
+            try {
+                localClassLoader = Thread.currentThread()
+                        .getContextClassLoader();
+            }catch (ClassCastException e){
+                logger.info("DroolsFactObject.updateRealObjectFromJSON",e);
+            }
+            try {
+                Class targetClass=null;
+                if (this.classLoader != null) {
+                    Thread.currentThread().setContextClassLoader(
+                            this.classLoader);
+                    targetClass=this.classLoader.loadClass(this.fullClassName);
+                }
+                if (targetClass==null){
+                    targetClass=Class.forName(this.fullClassName);
+                }
+                Object result = null;
+
+                result = mapper.readValue(this.realObject_JSON,targetClass );
+                this.realObject = result;
+
+            } catch (ClassNotFoundException e) {
+                logger.error("getRealObjectFromJSON");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (localClassLoader!= null) {
+                    Thread.currentThread().setContextClassLoader(localClassLoader);
+                }
+            }
+        }
+    }
+
+    public Object getRealObjectFromJSON() {
+
+
         try {
             this.updateRealObjectFromJSON();
         } catch (ClassNotFoundException e) {
@@ -73,7 +111,9 @@ public class DroolsFactObject implements Serializable {
             e.printStackTrace();
         }
         return realObject;
-    };
+    }
+
+    ;
 
 
     public String getRealObject_JSON() {
