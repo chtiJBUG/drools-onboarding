@@ -15,8 +15,9 @@
  */
 package org.chtijbug.loyalty.web;
 
-import org.chtijbug.drools.loyalty.restclient.LoyaltyConnexionConfiguration;
-import org.chtijbug.drools.loyalty.restclient.rest.LoyaltyRestAPI;
+
+import org.chtijbug.drools.generic.restclient.GenericConnexionConfiguration;
+import org.chtijbug.drools.generic.restclient.rest.UsedRestAPI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -45,10 +46,10 @@ public class Application {
     private String password;
 
     @Bean
-    public LoyaltyRestAPI serviceCalculate() {
-        LoyaltyConnexionConfiguration loyaltyConnexionConfiguration = new LoyaltyConnexionConfiguration(url, username, password);
+    public UsedRestAPI serviceCalculate() {
+        GenericConnexionConfiguration swimmingPoolConnexionConfiguration = new GenericConnexionConfiguration(url, username, password);
 
-        return loyaltyConnexionConfiguration.getLoyaltyRestAPI();
+        return swimmingPoolConnexionConfiguration.getGenericRestAPI();
 
     }
 }

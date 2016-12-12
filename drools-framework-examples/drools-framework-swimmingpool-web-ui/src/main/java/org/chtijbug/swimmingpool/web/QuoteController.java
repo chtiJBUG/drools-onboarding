@@ -16,13 +16,11 @@
 package org.chtijbug.swimmingpool.web;
 
 
-import org.chtijbug.drools.swimmingpool.restclient.rest.SwimmingPoolRestAPI;
+import org.chtijbug.drools.generic.restclient.rest.UsedRestAPI;
 import org.chtijbug.example.swimmingpool.Quote;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.ws.rs.PathParam;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,7 +32,7 @@ import javax.ws.rs.PathParam;
 @RequestMapping("/quote")
 public class QuoteController {
     @Resource
-    private SwimmingPoolRestAPI serviceCalculate;
+    private UsedRestAPI serviceCalculate;
 
 
 
@@ -43,7 +41,7 @@ public class QuoteController {
                              @RequestBody Quote quoteRequest) {
         Quote response = null;
         try {
-            response = serviceCalculate.runSession(containerid,quoteRequest);
+            response = (Quote) serviceCalculate.runSession(containerid,"swimmingpool.P000",Quote.class.getCanonicalName(),quoteRequest);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -16,12 +16,15 @@
 package org.chtijbug.swimmingpool.web;
 
 
-import org.chtijbug.drools.swimmingpool.restclient.SwimmingPoolConnexionConfiguration;
-import org.chtijbug.drools.swimmingpool.restclient.rest.SwimmingPoolRestAPI;
+import org.chtijbug.drools.generic.restclient.GenericConnexionConfiguration;
+import org.chtijbug.drools.generic.restclient.rest.UsedRestAPI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 
 @Configuration
@@ -44,10 +47,10 @@ public class Application {
     private String password;
 
     @Bean
-    public SwimmingPoolRestAPI serviceCalculate() {
-        SwimmingPoolConnexionConfiguration swimmingPoolConnexionConfiguration = new SwimmingPoolConnexionConfiguration(url, username, password);
+    public UsedRestAPI serviceCalculate() {
+        GenericConnexionConfiguration swimmingPoolConnexionConfiguration = new GenericConnexionConfiguration(url, username, password);
 
-        return swimmingPoolConnexionConfiguration.getSwimmingPoolRestAPI();
+        return swimmingPoolConnexionConfiguration.getGenericRestAPI();
 
     }
 }

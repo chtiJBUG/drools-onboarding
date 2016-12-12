@@ -11,9 +11,9 @@
     <artifactId>drools-framework-kie-server-parent</artifactId>
     <modules>
         <module>drools-framework-kie-server-services-drools</module>
-        <!--module>drools-framework-kie-server-rest-drools</module-->
         <module>drools-framework-kie-server-webapp</module>
-        <!--module>drools-framework-kie-server-extension</module-->
+        <module>drools-framewor-kie-server-rest-drools</module>
+        <module>drools-framework-kie-server-client-connector</module>
     </modules>
 
 </project>

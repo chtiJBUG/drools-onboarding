@@ -17,7 +17,8 @@ package org.chtijbug.loyalty.web;
 
 
 import loyalty.domains.Ticket;
-import org.chtijbug.drools.loyalty.restclient.rest.LoyaltyRestAPI;
+
+import org.chtijbug.drools.generic.restclient.rest.UsedRestAPI;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,14 +37,14 @@ import javax.ws.rs.PathParam;
 @RequestMapping("/ticket")
 public class TicketController {
     @Resource
-    private LoyaltyRestAPI serviceCalculate;
+    private UsedRestAPI serviceCalculate;
 
 
-    @RequestMapping(value = "/calculate", method = RequestMethod.PUT)
+    @RequestMapping(value = "/calculate/{id}", method = RequestMethod.PUT)
     public Ticket storeTicket(@PathParam("id") String id, @RequestBody Ticket ticket) {
         Ticket response = null;
         try {
-            response = serviceCalculate.runSession(id,ticket);
+            response = (Ticket)serviceCalculate.runSession(id,"P1.P1","loyalty.domains.Ticket",ticket);
         } catch (Exception e) {
             e.printStackTrace();
         }

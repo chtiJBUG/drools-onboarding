@@ -81,7 +81,7 @@
         </dependency>
         <dependency>
             <groupId>org.chtijbug.drools</groupId>
-            <artifactId>drools-framework-loyalty-rest-connector</artifactId>
+            <artifactId>drools-framework-kie-server-client-connector</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -130,6 +130,7 @@
 
     <dependencyManagement>
         <dependencies>
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
@@ -162,7 +163,7 @@
             </dependency>
             <dependency>
                 <groupId>org.chtijbug.drools</groupId>
-                <artifactId>drools-framework-loyalty-rest-connector</artifactId>
+                <artifactId>drools-framework-kie-server-client-connector</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
