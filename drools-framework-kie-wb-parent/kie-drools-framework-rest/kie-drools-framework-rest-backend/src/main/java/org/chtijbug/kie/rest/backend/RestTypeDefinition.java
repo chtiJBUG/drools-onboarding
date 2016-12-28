@@ -62,6 +62,9 @@ public class RestTypeDefinition implements ResourceTypeDefinition {
                 || path.getFileName().endsWith("." + ResourceType.BAYES.getDefaultExtension())
                 //  ||path.getFileName().endsWith("." + ResourceType.JAVA.getDefaultExtension())
                 || path.getFileName().endsWith("." + ResourceType.PROPERTIES.getDefaultExtension())
+                || path.getFileName().endsWith("." + ResourceType.BPMN2.getDefaultExtension())
+                || path.getFileName().endsWith("." + ResourceType.GDST.getDefaultExtension())
+
                 || path.getFileName().endsWith("." + ResourceType.DESCR.getDefaultExtension())
 
                 ) {
