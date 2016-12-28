@@ -34,8 +34,6 @@ public class QuoteController {
     @Resource
     private UsedRestAPI serviceCalculate;
 
-
-
     @RequestMapping(value = "/calculate/{containerId}", method = RequestMethod.PUT)
     public Quote storeTicket(@PathVariable("containerId") String containerid,
                              @RequestBody Quote quoteRequest) {
@@ -45,8 +43,6 @@ public class QuoteController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return response;
-
     }
 }

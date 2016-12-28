@@ -226,16 +226,10 @@
             <artifactId>hibernate-commons-annotations</artifactId>
         </dependency>
 
-        <!-- UF Security management provider for Tomcat. -->
+        <!-- UF Security management provider for WFLY10/EAP7. -->
         <dependency>
             <groupId>org.uberfire</groupId>
-            <artifactId>uberfire-security-management-tomcat</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>resteasy-cdi</artifactId>
-                    <groupId>org.jboss.resteasy</groupId>
-                </exclusion>
-            </exclusions>
+            <artifactId>uberfire-security-management-wildfly10</artifactId>
         </dependency>
 
         <!-- for tomcat and RestEasy -->
@@ -334,9 +328,12 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
                         <!--descriptor>${project.basedir}/src/main/community/assembly-kie-drools-wb-tomcat-7.xml
-                    </descriptor-->
+                    </descriptor>
                         <descriptor>${project.basedir}/src/main/community/assembly-kie-drools-wb-jboss-wildfly-8.xml
+                        </descriptor-->
+                        <descriptor>${project.basedir}/src/main/community/assembly-kie-drools-wb-jboss-wildfly-10.xml
                         </descriptor>
+
                     </descriptors>
                     <archive>
                         <addMavenDescriptor>false</addMavenDescriptor>
