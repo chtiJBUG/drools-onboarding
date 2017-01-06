@@ -15,8 +15,10 @@
  */
 package org.chtijbug.loyalty.web;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,6 +26,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
  * Time: 14:07
  * To change this template use File | Settings | File Templates.
  */
+@SpringBootApplication
 public class WebInitializer extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

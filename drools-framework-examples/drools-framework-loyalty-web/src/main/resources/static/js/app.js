@@ -97,7 +97,7 @@ productManagerModule.controller('productManagerController', function ($scope, $h
 
     $scope.calculateLoyalty = function () {
         var myTicket = $scope.ticket;
-        $http.put(urlBase + "/loyalty-web/ticket/calculate", myTicket).success(function (data) {
+        $http.put(urlBase + "/loyalty-web/ticket/calculate/loyalty", myTicket).success(function (data) {
             $scope.ticketResult = data;
         })
     }
