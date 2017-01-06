@@ -15,7 +15,6 @@
         <module>drools-framework-swimmingpool-web-ui</module>
         <module>drools-framework-car-insurance-model</module>
         <module>drools-framework-loyalty-web</module>
-        <module>drools-framework-carinsurance-jbpm-rest-client</module>
     </modules>
 
 </project>
