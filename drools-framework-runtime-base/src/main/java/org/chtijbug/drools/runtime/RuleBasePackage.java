@@ -29,12 +29,14 @@ public interface RuleBasePackage {
 
     RuleBaseSession createRuleBaseSession(int maxNumberRulesToExecute, HistoryListener sessionHistoryListener) throws DroolsChtijbugException;
 
-    public void loadKBase(String version) throws DroolsChtijbugException;
+    RuleBaseSession createRuleBaseSession(int maxNumberRulesToExecute, HistoryListener sessionHistoryListener, String sessionName) throws DroolsChtijbugException;
 
-    public HistoryListener getHistoryListener();
+    void loadKBase(String version) throws DroolsChtijbugException;
 
-    public Long getRuleBaseID();
+    HistoryListener getHistoryListener();
 
-    public void dispose();
+    Long getRuleBaseID();
+
+    void dispose();
 
 }

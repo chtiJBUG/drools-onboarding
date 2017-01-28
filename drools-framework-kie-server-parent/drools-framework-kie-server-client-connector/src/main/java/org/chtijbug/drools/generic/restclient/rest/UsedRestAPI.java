@@ -8,4 +8,10 @@ public interface UsedRestAPI {
                       String processID,
                        String className,
                       Object objectRequest);
+
+    Object runSessionSessionName(String id,
+                                 String processID,
+                                 String className,
+                                 String sessionName,
+                                 Object objectRequest);
 }
