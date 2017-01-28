@@ -14,6 +14,7 @@
         <module>kie-drools-framework-rest</module>
         <module>drools-framework-login</module>
         <module>drools-framework-kie-wb-wars</module>
+        <module>chtijbug-organizationalunit-manager</module>
     </modules>
 
     <build>

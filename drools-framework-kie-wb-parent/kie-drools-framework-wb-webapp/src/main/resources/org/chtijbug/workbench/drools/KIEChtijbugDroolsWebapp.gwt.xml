@@ -47,6 +47,7 @@
     <inherits name="org.guvnor.common.services.workingset.GuvnorWorkingsetClient"/>
     <inherits name="org.guvnor.messageconsole.GuvnorMessageConsoleClient"/>
     <inherits name='org.guvnor.organizationalunit.manager.GuvnorOrganizationalUnitManager'/>
+    <inherits name='org.chtijbug.organizationalunit.manager.GuvnorOrganizationalUnitManager'/>
 
     <inherits name="org.guvnor.asset.management.GuvnorAssetMgmtAPI"/>
     <inherits name='org.guvnor.asset.management.GuvnorAssetMgmtClient'/>

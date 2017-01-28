@@ -100,6 +100,10 @@ public interface AppConstants
 
     String MenuManageOrganizationalUnits();
 
+
+    String MenuManageOrganizationalUnitsRights();
+
+
     String Repository();
 
     String Upload();

@@ -102,11 +102,20 @@ public class AdministrationPerspective {
                 .newTopLevelMenu(constants.MenuOrganizationalUnits())
                 .withRoles(kieACL.getGrantedRoles(F_ADMINISTRATION))
                 .menus()
+
                 .menu(constants.MenuManageOrganizationalUnits())
                 .respondsWith(new Command() {
                     @Override
                     public void execute() {
                         placeManager.goTo("org.kie.workbench.common.screens.organizationalunit.manager.OrganizationalUnitManager");
+                    }
+                })
+                .endMenu()
+                .menu(constants.MenuManageOrganizationalUnitsRights())
+                .respondsWith(new Command() {
+                    @Override
+                    public void execute() {
+                        placeManager.goTo("org.chtijbug.OrganizationalUnitManager");
                     }
                 })
                 .endMenu()

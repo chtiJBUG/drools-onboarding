@@ -1131,6 +1131,12 @@
             <artifactId>junit</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.chtijbug.drools</groupId>
+            <artifactId>chtijbug-organizationalunit-manager</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>org.chtijbug.drools</groupId>
@@ -1416,6 +1422,7 @@
                         <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath>
                         <compileSourcesArtifacts>
                             <!-- Kie Server needed by Exec Server UI -->
+                            <compileSourcesArtifact>org.chtijbug.drools:chtijbug-organizationalunit-manager</compileSourcesArtifact>
                             <compileSourcesArtifact>org.kie:kie-api</compileSourcesArtifact>
                             <compileSourcesArtifact>org.kie.server:kie-server-api</compileSourcesArtifact>
 
@@ -1761,7 +1768,7 @@
                                 <artifactItem>
                                     <groupId>org.wildfly</groupId>
                                     <artifactId>wildfly-dist</artifactId>
-                                    <version>8.1.0.Final</version>
+                                    <version>${as.version}</version>
                                     <type>zip</type>
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.build.directory}</outputDirectory>

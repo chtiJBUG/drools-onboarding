@@ -285,7 +285,11 @@
                 <artifactId>drools-framework-kie-server-services-drools</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.chtijbug.drools</groupId>
+                <artifactId>chtijbug-organizationalunit-manager</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.chtijbug.drools</groupId>
                 <artifactId>kie-drools-framework-rest-backend</artifactId>
@@ -385,6 +389,16 @@
                 <groupId>com.googlecode.lambdaj</groupId>
                 <artifactId>lambdaj</artifactId>
                 <version>2.3.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.uberfire</groupId>
+                <artifactId>uberfire-security-management-client</artifactId>
+                <version>${version.org.uberfire}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.uberfire</groupId>
+                <artifactId>uberfire-security-management-api</artifactId>
+                <version>${version.org.uberfire}</version>
             </dependency>
             <dependency>
                 <groupId>org.uberfire</groupId>
