@@ -5,7 +5,7 @@
 package org.chtijbug.drools.runtime.test;
 
 import org.chtijbug.drools.entity.DroolsFactObject;
-import org.chtijbug.drools.runtime.DroolsFactObjectFactory;
+import org.chtijbug.drools.runtime.*;
 import org.junit.*;
 
 import java.math.BigDecimal;
@@ -45,6 +45,13 @@ public class DroolsFactObjectFactoryTest {
         DroolsFactObject fact = DroolsFactObjectFactory.createFactObject(underTest, 1);
         assertTrue(fact.getListfactObjectAttributes().size() == 7);
 
+    }
+
+    @Test
+    @Ignore
+    public void TestIntrosepct2() throws DroolsChtijbugException {
+        RuleBasePackage kbase = RuleBaseBuilder.createRuleBasePackage(new Long("1"), null);
+        RuleBaseSession session = kbase.createRuleBaseSession(2000, null, null);
     }
 
     public class TestPojoOne {

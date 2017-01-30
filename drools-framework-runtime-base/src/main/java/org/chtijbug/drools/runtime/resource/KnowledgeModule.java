@@ -47,6 +47,19 @@ public class KnowledgeModule {
         this.sharedCounter = sharedCounter;
     }
 
+    public KnowledgeModule(Long ruleBaseId, HistoryListener historyListener, EventCounter sharedCounter) {
+        this.ruleBaseId = ruleBaseId;
+        this.historyListener = historyListener;
+        this.groupId = null;
+        this.artifactId = null;
+        this.version = null;
+        this.kieServices = KieServices.Factory.get();
+        this.kieRepository = kieServices.getRepository();
+        this.kieResources = kieServices.getResources();
+        this.kieFileSystem = kieServices.newKieFileSystem();
+        this.sharedCounter = sharedCounter;
+    }
+
     public void addAllFiles(List<FileKnowledgeResource> files) {
         for (FileKnowledgeResource file : files) {
             addRuleFile(groupId + ".rules", file);
@@ -81,6 +94,12 @@ public class KnowledgeModule {
             }
         }
         return this.kieServices.newKieContainer(releaseId);
+    }
+
+    public KieContainer buildFromClassPath() {
+
+
+        return this.kieServices.getKieClasspathContainer();
     }
 
     public void addWorkbenchResource(String workbenchUrl, String username, String password) {
