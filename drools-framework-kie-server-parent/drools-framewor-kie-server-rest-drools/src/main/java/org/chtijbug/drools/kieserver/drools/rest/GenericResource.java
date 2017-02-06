@@ -67,7 +67,55 @@ public class GenericResource {
                 Object input = mapper.readValue(objectRequest, classLoader.loadClass(className));
                 ChtijbugObjectRequest chtijbugObjectRequest = new ChtijbugObjectRequest();
                 chtijbugObjectRequest.setObjectRequest(input);
-                ChtijbugObjectRequest chtijbutObjectResponse = (ChtijbugObjectRequest) rulesExecutionService.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID);
+                ChtijbugObjectRequest chtijbutObjectResponse = rulesExecutionService.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID);
+                ObjectMapper mapper = new ObjectMapper();
+                //String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getSessionLogging());
+                response = chtijbutObjectResponse.getObjectRequest();
+            }
+            //response.setSessionLogging(jsonInString);
+            logger.debug("Returning OK response with content '{}'", objectRequest);
+            return response;
+        } catch (Exception e) {
+            // in case marshalling failed return the FireAllRulesAndStartProcess container response to keep backward compatibility
+            String responseMessage = "Execution failed with error : " + e.getMessage();
+            logger.debug("Returning Failure response with content '{}'", responseMessage);
+            return objectRequest;
+        } finally {
+            if (localClassLoader != null) {
+                Thread.currentThread().setContextClassLoader(localClassLoader);
+            }
+        }
+
+    }
+
+    @POST
+    @Path("/runSessionName/{id}/{processId}/{className}/{sessionName}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Object runSessionWithName(@PathParam("id") String id,
+                                     @PathParam("processId") String processID,
+                                     @PathParam("className") String className,
+                                     @PathParam("sessionName") String sessionName,
+                                     String objectRequest) {
+        ClassLoader localClassLoader = null;
+        Object response = null;
+        try {
+            localClassLoader = Thread.currentThread()
+                    .getContextClassLoader();
+        } catch (ClassCastException e) {
+            logger.info("DroolsFactObject.updateRealObjectFromJSON", e);
+        }
+        try {
+
+            KieContainerInstance kci = registry.getContainer(id);
+            Set<Class<?>> classes = kci.getExtraClasses();
+            Class foundClass = this.getClassFromName(classes, className);
+            if (foundClass != null) {
+                ClassLoader classLoader = foundClass.getClassLoader();
+                Object input = mapper.readValue(objectRequest, classLoader.loadClass(className));
+                ChtijbugObjectRequest chtijbugObjectRequest = new ChtijbugObjectRequest();
+                chtijbugObjectRequest.setObjectRequest(input);
+                ChtijbugObjectRequest chtijbutObjectResponse = rulesExecutionService.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID, sessionName);
                 ObjectMapper mapper = new ObjectMapper();
                 //String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getSessionLogging());
                 response = chtijbutObjectResponse.getObjectRequest();

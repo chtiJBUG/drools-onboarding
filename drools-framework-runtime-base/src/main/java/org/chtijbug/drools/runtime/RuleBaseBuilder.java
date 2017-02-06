@@ -87,4 +87,17 @@ public abstract class RuleBaseBuilder {
         }
     }
 
+    public static RuleBasePackage createRuleBasePackage(Long ruleBaseId, HistoryListener historyListener) throws DroolsChtijbugException {
+        logger.debug(">>createRuleBasePackage");
+
+        RuleBaseSingleton ruleBasePackage = new RuleBaseSingleton(ruleBaseId, RuleBaseSingleton.DEFAULT_RULE_THRESHOLD, historyListener);
+        try {
+            ruleBasePackage.createKBase();
+            //_____ Returning the result
+            return ruleBasePackage;
+        } finally {
+            logger.debug("<<createRuleBasePackage", ruleBasePackage);
+        }
+    }
+
 }

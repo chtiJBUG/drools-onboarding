@@ -102,6 +102,20 @@ public class RuleBaseSingleton implements RuleBasePackage {
         this.knowledgeModule = new KnowledgeModule(this.ruleBaseID, this.historyListener, groupId, artifactId, version, eventCounter);
     }
 
+    public RuleBaseSingleton(Long ruleBaseID, int maxNumberRulesToExecute, HistoryListener historyListener) throws DroolsChtijbugException {
+        this.ruleBaseID = ruleBaseID;
+        this.maxNumberRuleToExecute = maxNumberRulesToExecute;
+        this.historyListener = historyListener;
+        if (this.historyListener != null) {
+            KnowledgeBaseCreatedEvent knowledgeBaseCreatedEvent = new KnowledgeBaseCreatedEvent(eventCounter.next(), new Date(), ruleBaseID);
+            this.historyListener.fireEvent(knowledgeBaseCreatedEvent);
+        }
+        this.groupId = groupId;
+        this.artifactId = artifactId;
+        this.version = version;
+        this.knowledgeModule = new KnowledgeModule(this.ruleBaseID, this.historyListener, eventCounter);
+    }
+
     @Override
     public RuleBaseSession createRuleBaseSession() throws DroolsChtijbugException {
         logger.debug(">>createRuleBaseSession");
@@ -121,6 +135,11 @@ public class RuleBaseSingleton implements RuleBasePackage {
 
     @Override
     public RuleBaseSession createRuleBaseSession(int maxNumberRulesToExecute, HistoryListener sessionHistoryListener) throws DroolsChtijbugException {
+        return this.createRuleBaseSession(maxNumberRulesToExecute, sessionHistoryListener, null);
+    }
+
+    @Override
+    public RuleBaseSession createRuleBaseSession(int maxNumberRulesToExecute, HistoryListener sessionHistoryListener, String sessionName) throws DroolsChtijbugException {
         logger.debug(">>createRuleBaseSession", maxNumberRulesToExecute);
         RuleBaseSession newRuleBaseSession = null;
         try {
@@ -133,7 +152,12 @@ public class RuleBaseSingleton implements RuleBasePackage {
                 }
                 //_____ Now we can create a new stateful session using KnowledgeBase
                 //_____ Now we can create a new stateful session using KnowledgeBase
-                KieSession newDroolsSession = this.kieContainer.newKieSession();
+                KieSession newDroolsSession = null;
+                if (sessionName == null) {
+                    newDroolsSession = this.kieContainer.newKieSession();
+                } else {
+                    newDroolsSession = this.kieContainer.newKieSession(sessionName);
+                }
                 Long sessionId = this.sessionCounter.next();
                 if (sessionHistoryListener != null) {
                     KnowledgeBaseCreateSessionEvent knowledgeBaseCreateSessionEvent = new KnowledgeBaseCreateSessionEvent(eventCounter.next(), new Date(), this.ruleBaseID);
@@ -238,6 +262,21 @@ public class RuleBaseSingleton implements RuleBasePackage {
             propagate(e);
         }
     }
+
+    public void createKBase() {
+        try {
+            if (this.historyListener != null) {
+                this.historyListener.fireEvent(new KnowledgeBaseInitialLoadEvent(eventCounter.next(), new Date(), this.ruleBaseID));
+            }
+            lockKbase.acquire();
+
+            kieContainer = this.knowledgeModule.buildFromClassPath();
+            lockKbase.release();
+        } catch (InterruptedException | DroolsChtijbugException e) {
+            propagate(e);
+        }
+    }
+
 
 
 }

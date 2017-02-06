@@ -47,7 +47,13 @@ public class DroolsFrameworkRulesExecutionService {
         return context;
     }
 
+
     public ChtijbugObjectRequest FireAllRulesAndStartProcess(KieContainerInstance kci, ChtijbugObjectRequest chtijbugObjectRequest, String processID) {
+        return this.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID, null);
+    }
+
+
+    public ChtijbugObjectRequest FireAllRulesAndStartProcess(KieContainerInstance kci, ChtijbugObjectRequest chtijbugObjectRequest, String processID, String sessionName) {
         Object result = null;
         try {
 
@@ -57,7 +63,7 @@ public class DroolsFrameworkRulesExecutionService {
                 ruleBasePackage = new RuleBaseSingleton(kieContainer, 20000);
             }
             ChtijbugHistoryListener chtijbugHistoryListener = new ChtijbugHistoryListener();
-            RuleBaseSession session = ruleBasePackage.createRuleBaseSession(20000, chtijbugHistoryListener);
+            RuleBaseSession session = ruleBasePackage.createRuleBaseSession(20000, chtijbugHistoryListener, sessionName);
             result = session.fireAllRulesAndStartProcess(chtijbugObjectRequest.getObjectRequest(), processID);
             SessionContext sessionContext = this.messageHandlerResolver.getSessionFromHistoryEvent(chtijbugHistoryListener.getHistoryEventLinkedList());
             chtijbugObjectRequest.setSessionLogging(sessionContext);

@@ -13,11 +13,9 @@ import java.io.IOException;
  */
 public class GenericRestAPIImpl implements UsedRestAPI {
 
-    private GenericlRestAPI genericlRestAPI;
-
-    private ObjectMapper mapper = new ObjectMapper();
-
     private static final Logger logger = LoggerFactory.getLogger(GenericRestAPIImpl.class);
+    private GenericlRestAPI genericlRestAPI;
+    private ObjectMapper mapper = new ObjectMapper();
 
     public GenericRestAPIImpl(GenericlRestAPI genericlRestAPI) {
         this.genericlRestAPI = genericlRestAPI;
@@ -33,6 +31,22 @@ public class GenericRestAPIImpl implements UsedRestAPI {
 
         try {
             response = mapper.readValue(responseJson, objectRequest.getClass()   );
+        } catch (IOException e) {
+            logger.error("GenericRestAPIImpl.runSession.readValue", e);
+        }
+
+        return response;
+    }
+
+    @Override
+    public Object runSessionSessionName(String id, String processID, String className, String sessionName, Object objectRequest) {
+        Object response = null;
+
+        String responseJson = this.genericlRestAPI.runSessionWithName(id, processID, className, sessionName, objectRequest);
+
+
+        try {
+            response = mapper.readValue(responseJson, objectRequest.getClass());
         } catch (IOException e) {
             logger.error("GenericRestAPIImpl.runSession.readValue", e);
         }

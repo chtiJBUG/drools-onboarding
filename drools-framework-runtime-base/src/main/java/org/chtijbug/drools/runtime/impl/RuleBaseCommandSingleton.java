@@ -5,7 +5,6 @@ import org.chtijbug.drools.runtime.DroolsChtijbugException;
 import org.chtijbug.drools.runtime.RuleBasePackage;
 import org.chtijbug.drools.runtime.RuleBaseSession;
 import org.chtijbug.drools.runtime.listener.HistoryListener;
-import org.kie.api.runtime.KieContainer;
 import org.kie.server.api.marshalling.MarshallingFormat;
 import org.kie.server.client.KieServicesClient;
 import org.kie.server.client.KieServicesConfiguration;
@@ -90,6 +89,11 @@ public class RuleBaseCommandSingleton implements RuleBasePackage {
         } finally {
             logger.debug("<<createRuleBaseSession", newRuleBaseSession);
         }
+    }
+
+    @Override
+    public RuleBaseSession createRuleBaseSession(int maxNumberRulesToExecute, HistoryListener sessionHistoryListener, String sessionName) throws DroolsChtijbugException {
+        return this.createRuleBaseSession(maxNumberRulesToExecute, sessionHistoryListener);
     }
 
     @Override
