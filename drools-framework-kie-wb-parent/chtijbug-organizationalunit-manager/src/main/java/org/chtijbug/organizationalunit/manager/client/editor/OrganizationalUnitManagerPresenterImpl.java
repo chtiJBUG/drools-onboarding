@@ -91,7 +91,7 @@ public class OrganizationalUnitManagerPresenterImpl implements OrganizationalUni
     @OnStartup
     public void onStartup() {
         view.reset();
-        AbstractEntityManager.SearchRequest request = new SearchRequestImpl("", 1, 5);
+        AbstractEntityManager.SearchRequest request = new SearchRequestImpl("", 1, 50);
         final List<String> listGroups = new ArrayList<String>();//= userSystemManager.groups().search(request);
         OrganizationalUnitManagerPresenterImpl.this.allGroups = listGroups;
         userSystemManager.groups(new RemoteCallback() {
