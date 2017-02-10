@@ -39,12 +39,6 @@ import java.util.*;
 @ApplicationScoped
 public class OrganizationalUnitManagerViewImpl extends Composite implements OrganizationalUnitManagerView {
 
-    interface OrganizationalUnitManagerViewBinder
-            extends
-            UiBinder<Widget, OrganizationalUnitManagerViewImpl> {
-
-    }
-
     private static final Comparator<OrganizationalUnit> ORGANIZATIONAL_UNIT_COMPARATOR = new Comparator<OrganizationalUnit>() {
         @Override
         public int compare(final OrganizationalUnit o1,
@@ -52,7 +46,6 @@ public class OrganizationalUnitManagerViewImpl extends Composite implements Orga
             return o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
         }
     };
-
     private static final Comparator<String> GROUP_COMPARATOR = new Comparator<String>() {
         @Override
         public int compare(final String o1,
@@ -60,31 +53,21 @@ public class OrganizationalUnitManagerViewImpl extends Composite implements Orga
             return o1.toLowerCase().compareTo(o2.toLowerCase());
         }
     };
-
     private static OrganizationalUnitManagerViewBinder uiBinder = GWT.create(OrganizationalUnitManagerViewBinder.class);
-
     @UiField
     ListBox lstOrganizationalUnits;
-
     @UiField
     ListBox lstOrganizationalUnitGroups;
-
     @UiField
     ListBox lstAvailableGroupsForOrganizationalUnit;
-
-
     @UiField
     Button btnAddGroupOrganizationalUnit;
-
     @UiField
     Button btnRemoveGroupOrganizationalUnit;
-
     private OrganizationalUnitManagerPresenter presenter;
-
     private List<OrganizationalUnit> sortedOrganizationalUnits = new ArrayList<OrganizationalUnit>();
     private List<String> sortedOrganizationalUnitGroups = new ArrayList<String>();
     private List<String> sortedAvailableGroups = new ArrayList<String>();
-
     public OrganizationalUnitManagerViewImpl() {
         initWidget(uiBinder.createAndBindUi(this));
 
@@ -102,8 +85,8 @@ public class OrganizationalUnitManagerViewImpl extends Composite implements Orga
                 final OrganizationalUnit selectedOrganizationalUnit = sortedOrganizationalUnits.get(selectedOrganizationalUnitIndex);
                 presenter.organizationalUnitSelected(selectedOrganizationalUnit);
 
-                btnAddGroupOrganizationalUnit.setEnabled(false);
-                btnRemoveGroupOrganizationalUnit.setEnabled(false);
+                btnAddGroupOrganizationalUnit.setEnabled(true);
+                btnRemoveGroupOrganizationalUnit.setEnabled(true);
             }
         });
 
@@ -233,7 +216,6 @@ public class OrganizationalUnitManagerViewImpl extends Composite implements Orga
         return sortedGroups;
     }
 
-
     @Override
     public void showBusyIndicator(final String message) {
         BusyPopup.showMessage(message);
@@ -243,7 +225,6 @@ public class OrganizationalUnitManagerViewImpl extends Composite implements Orga
     public void hideBusyIndicator() {
         BusyPopup.close();
     }
-
 
     @UiHandler("btnAddGroupOrganizationalUnit")
     public void onClickAddRepositoryButton(final ClickEvent event) {
@@ -276,6 +257,12 @@ public class OrganizationalUnitManagerViewImpl extends Composite implements Orga
         }
         presenter.removeOrganizationalUnitGroup(selectedOrganizationalUnit,
                 selectdGroup);
+    }
+
+    interface OrganizationalUnitManagerViewBinder
+            extends
+            UiBinder<Widget, OrganizationalUnitManagerViewImpl> {
+
     }
 
 }
