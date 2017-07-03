@@ -3,7 +3,7 @@
     <parent>
         <artifactId>drools-framework-kie-server-parent</artifactId>
         <groupId>org.chtijbug.drools</groupId>
-        <version>2.0.10-SNAPSHOT</version>
+        <version>2.0.10</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
