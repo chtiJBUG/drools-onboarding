@@ -24,6 +24,7 @@ import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
 import org.kie.api.runtime.KieContainer;
 import org.kie.server.services.api.KieContainerInstance;
 import org.kie.server.services.api.KieServerRegistry;
+import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,10 +37,13 @@ public class DroolsFrameworkRulesExecutionService {
     private KieServerRegistry context;
     private RuleBasePackage ruleBasePackage = null;
     private MessageHandlerResolver messageHandlerResolver;
+    private int MaxNumberRulesToExecute = 20000;
+    private Reflections reflections = null;
 
     public DroolsFrameworkRulesExecutionService(KieServerRegistry context) {
         this.context = context;
         this.messageHandlerResolver = new MessageHandlerResolver();
+        this.reflections = new Reflections();
     }
 
 
@@ -48,22 +52,29 @@ public class DroolsFrameworkRulesExecutionService {
     }
 
 
+    public ChtijbugObjectRequest FireAllRulesAndStartProcess(KieContainerInstance kci, ChtijbugObjectRequest chtijbugObjectRequest, String processID, int sessionMaxNumberRulesToExecute) {
+        return this.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID, null, sessionMaxNumberRulesToExecute);
+    }
+
     public ChtijbugObjectRequest FireAllRulesAndStartProcess(KieContainerInstance kci, ChtijbugObjectRequest chtijbugObjectRequest, String processID) {
         return this.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID, null);
     }
 
 
-    public ChtijbugObjectRequest FireAllRulesAndStartProcess(KieContainerInstance kci, ChtijbugObjectRequest chtijbugObjectRequest, String processID, String sessionName) {
+    public ChtijbugObjectRequest FireAllRulesAndStartProcess(KieContainerInstance kci, ChtijbugObjectRequest chtijbugObjectRequest, String processID, String sessionName, int sessionMaxNumberRulesToExecute) {
+
         Object result = null;
         try {
 
-            if (kci != null && kci.getKieContainer() != null) {
+            if (kci != null
+                    && kci.getKieContainer() != null
+                    && ruleBasePackage == null) {
 
                 KieContainer kieContainer = kci.getKieContainer();
-                ruleBasePackage = new RuleBaseSingleton(kieContainer, 20000);
+                ruleBasePackage = new RuleBaseSingleton(kieContainer, sessionMaxNumberRulesToExecute, this.reflections);
             }
             ChtijbugHistoryListener chtijbugHistoryListener = new ChtijbugHistoryListener();
-            RuleBaseSession session = ruleBasePackage.createRuleBaseSession(20000, chtijbugHistoryListener, sessionName);
+            RuleBaseSession session = ruleBasePackage.createRuleBaseSession(sessionMaxNumberRulesToExecute, chtijbugHistoryListener, sessionName);
             result = session.fireAllRulesAndStartProcess(chtijbugObjectRequest.getObjectRequest(), processID);
             SessionContext sessionContext = this.messageHandlerResolver.getSessionFromHistoryEvent(chtijbugHistoryListener.getHistoryEventLinkedList());
             chtijbugObjectRequest.setSessionLogging(sessionContext);
@@ -75,7 +86,12 @@ public class DroolsFrameworkRulesExecutionService {
             e.printStackTrace();
         }
 
-
         throw new IllegalStateException("Unable to execute command " + chtijbugObjectRequest.getObjectRequest());
+
+    }
+
+    public ChtijbugObjectRequest FireAllRulesAndStartProcess(KieContainerInstance kci, ChtijbugObjectRequest chtijbugObjectRequest, String processID, String sessionName) {
+
+        return this.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID, sessionName, this.MaxNumberRulesToExecute);
     }
 }

@@ -41,6 +41,20 @@ public class GenericResource {
         return result;
     }
 
+
+    @POST
+    @Path("/runAsync/{id}/{processId}/{className}/{maxNumberRulesToExecute}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public String runSessionAsync(@PathParam("id") String id,
+                                  @PathParam("processId") String processID,
+                                  @PathParam("className") String className,
+                                  @PathParam("className") String maxNumberRulesToExecute,
+                                  String objectRequest) {
+        String result = null;
+        return result;
+    }
+
     @POST
     @Path("/run/{id}/{processId}/{className}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -69,7 +83,7 @@ public class GenericResource {
                 chtijbugObjectRequest.setObjectRequest(input);
                 ChtijbugObjectRequest chtijbutObjectResponse = rulesExecutionService.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID);
                 ObjectMapper mapper = new ObjectMapper();
-                //String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getSessionLogging());
+                String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getSessionLogging());
                 response = chtijbutObjectResponse.getObjectRequest();
             }
             //response.setSessionLogging(jsonInString);

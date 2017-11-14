@@ -259,6 +259,16 @@
             </dependency>
             <dependency>
                 <groupId>org.chtijbug.drools</groupId>
+                <artifactId>drools-framework-kie-server-extension-interface</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>0.9.11</version>
+            </dependency>
+            <dependency>
+                <groupId>org.chtijbug.drools</groupId>
                 <artifactId>swimming-pool-kie-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
