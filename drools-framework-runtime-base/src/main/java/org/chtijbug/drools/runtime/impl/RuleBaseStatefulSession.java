@@ -477,6 +477,11 @@ public class RuleBaseStatefulSession implements RuleBaseSession {
     }
 
     @Override
+    public KieSession getKnowledgeSession() {
+        return knowledgeSession;
+    }
+
+    @Override
     public Collection<? extends java.lang.Object> getObjects(ObjectFilter objectFilter) {
         return this.knowledgeSession.getObjects(objectFilter);
     }

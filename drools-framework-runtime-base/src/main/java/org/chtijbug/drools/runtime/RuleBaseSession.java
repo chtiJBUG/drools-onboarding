@@ -18,6 +18,7 @@ package org.chtijbug.drools.runtime;
 import org.chtijbug.drools.entity.DroolsFactObject;
 import org.chtijbug.drools.entity.DroolsRuleObject;
 import org.chtijbug.drools.entity.history.HistoryContainer;
+import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.ObjectFilter;
 import org.kie.api.runtime.process.ProcessInstance;
 import org.kie.api.runtime.process.WorkItemHandler;
@@ -52,39 +53,42 @@ public interface RuleBaseSession {
      * @param identifier - the key of the global variable to inject
      * @param value      - the value of the global variable to inject
      */
-    public void setGlobal(String identifier, Object value);
+    void setGlobal(String identifier, Object value);
 
-    public void updateObject(Object updatedObject);
+    void updateObject(Object updatedObject);
 
-    public void retractObject(Object oldObject);
+    void retractObject(Object oldObject);
 
-    public void fireAllRules() throws DroolsChtijbugException;
+    void fireAllRules() throws DroolsChtijbugException;
 
-    public Object fireAllRulesAndStartProcess(Object inputObject, String processName) throws DroolsChtijbugException;
+    Object fireAllRulesAndStartProcess(Object inputObject, String processName) throws DroolsChtijbugException;
 
-    public Object fireAllRulesAndStartProcessWithParam(Object inputObject, String processName) throws DroolsChtijbugException;
+    Object fireAllRulesAndStartProcessWithParam(Object inputObject, String processName) throws DroolsChtijbugException;
 
-    public void startProcess(String processName);
+    void startProcess(String processName);
 
-    public void dispose();
+    void dispose();
 
-    public HistoryContainer getHistoryContainer();
+    HistoryContainer getHistoryContainer();
 
-    public String getHistoryContainerXML();
+    String getHistoryContainerXML();
 
-    public Collection<DroolsFactObject> listLastVersionObjects();
+    Collection<DroolsFactObject> listLastVersionObjects();
 
-    public String listLastVersionObjectsXML();
+    String listLastVersionObjectsXML();
 
-    public Collection<DroolsRuleObject> listRules();
+    Collection<DroolsRuleObject> listRules();
 
-    public int getNumberRulesExecuted();
+    int getNumberRulesExecuted();
 
-    public Long getSessionId();
+    Long getSessionId();
 
-    public Long getRuleBaseID();
+    Long getRuleBaseID();
 
-    public Collection<? extends Object> getObjects(ObjectFilter objectFilter);
+
+    KieSession getKnowledgeSession();
+
+    Collection<? extends Object> getObjects(ObjectFilter objectFilter);
 
     void completeWorkItem(long processId, Map<String, Object> vars);
 
@@ -92,6 +96,6 @@ public interface RuleBaseSession {
 
     void registerWorkItemHandler(String workItemName, WorkItemHandler workItemHandler);
 
-    public ProcessInstance startProcess(String processName, Map<String, Object> vars);
+    ProcessInstance startProcess(String processName, Map<String, Object> vars);
 
 }

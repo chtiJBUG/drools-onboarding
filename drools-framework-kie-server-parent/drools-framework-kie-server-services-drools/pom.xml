@@ -58,9 +58,12 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.chtijbug.drools</groupId>
+            <artifactId>drools-framework-kie-server-extension-interface</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
-
         </dependency>
 
     </dependencies>

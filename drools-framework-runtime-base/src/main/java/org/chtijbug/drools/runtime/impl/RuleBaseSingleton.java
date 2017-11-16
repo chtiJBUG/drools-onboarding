@@ -17,9 +17,7 @@ package org.chtijbug.drools.runtime.impl;
 
 import org.chtijbug.drools.entity.history.EventCounter;
 import org.chtijbug.drools.entity.history.knowledge.*;
-import org.chtijbug.drools.kieserver.extension.KieServerGlobalVariableDefinition;
-import org.chtijbug.drools.kieserver.extension.KieServerListenerDefinition;
-import org.chtijbug.drools.kieserver.extension.KieServerLoggingDefinition;
+import org.chtijbug.drools.kieserver.extension.KieServerAddOnElement;
 import org.chtijbug.drools.runtime.DroolsChtijbugException;
 import org.chtijbug.drools.runtime.RuleBasePackage;
 import org.chtijbug.drools.runtime.RuleBaseSession;
@@ -30,11 +28,13 @@ import org.chtijbug.drools.runtime.resource.WorkbenchClient;
 import org.kie.api.builder.ReleaseId;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
-import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Semaphore;
 
 import static com.google.common.base.Throwables.propagate;
@@ -85,10 +85,7 @@ public class RuleBaseSingleton implements RuleBasePackage {
     /**
      * extensions Points
      */
-    private List<KieServerGlobalVariableDefinition> kieServerGlobalVariableDefinitions = new ArrayList<>();
-    private List<KieServerLoggingDefinition> kieServerLoggingDefinitions = new ArrayList<>();
-    private List<KieServerListenerDefinition> kieServerListenerDefinitions = new ArrayList<>();
-    private Reflections reflections = null;
+    private KieServerAddOnElement kieServerAddOnElement = null;
 
     /**
      * @param kieContainer
@@ -98,14 +95,12 @@ public class RuleBaseSingleton implements RuleBasePackage {
     public RuleBaseSingleton(KieContainer kieContainer, int maxNumberRulesToExecute) {
         this.kieContainer = kieContainer;
         this.maxNumberRuleToExecute = maxNumberRulesToExecute;
-        initExtensionsList();
     }
 
-    public RuleBaseSingleton(KieContainer kieContainer, int maxNumberRulesToExecute, Reflections reflections) {
-        this.reflections = reflections;
+    public RuleBaseSingleton(KieContainer kieContainer, int maxNumberRulesToExecute, KieServerAddOnElement kieServerAddOnElement) {
+        this.kieServerAddOnElement = kieServerAddOnElement;
         this.kieContainer = kieContainer;
         this.maxNumberRuleToExecute = maxNumberRulesToExecute;
-        initExtensionsList();
     }
 
     public RuleBaseSingleton(KieContainer kieContainer, int maxNumberRulesToExecute, HistoryListener historyListener) {
@@ -113,7 +108,6 @@ public class RuleBaseSingleton implements RuleBasePackage {
         this.maxNumberRuleToExecute = maxNumberRulesToExecute;
         this.historyListener = historyListener;
 
-        initExtensionsList();
     }
 
     public RuleBaseSingleton(Long ruleBaseID, int maxNumberRulesToExecute, HistoryListener historyListener, String groupId, String artifactId, String version) throws DroolsChtijbugException {
@@ -129,56 +123,9 @@ public class RuleBaseSingleton implements RuleBasePackage {
         this.version = version;
         this.knowledgeModule = new KnowledgeModule(this.ruleBaseID, this.historyListener, groupId, artifactId, version, eventCounter);
 
-        initExtensionsList();
     }
 
-    private void initExtensionsList() {
 
-
-        if (reflections != null) {
-            Set<Class<? extends KieServerGlobalVariableDefinition>> classes1 = reflections.getSubTypesOf(KieServerGlobalVariableDefinition.class);
-            for (Class<? extends KieServerGlobalVariableDefinition> classeA : classes1) {
-                try {
-                    KieServerGlobalVariableDefinition newElement = classeA.newInstance();
-                    kieServerGlobalVariableDefinitions.add(newElement);
-                } catch (InstantiationException e) {
-                    logger.error("initExtensionsList.KieServerGlobalVariableDefinition.InstantiationException", e);
-
-                } catch (IllegalAccessException e) {
-                    logger.error("initExtensionsList.KieServerGlobalVariableDefinition.IllegalAccessException", e);
-                }
-
-
-            }
-            Set<Class<? extends KieServerLoggingDefinition>> classes2 = reflections.getSubTypesOf(KieServerLoggingDefinition.class);
-            for (Class<? extends KieServerLoggingDefinition> classeA : classes2) {
-
-                try {
-                    KieServerLoggingDefinition newElement = classeA.newInstance();
-                    kieServerLoggingDefinitions.add(newElement);
-                } catch (InstantiationException e) {
-                    logger.error("initExtensionsList.KieServerLoggingDefinition.InstantiationException", e);
-
-                } catch (IllegalAccessException e) {
-                    logger.error("initExtensionsList.KieServerLoggingDefinition.IllegalAccessException", e);
-                }
-
-            }
-            Set<Class<? extends KieServerListenerDefinition>> classes3 = reflections.getSubTypesOf(KieServerListenerDefinition.class);
-            for (Class<? extends KieServerListenerDefinition> classeA : classes3) {
-                try {
-                    KieServerListenerDefinition newElement = classeA.newInstance();
-                    kieServerListenerDefinitions.add(newElement);
-                } catch (InstantiationException e) {
-                    logger.error("initExtensionsList.KieServerListenerDefinition.InstantiationException", e);
-
-                } catch (IllegalAccessException e) {
-                    logger.error("initExtensionsList.KieServerListenerDefinition.IllegalAccessException", e);
-                }
-
-            }
-        }
-    }
 
     public RuleBaseSingleton(Long ruleBaseID, int maxNumberRulesToExecute, HistoryListener historyListener) throws DroolsChtijbugException {
         this.ruleBaseID = ruleBaseID;

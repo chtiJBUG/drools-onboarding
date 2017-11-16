@@ -1,6 +1,9 @@
 package org.chtijbug.drools.kieserver.drools.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.chtijbug.drools.kieserver.extension.KieServerAddOnElement;
+import org.chtijbug.drools.kieserver.extension.KieServerAsyncCallBack;
+import org.chtijbug.drools.kieserver.extension.KieServerLoggingDefinition;
 import org.chtijbug.kieserver.services.drools.ChtijbugObjectRequest;
 import org.chtijbug.kieserver.services.drools.DroolsFrameworkRulesExecutionService;
 import org.kie.server.services.api.KieContainerInstance;
@@ -81,9 +84,26 @@ public class GenericResource {
                 Object input = mapper.readValue(objectRequest, classLoader.loadClass(className));
                 ChtijbugObjectRequest chtijbugObjectRequest = new ChtijbugObjectRequest();
                 chtijbugObjectRequest.setObjectRequest(input);
+                KieServerAddOnElement kieServerAddOnElement = rulesExecutionService.getKieServerAddOnElement();
+                if (kieServerAddOnElement != null) {
+
+
+                    for (KieServerLoggingDefinition kieServerLoggingDefinition : kieServerAddOnElement.getKieServerLoggingDefinitions()) {
+                        kieServerLoggingDefinition.OnFireAllrulesStart(kci.getKieContainer().getReleaseId().getGroupId(), kci.getKieContainer().getReleaseId().getArtifactId(), kci.getKieContainer().getReleaseId().getVersion(), input);
+                    }
+                }
                 ChtijbugObjectRequest chtijbutObjectResponse = rulesExecutionService.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID);
                 ObjectMapper mapper = new ObjectMapper();
                 String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getSessionLogging());
+                if (kieServerAddOnElement != null) {
+                    for (KieServerAsyncCallBack kieServerAsyncCallBack : kieServerAddOnElement.getKieServerAsyncCallBacks()) {
+                        kieServerAsyncCallBack.OnFireAllrulesEnd(kci.getKieContainer().getReleaseId().getGroupId(), kci.getKieContainer().getReleaseId().getArtifactId(), kci.getKieContainer().getReleaseId().getVersion(), chtijbutObjectResponse.getObjectRequest(), chtijbutObjectResponse.getSessionLogging());
+                    }
+
+                    for (KieServerLoggingDefinition kieServerLoggingDefinition : kieServerAddOnElement.getKieServerLoggingDefinitions()) {
+                        kieServerLoggingDefinition.OnFireAllrulesEnd(kci.getKieContainer().getReleaseId().getGroupId(), kci.getKieContainer().getReleaseId().getArtifactId(), kci.getKieContainer().getReleaseId().getVersion(), chtijbutObjectResponse.getObjectRequest(), jsonInString);
+                    }
+                }
                 response = chtijbutObjectResponse.getObjectRequest();
             }
             //response.setSessionLogging(jsonInString);

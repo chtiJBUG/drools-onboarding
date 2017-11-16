@@ -15,11 +15,13 @@
 
 package org.chtijbug.kieserver.services.drools;
 
+import org.chtijbug.drools.kieserver.extension.*;
 import org.kie.api.remote.Remotable;
 import org.kie.scanner.KieModuleMetaData;
 import org.kie.server.api.KieServerConstants;
 import org.kie.server.services.api.*;
 import org.kie.server.services.impl.KieServerImpl;
+import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +42,8 @@ public class DroolsFrameworkKieServerExtension implements KieServerExtension {
     private KieServerRegistry registry;
 
     private List<Object> services = new ArrayList<Object>();
+    private Reflections reflections = null;
+    private KieServerAddOnElement kieServerAddOnElement = null;
 
     @Override
     public boolean isActive() {
@@ -48,12 +52,78 @@ public class DroolsFrameworkKieServerExtension implements KieServerExtension {
 
     @Override
     public void init(KieServerImpl kieServer, KieServerRegistry registry) {
-        this.rulesExecutionService = new DroolsFrameworkRulesExecutionService(registry);
+        this.reflections = new Reflections();
+        initExtensionsList();
+        this.rulesExecutionService = new DroolsFrameworkRulesExecutionService(registry, this.kieServerAddOnElement);
         this.registry = registry;
 
         services.add(rulesExecutionService);
     }
 
+    private void initExtensionsList() {
+        List<KieServerGlobalVariableDefinition> kieServerGlobalVariableDefinitions = new ArrayList<>();
+        List<KieServerLoggingDefinition> kieServerLoggingDefinitions = new ArrayList<>();
+        List<KieServerListenerDefinition> kieServerListenerDefinitions = new ArrayList<>();
+        List<KieServerAsyncCallBack> kieServerAsyncCallBacks = new ArrayList<>();
+        this.kieServerAddOnElement = new KieServerAddOnElement(kieServerGlobalVariableDefinitions, kieServerLoggingDefinitions, kieServerListenerDefinitions, kieServerAsyncCallBacks);
+
+        if (reflections != null) {
+            Set<Class<? extends KieServerGlobalVariableDefinition>> classes1 = reflections.getSubTypesOf(KieServerGlobalVariableDefinition.class);
+            for (Class<? extends KieServerGlobalVariableDefinition> classeA : classes1) {
+                try {
+                    KieServerGlobalVariableDefinition newElement = classeA.newInstance();
+                    kieServerGlobalVariableDefinitions.add(newElement);
+                } catch (InstantiationException e) {
+                    logger.error("initExtensionsList.KieServerGlobalVariableDefinition.InstantiationException", e);
+
+                } catch (IllegalAccessException e) {
+                    logger.error("initExtensionsList.KieServerGlobalVariableDefinition.IllegalAccessException", e);
+                }
+
+
+            }
+            Set<Class<? extends KieServerLoggingDefinition>> classes2 = reflections.getSubTypesOf(KieServerLoggingDefinition.class);
+            for (Class<? extends KieServerLoggingDefinition> classeA : classes2) {
+
+                try {
+                    KieServerLoggingDefinition newElement = classeA.newInstance();
+                    kieServerLoggingDefinitions.add(newElement);
+                } catch (InstantiationException e) {
+                    logger.error("initExtensionsList.KieServerLoggingDefinition.InstantiationException", e);
+
+                } catch (IllegalAccessException e) {
+                    logger.error("initExtensionsList.KieServerLoggingDefinition.IllegalAccessException", e);
+                }
+
+            }
+            Set<Class<? extends KieServerListenerDefinition>> classes3 = reflections.getSubTypesOf(KieServerListenerDefinition.class);
+            for (Class<? extends KieServerListenerDefinition> classeA : classes3) {
+                try {
+                    KieServerListenerDefinition newElement = classeA.newInstance();
+                    kieServerListenerDefinitions.add(newElement);
+                } catch (InstantiationException e) {
+                    logger.error("initExtensionsList.KieServerListenerDefinition.InstantiationException", e);
+
+                } catch (IllegalAccessException e) {
+                    logger.error("initExtensionsList.KieServerListenerDefinition.IllegalAccessException", e);
+                }
+
+            }
+            Set<Class<? extends KieServerAsyncCallBack>> classes4 = reflections.getSubTypesOf(KieServerAsyncCallBack.class);
+            for (Class<? extends KieServerAsyncCallBack> classeA : classes4) {
+                try {
+                    KieServerAsyncCallBack newElement = classeA.newInstance();
+                    kieServerAsyncCallBacks.add(newElement);
+                } catch (InstantiationException e) {
+                    logger.error("initExtensionsList.KieServerAsyncCallBack.InstantiationException", e);
+
+                } catch (IllegalAccessException e) {
+                    logger.error("initExtensionsList.KieServerAsyncCallBack.IllegalAccessException", e);
+                }
+
+            }
+        }
+    }
     @Override
     public void destroy(KieServerImpl kieServer, KieServerRegistry registry) {
         // no-op?
@@ -114,6 +184,20 @@ public class DroolsFrameworkKieServerExtension implements KieServerExtension {
     @Override
     public void disposeContainer(String id, KieContainerInstance kieContainerInstance, Map<String, Object> parameters) {
         System.out.println("disposeContainer");
+        if (kieServerAddOnElement != null) {
+            for (KieServerAsyncCallBack kieServerAsyncCallBack : kieServerAddOnElement.getKieServerAsyncCallBacks()) {
+                kieServerAsyncCallBack.OnDisposeKieBase();
+            }
+            for (KieServerGlobalVariableDefinition kieServerGlobalVariableDefinition : kieServerAddOnElement.getKieServerGlobalVariableDefinitions()) {
+                kieServerGlobalVariableDefinition.OnDisposeKieBase();
+            }
+            for (KieServerListenerDefinition kieServerListenerDefinition : kieServerAddOnElement.getKieServerListenerDefinitions()) {
+                kieServerListenerDefinition.OnDisposeKieBase();
+            }
+            for (KieServerLoggingDefinition kieServerLoggingDefinition : kieServerAddOnElement.getKieServerLoggingDefinitions()) {
+                kieServerLoggingDefinition.OnDisposeKieBase();
+            }
+        }
     }
 
     @Override

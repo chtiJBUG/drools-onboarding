@@ -11,10 +11,10 @@ import org.kie.api.command.BatchExecutionCommand;
 import org.kie.api.command.Command;
 import org.kie.api.command.KieCommands;
 import org.kie.api.runtime.ExecutionResults;
+import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.ObjectFilter;
 import org.kie.api.runtime.process.ProcessInstance;
 import org.kie.api.runtime.process.WorkItemHandler;
-import org.kie.server.api.commands.CommandScript;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.client.KieServicesClient;
 import org.kie.server.client.RuleServicesClient;
@@ -181,6 +181,11 @@ public class RuleBaseCommandSession implements RuleBaseSession {
 
     @Override
     public Long getRuleBaseID() {
+        return null;
+    }
+
+    @Override
+    public KieSession getKnowledgeSession() {
         return null;
     }
 
