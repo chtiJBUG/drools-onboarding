@@ -52,15 +52,15 @@ public class DroolsFrameworkKieServerExtension implements KieServerExtension {
 
     @Override
     public void init(KieServerImpl kieServer, KieServerRegistry registry) {
-        this.reflections = new Reflections();
-        initExtensionsList();
+        this.reflections = new Reflections(DroolsFrameworkKieServerExtension.class.getClassLoader());
         this.rulesExecutionService = new DroolsFrameworkRulesExecutionService(registry, this.kieServerAddOnElement);
         this.registry = registry;
-
+        initExtensionsList();
         services.add(rulesExecutionService);
     }
 
     private void initExtensionsList() {
+
         List<KieServerGlobalVariableDefinition> kieServerGlobalVariableDefinitions = new ArrayList<>();
         List<KieServerLoggingDefinition> kieServerLoggingDefinitions = new ArrayList<>();
         List<KieServerListenerDefinition> kieServerListenerDefinitions = new ArrayList<>();
