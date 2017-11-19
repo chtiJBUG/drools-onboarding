@@ -21,7 +21,6 @@ import org.kie.scanner.KieModuleMetaData;
 import org.kie.server.api.KieServerConstants;
 import org.kie.server.services.api.*;
 import org.kie.server.services.impl.KieServerImpl;
-import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +41,6 @@ public class DroolsFrameworkKieServerExtension implements KieServerExtension {
     private KieServerRegistry registry;
 
     private List<Object> services = new ArrayList<Object>();
-    private Reflections reflections = null;
     private KieServerAddOnElement kieServerAddOnElement = null;
 
     @Override
@@ -52,7 +50,7 @@ public class DroolsFrameworkKieServerExtension implements KieServerExtension {
 
     @Override
     public void init(KieServerImpl kieServer, KieServerRegistry registry) {
-        this.reflections = new Reflections(DroolsFrameworkKieServerExtension.class.getClassLoader());
+
         this.rulesExecutionService = new DroolsFrameworkRulesExecutionService(registry, this.kieServerAddOnElement);
         this.registry = registry;
         initExtensionsList();
@@ -60,69 +58,29 @@ public class DroolsFrameworkKieServerExtension implements KieServerExtension {
     }
 
     private void initExtensionsList() {
-
         List<KieServerGlobalVariableDefinition> kieServerGlobalVariableDefinitions = new ArrayList<>();
+        ServiceLoader<KieServerGlobalVariableDefinition> serverExtensions1 = ServiceLoader.load(KieServerGlobalVariableDefinition.class);
+        for (KieServerGlobalVariableDefinition loadedImpl : serverExtensions1) {
+            kieServerGlobalVariableDefinitions.add(loadedImpl);
+        }
         List<KieServerLoggingDefinition> kieServerLoggingDefinitions = new ArrayList<>();
+        ServiceLoader<KieServerLoggingDefinition> serverExtensions2 = ServiceLoader.load(KieServerLoggingDefinition.class);
+        for (KieServerLoggingDefinition loadedImpl : serverExtensions2) {
+            kieServerLoggingDefinitions.add(loadedImpl);
+        }
         List<KieServerListenerDefinition> kieServerListenerDefinitions = new ArrayList<>();
+        ServiceLoader<KieServerListenerDefinition> serverExtensions3 = ServiceLoader.load(KieServerListenerDefinition.class);
+        for (KieServerListenerDefinition loadedImpl : serverExtensions3) {
+            kieServerListenerDefinitions.add(loadedImpl);
+        }
         List<KieServerAsyncCallBack> kieServerAsyncCallBacks = new ArrayList<>();
+        ServiceLoader<KieServerAsyncCallBack> serverExtensions4 = ServiceLoader.load(KieServerAsyncCallBack.class);
+        for (KieServerAsyncCallBack loadedImpl : serverExtensions4) {
+            kieServerAsyncCallBacks.add(loadedImpl);
+        }
         this.kieServerAddOnElement = new KieServerAddOnElement(kieServerGlobalVariableDefinitions, kieServerLoggingDefinitions, kieServerListenerDefinitions, kieServerAsyncCallBacks);
 
-        if (reflections != null) {
-            Set<Class<? extends KieServerGlobalVariableDefinition>> classes1 = reflections.getSubTypesOf(KieServerGlobalVariableDefinition.class);
-            for (Class<? extends KieServerGlobalVariableDefinition> classeA : classes1) {
-                try {
-                    KieServerGlobalVariableDefinition newElement = classeA.newInstance();
-                    kieServerGlobalVariableDefinitions.add(newElement);
-                } catch (InstantiationException e) {
-                    logger.error("initExtensionsList.KieServerGlobalVariableDefinition.InstantiationException", e);
 
-                } catch (IllegalAccessException e) {
-                    logger.error("initExtensionsList.KieServerGlobalVariableDefinition.IllegalAccessException", e);
-                }
-
-
-            }
-            Set<Class<? extends KieServerLoggingDefinition>> classes2 = reflections.getSubTypesOf(KieServerLoggingDefinition.class);
-            for (Class<? extends KieServerLoggingDefinition> classeA : classes2) {
-
-                try {
-                    KieServerLoggingDefinition newElement = classeA.newInstance();
-                    kieServerLoggingDefinitions.add(newElement);
-                } catch (InstantiationException e) {
-                    logger.error("initExtensionsList.KieServerLoggingDefinition.InstantiationException", e);
-
-                } catch (IllegalAccessException e) {
-                    logger.error("initExtensionsList.KieServerLoggingDefinition.IllegalAccessException", e);
-                }
-
-            }
-            Set<Class<? extends KieServerListenerDefinition>> classes3 = reflections.getSubTypesOf(KieServerListenerDefinition.class);
-            for (Class<? extends KieServerListenerDefinition> classeA : classes3) {
-                try {
-                    KieServerListenerDefinition newElement = classeA.newInstance();
-                    kieServerListenerDefinitions.add(newElement);
-                } catch (InstantiationException e) {
-                    logger.error("initExtensionsList.KieServerListenerDefinition.InstantiationException", e);
-
-                } catch (IllegalAccessException e) {
-                    logger.error("initExtensionsList.KieServerListenerDefinition.IllegalAccessException", e);
-                }
-
-            }
-            Set<Class<? extends KieServerAsyncCallBack>> classes4 = reflections.getSubTypesOf(KieServerAsyncCallBack.class);
-            for (Class<? extends KieServerAsyncCallBack> classeA : classes4) {
-                try {
-                    KieServerAsyncCallBack newElement = classeA.newInstance();
-                    kieServerAsyncCallBacks.add(newElement);
-                } catch (InstantiationException e) {
-                    logger.error("initExtensionsList.KieServerAsyncCallBack.InstantiationException", e);
-
-                } catch (IllegalAccessException e) {
-                    logger.error("initExtensionsList.KieServerAsyncCallBack.IllegalAccessException", e);
-                }
-
-            }
-        }
     }
     @Override
     public void destroy(KieServerImpl kieServer, KieServerRegistry registry) {
