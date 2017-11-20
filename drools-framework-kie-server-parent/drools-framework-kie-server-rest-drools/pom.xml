@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>drools-framewor-kie-server-rest-drools</artifactId>
+    <artifactId>drools-framework-kie-server-rest-drools</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
