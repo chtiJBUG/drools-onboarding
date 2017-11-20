@@ -50,7 +50,6 @@ public class DroolsFrameworkKieServerExtension implements KieServerExtension {
 
     @Override
     public void init(KieServerImpl kieServer, KieServerRegistry registry) {
-
         this.rulesExecutionService = new DroolsFrameworkRulesExecutionService(registry, this.kieServerAddOnElement);
         this.registry = registry;
         initExtensionsList();
