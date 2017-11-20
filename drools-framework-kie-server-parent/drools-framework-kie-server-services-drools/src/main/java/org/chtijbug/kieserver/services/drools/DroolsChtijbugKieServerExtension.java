@@ -29,14 +29,14 @@ import javax.xml.bind.annotation.XmlType;
 import java.lang.annotation.Annotation;
 import java.util.*;
 
-public class DroolsFrameworkKieServerExtension implements KieServerExtension {
+public class DroolsChtijbugKieServerExtension implements KieServerExtension {
 
     public static final String EXTENSION_NAME = "DroolsFramework";
-    private static final Logger logger = LoggerFactory.getLogger(DroolsFrameworkKieServerExtension.class);
+    private static final Logger logger = LoggerFactory.getLogger(DroolsChtijbugKieServerExtension.class);
     private static final Boolean disabled = Boolean.parseBoolean(System.getProperty(KieServerConstants.KIE_DROOLS_SERVER_EXT_DISABLED, "false"));
     private static final Boolean filterRemoteable = Boolean.parseBoolean(System.getProperty(KieServerConstants.KIE_DROOLS_FILTER_REMOTEABLE_CLASSES, "false"));
 
-    private DroolsFrameworkRulesExecutionService rulesExecutionService;
+    private DroolsChtijbugRulesExecutionService rulesExecutionService;
 
     private KieServerRegistry registry;
 
@@ -50,7 +50,7 @@ public class DroolsFrameworkKieServerExtension implements KieServerExtension {
 
     @Override
     public void init(KieServerImpl kieServer, KieServerRegistry registry) {
-        this.rulesExecutionService = new DroolsFrameworkRulesExecutionService(registry, this.kieServerAddOnElement);
+        this.rulesExecutionService = new DroolsChtijbugRulesExecutionService(registry, this.kieServerAddOnElement);
         this.registry = registry;
         initExtensionsList();
         services.add(rulesExecutionService);

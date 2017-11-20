@@ -5,7 +5,7 @@ import org.chtijbug.drools.kieserver.extension.KieServerAddOnElement;
 import org.chtijbug.drools.kieserver.extension.KieServerAsyncCallBack;
 import org.chtijbug.drools.kieserver.extension.KieServerLoggingDefinition;
 import org.chtijbug.kieserver.services.drools.ChtijbugObjectRequest;
-import org.chtijbug.kieserver.services.drools.DroolsFrameworkRulesExecutionService;
+import org.chtijbug.kieserver.services.drools.DroolsChtijbugRulesExecutionService;
 import org.kie.server.services.api.KieContainerInstance;
 import org.kie.server.services.api.KieServerRegistry;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ public class GenericResource {
 
     private static final Logger logger = LoggerFactory.getLogger(GenericResource.class);
 
-    private DroolsFrameworkRulesExecutionService rulesExecutionService;
+    private DroolsChtijbugRulesExecutionService rulesExecutionService;
     private KieServerRegistry registry;
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -28,7 +28,7 @@ public class GenericResource {
 
     }
 
-    public GenericResource(DroolsFrameworkRulesExecutionService rulesExecutionService, KieServerRegistry registry) {
+    public GenericResource(DroolsChtijbugRulesExecutionService rulesExecutionService, KieServerRegistry registry) {
         this.rulesExecutionService = rulesExecutionService;
         this.registry = registry;
     }

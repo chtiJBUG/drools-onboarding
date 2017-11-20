@@ -1,6 +1,6 @@
 package org.chtijbug.drools.kieserver.drools.rest;
 
-import org.chtijbug.kieserver.services.drools.DroolsFrameworkRulesExecutionService;
+import org.chtijbug.kieserver.services.drools.DroolsChtijbugRulesExecutionService;
 import org.kie.server.services.api.KieServerApplicationComponentsService;
 import org.kie.server.services.api.KieServerRegistry;
 import org.kie.server.services.api.SupportedTransports;
@@ -21,12 +21,12 @@ public class GenericKieServerApplicationComponentsService implements KieServerAp
             return Collections.emptyList();
         }
 
-        DroolsFrameworkRulesExecutionService rulesExecutionService = null;
+        DroolsChtijbugRulesExecutionService rulesExecutionService = null;
         KieServerRegistry context = null;
 
         for (Object object : services) {
-            if (DroolsFrameworkRulesExecutionService.class.isAssignableFrom(object.getClass())) {
-                DroolsFrameworkRulesExecutionService droolsFrameworkRulesExecutionService = (DroolsFrameworkRulesExecutionService) object;
+            if (DroolsChtijbugRulesExecutionService.class.isAssignableFrom(object.getClass())) {
+                DroolsChtijbugRulesExecutionService droolsFrameworkRulesExecutionService = (DroolsChtijbugRulesExecutionService) object;
                 context = droolsFrameworkRulesExecutionService.getContext();
                 rulesExecutionService = droolsFrameworkRulesExecutionService;
                 continue;

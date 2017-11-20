@@ -75,10 +75,10 @@
             <artifactId>kie-drools-framework-rest-pojo</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>org.chtijbug.osgi</groupId>
             <artifactId>lambdaj.osgi</artifactId>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>de.twentyeleven.skysail</groupId>
             <artifactId>org.apache.poi-osgi</artifactId>

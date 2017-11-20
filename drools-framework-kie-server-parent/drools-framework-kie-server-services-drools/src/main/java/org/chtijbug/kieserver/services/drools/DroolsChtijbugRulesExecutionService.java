@@ -31,8 +31,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Direct rules execution service that allow use of typed objects instead of string only
  */
-public class DroolsFrameworkRulesExecutionService {
-    private static final Logger logger = LoggerFactory.getLogger(DroolsFrameworkRulesExecutionService.class);
+public class DroolsChtijbugRulesExecutionService {
+    private static final Logger logger = LoggerFactory.getLogger(DroolsChtijbugRulesExecutionService.class);
 
     private KieServerRegistry context;
     private RuleBasePackage ruleBasePackage = null;
@@ -40,7 +40,7 @@ public class DroolsFrameworkRulesExecutionService {
     private int MaxNumberRulesToExecute = 20000;
     private KieServerAddOnElement kieServerAddOnElement = null;
 
-    public DroolsFrameworkRulesExecutionService(KieServerRegistry context, KieServerAddOnElement kieServerAddOnElement) {
+    public DroolsChtijbugRulesExecutionService(KieServerRegistry context, KieServerAddOnElement kieServerAddOnElement) {
         this.context = context;
         this.messageHandlerResolver = new MessageHandlerResolver();
         this.kieServerAddOnElement = kieServerAddOnElement;

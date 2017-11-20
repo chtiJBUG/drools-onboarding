@@ -97,10 +97,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>org.kie.server</groupId>
             <artifactId>kie-server-services-drools</artifactId>
-        </dependency>
+        </dependency-->
         <!--dependency>
             <groupId>org.kie.server</groupId>
             <artifactId>kie-server-services-jbpm</artifactId>
