@@ -50,9 +50,9 @@ public class DroolsChtijbugKieServerExtension implements KieServerExtension {
 
     @Override
     public void init(KieServerImpl kieServer, KieServerRegistry registry) {
+        initExtensionsList();
         this.rulesExecutionService = new DroolsChtijbugRulesExecutionService(registry, this.kieServerAddOnElement);
         this.registry = registry;
-        initExtensionsList();
         services.add(rulesExecutionService);
     }
 
