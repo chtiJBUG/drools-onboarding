@@ -2,7 +2,6 @@ package org.chtijbug.drools.kieserver.drools.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.chtijbug.drools.kieserver.extension.KieServerAddOnElement;
-import org.chtijbug.drools.kieserver.extension.KieServerAsyncCallBack;
 import org.chtijbug.drools.kieserver.extension.KieServerLoggingDefinition;
 import org.chtijbug.kieserver.services.drools.ChtijbugObjectRequest;
 import org.chtijbug.kieserver.services.drools.DroolsChtijbugRulesExecutionService;
@@ -33,30 +32,18 @@ public class GenericResource {
         this.registry = registry;
     }
 
-    private Class getClassFromName(Set<Class<?>> classes,String name){
-        Class result=null;
-            for (Class c : classes){
-                if (c.getCanonicalName().equals(name)){
-                    result=c;
-                    break;
-                }
+    private Class getClassFromName(Set<Class<?>> classes, String name) {
+        Class result = null;
+        for (Class c : classes) {
+            if (c.getCanonicalName().equals(name)) {
+                result = c;
+                break;
             }
+        }
         return result;
     }
 
 
-    @POST
-    @Path("/runAsync/{id}/{processId}/{className}/{maxNumberRulesToExecute}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public String runSessionAsync(@PathParam("id") String id,
-                                  @PathParam("processId") String processID,
-                                  @PathParam("className") String className,
-                                  @PathParam("className") String maxNumberRulesToExecute,
-                                  String objectRequest) {
-        String result = null;
-        return result;
-    }
 
     @POST
     @Path("/run/{id}/{processId}/{className}")
@@ -71,23 +58,21 @@ public class GenericResource {
         try {
             localClassLoader = Thread.currentThread()
                     .getContextClassLoader();
-        }catch (ClassCastException e){
-            logger.info("DroolsFactObject.updateRealObjectFromJSON",e);
+        } catch (ClassCastException e) {
+            logger.info("DroolsFactObject.updateRealObjectFromJSON", e);
         }
         try {
 
             KieContainerInstance kci = registry.getContainer(id);
             Set<Class<?>> classes = kci.getExtraClasses();
-            Class foundClass=this.getClassFromName(classes,className);
-            if (foundClass!= null) {
+            Class foundClass = this.getClassFromName(classes, className);
+            if (foundClass != null) {
                 ClassLoader classLoader = foundClass.getClassLoader();
                 Object input = mapper.readValue(objectRequest, classLoader.loadClass(className));
                 ChtijbugObjectRequest chtijbugObjectRequest = new ChtijbugObjectRequest();
                 chtijbugObjectRequest.setObjectRequest(input);
                 KieServerAddOnElement kieServerAddOnElement = rulesExecutionService.getKieServerAddOnElement();
                 if (kieServerAddOnElement != null) {
-
-
                     for (KieServerLoggingDefinition kieServerLoggingDefinition : kieServerAddOnElement.getKieServerLoggingDefinitions()) {
                         kieServerLoggingDefinition.OnFireAllrulesStart(kci.getKieContainer().getReleaseId().getGroupId(), kci.getKieContainer().getReleaseId().getArtifactId(), kci.getKieContainer().getReleaseId().getVersion(), input);
                     }
@@ -96,9 +81,6 @@ public class GenericResource {
                 ObjectMapper mapper = new ObjectMapper();
                 String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getSessionLogging());
                 if (kieServerAddOnElement != null) {
-                    for (KieServerAsyncCallBack kieServerAsyncCallBack : kieServerAddOnElement.getKieServerAsyncCallBacks()) {
-                        kieServerAsyncCallBack.OnFireAllrulesEnd(kci.getKieContainer().getReleaseId().getGroupId(), kci.getKieContainer().getReleaseId().getArtifactId(), kci.getKieContainer().getReleaseId().getVersion(), chtijbutObjectResponse.getObjectRequest(), chtijbutObjectResponse.getSessionLogging());
-                    }
 
                     for (KieServerLoggingDefinition kieServerLoggingDefinition : kieServerAddOnElement.getKieServerLoggingDefinitions()) {
                         kieServerLoggingDefinition.OnFireAllrulesEnd(kci.getKieContainer().getReleaseId().getGroupId(), kci.getKieContainer().getReleaseId().getArtifactId(), kci.getKieContainer().getReleaseId().getVersion(), chtijbutObjectResponse.getObjectRequest(), jsonInString);

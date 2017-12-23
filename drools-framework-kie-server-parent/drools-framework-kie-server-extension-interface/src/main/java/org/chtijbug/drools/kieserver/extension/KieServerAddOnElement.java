@@ -9,14 +9,12 @@ public class KieServerAddOnElement {
     private List<KieServerGlobalVariableDefinition> kieServerGlobalVariableDefinitions = null;
     private List<KieServerLoggingDefinition> kieServerLoggingDefinitions = null;
     private List<KieServerListenerDefinition> kieServerListenerDefinitions = null;
-    private List<KieServerAsyncCallBack> kieServerAsyncCallBacks = null;
     private Map<String, Object> globals = new HashMap<>();
 
-    public KieServerAddOnElement(List<KieServerGlobalVariableDefinition> kieServerGlobalVariableDefinitions, List<KieServerLoggingDefinition> kieServerLoggingDefinitions, List<KieServerListenerDefinition> kieServerListenerDefinitions, List<KieServerAsyncCallBack> kieServerAsyncCallBacks) {
+    public KieServerAddOnElement(List<KieServerGlobalVariableDefinition> kieServerGlobalVariableDefinitions, List<KieServerLoggingDefinition> kieServerLoggingDefinitions, List<KieServerListenerDefinition> kieServerListenerDefinitions) {
         this.kieServerGlobalVariableDefinitions = kieServerGlobalVariableDefinitions;
         this.kieServerLoggingDefinitions = kieServerLoggingDefinitions;
         this.kieServerListenerDefinitions = kieServerListenerDefinitions;
-        this.kieServerAsyncCallBacks = kieServerAsyncCallBacks;
     }
 
     public List<KieServerGlobalVariableDefinition> getKieServerGlobalVariableDefinitions() {
@@ -31,9 +29,6 @@ public class KieServerAddOnElement {
         return kieServerListenerDefinitions;
     }
 
-    public List<KieServerAsyncCallBack> getKieServerAsyncCallBacks() {
-        return kieServerAsyncCallBacks;
-    }
 
     public Map<String, Object> getGlobals() {
         return globals;

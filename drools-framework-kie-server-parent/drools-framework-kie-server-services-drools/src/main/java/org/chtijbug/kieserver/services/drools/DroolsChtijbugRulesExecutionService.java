@@ -15,7 +15,10 @@
 
 package org.chtijbug.kieserver.services.drools;
 
-import org.chtijbug.drools.kieserver.extension.*;
+import org.chtijbug.drools.kieserver.extension.KieServerAddOnElement;
+import org.chtijbug.drools.kieserver.extension.KieServerGlobalVariableDefinition;
+import org.chtijbug.drools.kieserver.extension.KieServerListenerDefinition;
+import org.chtijbug.drools.kieserver.extension.KieServerLoggingDefinition;
 import org.chtijbug.drools.runtime.DroolsChtijbugException;
 import org.chtijbug.drools.runtime.RuleBasePackage;
 import org.chtijbug.drools.runtime.RuleBaseSession;
@@ -76,9 +79,6 @@ public class DroolsChtijbugRulesExecutionService {
                 KieContainer kieContainer = kci.getKieContainer();
                 ruleBasePackage = new RuleBaseSingleton(kieContainer, sessionMaxNumberRulesToExecute, kieServerAddOnElement);
                 if (kieServerAddOnElement != null) {
-                    for (KieServerAsyncCallBack kieServerAsyncCallBack : kieServerAddOnElement.getKieServerAsyncCallBacks()) {
-                        kieServerAsyncCallBack.OnCreateKieBase();
-                    }
                     for (KieServerGlobalVariableDefinition kieServerGlobalVariableDefinition : kieServerAddOnElement.getKieServerGlobalVariableDefinitions()) {
                         kieServerGlobalVariableDefinition.OnCreateKieBase(kieServerAddOnElement.getGlobals());
                     }

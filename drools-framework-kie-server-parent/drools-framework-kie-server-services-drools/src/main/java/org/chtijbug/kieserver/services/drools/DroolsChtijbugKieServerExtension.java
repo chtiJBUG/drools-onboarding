@@ -15,7 +15,10 @@
 
 package org.chtijbug.kieserver.services.drools;
 
-import org.chtijbug.drools.kieserver.extension.*;
+import org.chtijbug.drools.kieserver.extension.KieServerAddOnElement;
+import org.chtijbug.drools.kieserver.extension.KieServerGlobalVariableDefinition;
+import org.chtijbug.drools.kieserver.extension.KieServerListenerDefinition;
+import org.chtijbug.drools.kieserver.extension.KieServerLoggingDefinition;
 import org.kie.api.remote.Remotable;
 import org.kie.scanner.KieModuleMetaData;
 import org.kie.server.api.KieServerConstants;
@@ -72,12 +75,8 @@ public class DroolsChtijbugKieServerExtension implements KieServerExtension {
         for (KieServerListenerDefinition loadedImpl : serverExtensions3) {
             kieServerListenerDefinitions.add(loadedImpl);
         }
-        List<KieServerAsyncCallBack> kieServerAsyncCallBacks = new ArrayList<>();
-        ServiceLoader<KieServerAsyncCallBack> serverExtensions4 = ServiceLoader.load(KieServerAsyncCallBack.class);
-        for (KieServerAsyncCallBack loadedImpl : serverExtensions4) {
-            kieServerAsyncCallBacks.add(loadedImpl);
-        }
-        this.kieServerAddOnElement = new KieServerAddOnElement(kieServerGlobalVariableDefinitions, kieServerLoggingDefinitions, kieServerListenerDefinitions, kieServerAsyncCallBacks);
+
+        this.kieServerAddOnElement = new KieServerAddOnElement(kieServerGlobalVariableDefinitions, kieServerLoggingDefinitions, kieServerListenerDefinitions);
 
 
     }
@@ -142,9 +141,7 @@ public class DroolsChtijbugKieServerExtension implements KieServerExtension {
     public void disposeContainer(String id, KieContainerInstance kieContainerInstance, Map<String, Object> parameters) {
         System.out.println("disposeContainer");
         if (kieServerAddOnElement != null) {
-            for (KieServerAsyncCallBack kieServerAsyncCallBack : kieServerAddOnElement.getKieServerAsyncCallBacks()) {
-                kieServerAsyncCallBack.OnDisposeKieBase();
-            }
+
             for (KieServerGlobalVariableDefinition kieServerGlobalVariableDefinition : kieServerAddOnElement.getKieServerGlobalVariableDefinitions()) {
                 kieServerGlobalVariableDefinition.OnDisposeKieBase();
             }
