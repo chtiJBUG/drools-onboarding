@@ -35,7 +35,8 @@ public class GenericResource {
     private Class getClassFromName(Set<Class<?>> classes, String name) {
         Class result = null;
         for (Class c : classes) {
-            if (c.getCanonicalName().equals(name)) {
+            if (c.getCanonicalName() != null
+                    && c.getCanonicalName().equals(name)) {
                 result = c;
                 break;
             }
