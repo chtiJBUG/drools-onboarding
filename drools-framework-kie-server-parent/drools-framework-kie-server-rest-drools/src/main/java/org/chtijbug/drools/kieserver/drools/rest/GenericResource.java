@@ -90,7 +90,7 @@ public class GenericResource {
                 response = chtijbutObjectResponse.getObjectRequest();
             }
             //response.setSessionLogging(jsonInString);
-            logger.debug("Returning OK response with content '{}'", objectRequest);
+            logger.debug("Returning OK response with content '{}'", response);
             return response;
         } catch (Exception e) {
             // in case marshalling failed return the FireAllRulesAndStartProcess container response to keep backward compatibility
