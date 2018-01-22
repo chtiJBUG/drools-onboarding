@@ -79,12 +79,10 @@ public class GenericResource {
                     }
                 }
                 ChtijbugObjectRequest chtijbutObjectResponse = rulesExecutionService.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID);
-                mapper = new ObjectMapper();
-                String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getSessionLogging());
                 if (kieServerAddOnElement != null) {
 
                     for (KieServerLoggingDefinition kieServerLoggingDefinition : kieServerAddOnElement.getKieServerLoggingDefinitions()) {
-                        kieServerLoggingDefinition.OnFireAllrulesEnd(kci.getKieContainer().getReleaseId().getGroupId(), kci.getKieContainer().getReleaseId().getArtifactId(), kci.getKieContainer().getReleaseId().getVersion(), chtijbutObjectResponse.getObjectRequest(), jsonInString);
+                        kieServerLoggingDefinition.OnFireAllrulesEnd(kci.getKieContainer().getReleaseId().getGroupId(), kci.getKieContainer().getReleaseId().getArtifactId(), kci.getKieContainer().getReleaseId().getVersion(), chtijbutObjectResponse.getObjectRequest(), chtijbutObjectResponse.getSessionLogging());
                     }
                 }
                 response = chtijbutObjectResponse.getObjectRequest();

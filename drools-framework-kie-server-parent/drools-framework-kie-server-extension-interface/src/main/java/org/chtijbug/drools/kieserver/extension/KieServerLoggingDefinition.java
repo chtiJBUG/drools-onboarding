@@ -6,7 +6,7 @@ public interface KieServerLoggingDefinition {
 
     void OnFireAllrulesStart(String groupID, String artifactId, String version, Object inputDataObject);
 
-    void OnFireAllrulesEnd(String groupID, String artifactId, String version, Object outputDataObject, String jsonSessionLogging);
+    void OnFireAllrulesEnd(String groupID, String artifactId, String version, Object outputDataObject, Object sessionLogging);
 
     void OnDisposeKieBase();
 }
