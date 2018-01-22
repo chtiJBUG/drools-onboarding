@@ -79,7 +79,7 @@ public class GenericResource {
                     }
                 }
                 ChtijbugObjectRequest chtijbutObjectResponse = rulesExecutionService.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID);
-                ObjectMapper mapper = new ObjectMapper();
+                mapper = new ObjectMapper();
                 String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getSessionLogging());
                 if (kieServerAddOnElement != null) {
 
