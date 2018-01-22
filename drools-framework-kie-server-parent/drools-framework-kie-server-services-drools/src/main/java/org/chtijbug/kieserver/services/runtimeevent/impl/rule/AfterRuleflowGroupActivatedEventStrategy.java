@@ -19,7 +19,7 @@ package org.chtijbug.kieserver.services.runtimeevent.impl.rule;
 import org.chtijbug.drools.entity.history.HistoryEvent;
 import org.chtijbug.drools.entity.history.rule.AfterRuleFlowActivatedHistoryEvent;
 import org.chtijbug.kieserver.services.runtimeevent.AbstractMemoryEventHandlerStrategy;
-import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
+import org.chtijbug.drools.SessionContext;
 
 public class AfterRuleflowGroupActivatedEventStrategy implements AbstractMemoryEventHandlerStrategy {
 

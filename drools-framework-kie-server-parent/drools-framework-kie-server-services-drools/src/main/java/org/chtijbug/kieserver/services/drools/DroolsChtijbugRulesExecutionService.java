@@ -24,7 +24,7 @@ import org.chtijbug.drools.runtime.RuleBasePackage;
 import org.chtijbug.drools.runtime.RuleBaseSession;
 import org.chtijbug.drools.runtime.impl.RuleBaseSingleton;
 import org.chtijbug.kieserver.services.runtimeevent.MessageHandlerResolver;
-import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
+import org.chtijbug.drools.SessionContext;
 import org.kie.api.runtime.KieContainer;
 import org.kie.server.services.api.KieContainerInstance;
 import org.kie.server.services.api.KieServerRegistry;

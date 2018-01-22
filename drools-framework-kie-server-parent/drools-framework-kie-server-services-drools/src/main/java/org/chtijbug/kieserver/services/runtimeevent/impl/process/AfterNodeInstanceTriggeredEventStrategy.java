@@ -23,7 +23,7 @@ import org.chtijbug.drools.logging.ProcessExecution;
 import org.chtijbug.drools.logging.RuleflowGroup;
 import org.chtijbug.drools.logging.RuleflowGroupStatus;
 import org.chtijbug.kieserver.services.runtimeevent.AbstractMemoryEventHandlerStrategy;
-import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
+import org.chtijbug.drools.SessionContext;
 
 public class AfterNodeInstanceTriggeredEventStrategy implements AbstractMemoryEventHandlerStrategy {
 

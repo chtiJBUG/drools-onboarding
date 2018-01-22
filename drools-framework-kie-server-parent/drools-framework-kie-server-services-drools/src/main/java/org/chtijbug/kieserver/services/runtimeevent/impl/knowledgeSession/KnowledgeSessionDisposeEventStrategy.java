@@ -21,7 +21,7 @@ import org.chtijbug.drools.entity.history.session.SessionDisposedEvent;
 import org.chtijbug.drools.logging.SessionExecution;
 import org.chtijbug.drools.logging.SessionExecutionStatus;
 import org.chtijbug.kieserver.services.runtimeevent.AbstractMemoryEventHandlerStrategy;
-import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
+import org.chtijbug.drools.SessionContext;
 
 import java.util.Date;
 

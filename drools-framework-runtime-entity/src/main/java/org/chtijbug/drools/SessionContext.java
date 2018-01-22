@@ -1,4 +1,4 @@
-package org.chtijbug.kieserver.services.runtimeevent;
+package org.chtijbug.drools;
 
 import org.chtijbug.drools.logging.*;
 import org.chtijbug.drools.logging.RuleExecution;

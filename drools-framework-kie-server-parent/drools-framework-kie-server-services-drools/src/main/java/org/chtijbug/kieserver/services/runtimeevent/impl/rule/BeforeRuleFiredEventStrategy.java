@@ -25,7 +25,7 @@ import org.chtijbug.drools.logging.RuleflowGroup;
 import org.chtijbug.drools.logging.SessionExecution;
 import org.chtijbug.drools.logging.RuleExecution;
 import org.chtijbug.kieserver.services.runtimeevent.AbstractMemoryEventHandlerStrategy;
-import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
+import org.chtijbug.drools.SessionContext;
 
 public class BeforeRuleFiredEventStrategy implements AbstractMemoryEventHandlerStrategy {
 

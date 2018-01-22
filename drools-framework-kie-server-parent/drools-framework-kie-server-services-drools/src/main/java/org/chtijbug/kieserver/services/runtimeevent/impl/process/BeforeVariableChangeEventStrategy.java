@@ -19,7 +19,7 @@ package org.chtijbug.kieserver.services.runtimeevent.impl.process;
 import org.chtijbug.drools.entity.history.HistoryEvent;
 import org.chtijbug.drools.entity.history.process.BeforeVariableChangeChangedHistoryEvent;
 import org.chtijbug.kieserver.services.runtimeevent.AbstractMemoryEventHandlerStrategy;
-import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
+import org.chtijbug.drools.SessionContext;
 
 public class BeforeVariableChangeEventStrategy implements AbstractMemoryEventHandlerStrategy {
 

@@ -1,6 +1,6 @@
 package org.chtijbug.kieserver.services.drools;
 
-import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
+import org.chtijbug.drools.SessionContext;
 
 /**
  * Created by nheron on 07/07/2016.

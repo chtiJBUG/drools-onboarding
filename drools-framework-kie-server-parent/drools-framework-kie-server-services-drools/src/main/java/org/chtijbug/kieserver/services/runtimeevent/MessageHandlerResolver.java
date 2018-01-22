@@ -15,6 +15,7 @@
  */
 package org.chtijbug.kieserver.services.runtimeevent;
 
+import org.chtijbug.drools.SessionContext;
 import org.chtijbug.drools.entity.history.HistoryEvent;
 import org.chtijbug.kieserver.services.runtimeevent.impl.fact.*;
 import org.chtijbug.kieserver.services.runtimeevent.impl.knowledgeSession.*;

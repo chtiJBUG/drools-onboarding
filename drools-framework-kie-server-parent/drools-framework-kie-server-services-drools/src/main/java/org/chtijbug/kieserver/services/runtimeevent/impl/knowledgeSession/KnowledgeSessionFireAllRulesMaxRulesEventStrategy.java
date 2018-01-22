@@ -21,7 +21,7 @@ import org.chtijbug.drools.entity.history.session.SessionFireAllRulesMaxNumberRe
 import org.chtijbug.drools.logging.FireAllRulesExecution;
 import org.chtijbug.drools.logging.FireAllRulesExecutionStatus;
 import org.chtijbug.kieserver.services.runtimeevent.AbstractMemoryEventHandlerStrategy;
-import org.chtijbug.kieserver.services.runtimeevent.SessionContext;
+import org.chtijbug.drools.SessionContext;
 
 public class KnowledgeSessionFireAllRulesMaxRulesEventStrategy implements AbstractMemoryEventHandlerStrategy {
     @Override
