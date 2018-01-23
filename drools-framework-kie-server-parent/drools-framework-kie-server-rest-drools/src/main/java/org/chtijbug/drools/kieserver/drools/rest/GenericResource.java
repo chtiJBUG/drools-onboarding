@@ -3,6 +3,7 @@ package org.chtijbug.drools.kieserver.drools.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.chtijbug.drools.kieserver.extension.KieServerAddOnElement;
 import org.chtijbug.drools.kieserver.extension.KieServerLoggingDefinition;
+import org.chtijbug.drools.logging.SessionExecution;
 import org.chtijbug.kieserver.services.drools.ChtijbugObjectRequest;
 import org.chtijbug.kieserver.services.drools.DroolsChtijbugRulesExecutionService;
 import org.kie.server.services.api.KieContainerInstance;
@@ -60,7 +61,7 @@ public class GenericResource {
             localClassLoader = Thread.currentThread()
                     .getContextClassLoader();
         } catch (ClassCastException e) {
-            logger.info("DroolsFactObject.updateRealObjectFromJSON", e);
+            logger.info("GenericResource.runSession", e);
         }
         try {
 
@@ -79,6 +80,11 @@ public class GenericResource {
                     }
                 }
                 ChtijbugObjectRequest chtijbutObjectResponse = rulesExecutionService.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID);
+                /**
+                 * remove facts from logging to avoid infinite loop when marshalling to json and size of logging
+                 */
+                SessionExecution sessionExecution = chtijbutObjectResponse.getSessionLogging().getSessionExecution();
+                sessionExecution.getFacts().clear();
                 if (kieServerAddOnElement != null) {
 
                     for (KieServerLoggingDefinition kieServerLoggingDefinition : kieServerAddOnElement.getKieServerLoggingDefinitions()) {
@@ -118,7 +124,7 @@ public class GenericResource {
             localClassLoader = Thread.currentThread()
                     .getContextClassLoader();
         } catch (ClassCastException e) {
-            logger.info("DroolsFactObject.updateRealObjectFromJSON", e);
+            logger.info("GenericResource.runSessionWithName", e);
         }
         try {
 
