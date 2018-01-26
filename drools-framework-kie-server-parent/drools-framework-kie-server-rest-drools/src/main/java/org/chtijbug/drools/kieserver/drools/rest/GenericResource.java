@@ -1,6 +1,8 @@
 package org.chtijbug.drools.kieserver.drools.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.chtijbug.drools.common.rest.InputElement;
+import org.chtijbug.drools.common.rest.MultipleInputs;
 import org.chtijbug.drools.kieserver.extension.KieServerAddOnElement;
 import org.chtijbug.drools.kieserver.extension.KieServerLoggingDefinition;
 import org.chtijbug.drools.logging.SessionExecution;
@@ -13,6 +15,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 @Path("server/containers/instances/generic/")
@@ -45,7 +49,71 @@ public class GenericResource {
         return result;
     }
 
+    @POST
+    @Path("/runMultiple/{id}/{processId}/{className}")
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Object runSessionMaps(@PathParam("id") String id,
+                                 @PathParam("processId") String processID,
+                                 MultipleInputs objectRequest) {
+        ClassLoader localClassLoader = null;
+        Object response = null;
+        try {
+            localClassLoader = Thread.currentThread()
+                    .getContextClassLoader();
+        } catch (ClassCastException e) {
+            logger.info("GenericResource.runSession", e);
+        }
+        try {
+            Map<String, Object> newInput = new HashMap<>();
+            KieContainerInstance kci = registry.getContainer(id);
+            Set<Class<?>> classes = kci.getExtraClasses();
+            for (InputElement element : objectRequest.getInputElementList()) {
+                Class foundClass = this.getClassFromName(classes, element.getClassName());
+                if (foundClass != null) {
+                    ClassLoader classLoader = foundClass.getClassLoader();
+                    Object input = mapper.readValue(element.getJsonInput(), classLoader.loadClass(element.getClassName()));
+                    newInput.put(element.getClassName(), input);
 
+                }
+            }
+            ChtijbugObjectRequest chtijbugObjectRequest = new ChtijbugObjectRequest();
+            chtijbugObjectRequest.setObjectRequest(newInput);
+            KieServerAddOnElement kieServerAddOnElement = rulesExecutionService.getKieServerAddOnElement();
+            if (kieServerAddOnElement != null) {
+                for (KieServerLoggingDefinition kieServerLoggingDefinition : kieServerAddOnElement.getKieServerLoggingDefinitions()) {
+                    kieServerLoggingDefinition.OnFireAllrulesStart(kci.getKieContainer().getReleaseId().getGroupId(), kci.getKieContainer().getReleaseId().getArtifactId(), kci.getKieContainer().getReleaseId().getVersion(), newInput);
+                }
+            }
+            ChtijbugObjectRequest chtijbutObjectResponse = rulesExecutionService.FireAllRulesAndStartProcess(kci, chtijbugObjectRequest, processID);
+            /**
+             * remove facts from logging to avoid infinite loop when marshalling to json and size of logging
+             */
+            SessionExecution sessionExecution = chtijbutObjectResponse.getSessionLogging().getSessionExecution();
+            sessionExecution.getFacts().clear();
+            if (kieServerAddOnElement != null) {
+
+                for (KieServerLoggingDefinition kieServerLoggingDefinition : kieServerAddOnElement.getKieServerLoggingDefinitions()) {
+                    kieServerLoggingDefinition.OnFireAllrulesEnd(kci.getKieContainer().getReleaseId().getGroupId(), kci.getKieContainer().getReleaseId().getArtifactId(), kci.getKieContainer().getReleaseId().getVersion(), chtijbutObjectResponse.getObjectRequest(), chtijbutObjectResponse.getSessionLogging());
+                }
+            }
+            response = chtijbutObjectResponse.getObjectRequest();
+
+            //response.setSessionLogging(jsonInString);
+            logger.debug("Returning OK response with content '{}'", response);
+            return response;
+        } catch (Exception e) {
+            // in case marshalling failed return the FireAllRulesAndStartProcess container response to keep backward compatibility
+            String responseMessage = "Execution failed with error : " + e.getMessage();
+            logger.debug("Returning Failure response with content '{}'", responseMessage);
+            return objectRequest;
+        } finally {
+            if (localClassLoader != null) {
+                Thread.currentThread().setContextClassLoader(localClassLoader);
+            }
+        }
+
+    }
 
     @POST
     @Path("/run/{id}/{processId}/{className}")

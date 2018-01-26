@@ -316,6 +316,7 @@ public class RuleBaseStatefulSession implements RuleBaseSession {
     @Override
     public void insertByReflection(Object newObject) throws DroolsChtijbugException {
         // Avoid inserting java.* classes
+
         if (newObject.getClass().getPackage().getName().startsWith("java.")) {
             return;
         }
