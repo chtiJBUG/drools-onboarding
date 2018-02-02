@@ -15,6 +15,7 @@
 
 package org.chtijbug.kieserver.services.drools;
 
+import org.chtijbug.drools.SessionContext;
 import org.chtijbug.drools.kieserver.extension.KieServerAddOnElement;
 import org.chtijbug.drools.kieserver.extension.KieServerGlobalVariableDefinition;
 import org.chtijbug.drools.kieserver.extension.KieServerListenerDefinition;
@@ -23,8 +24,7 @@ import org.chtijbug.drools.runtime.DroolsChtijbugException;
 import org.chtijbug.drools.runtime.RuleBasePackage;
 import org.chtijbug.drools.runtime.RuleBaseSession;
 import org.chtijbug.drools.runtime.impl.RuleBaseSingleton;
-import org.chtijbug.kieserver.services.runtimeevent.MessageHandlerResolver;
-import org.chtijbug.drools.SessionContext;
+import org.chtijbug.drools.runtimeevent.MessageHandlerResolver;
 import org.kie.api.runtime.KieContainer;
 import org.kie.server.services.api.KieContainerInstance;
 import org.kie.server.services.api.KieServerRegistry;
