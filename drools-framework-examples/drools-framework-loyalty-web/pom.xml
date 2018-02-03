@@ -47,6 +47,7 @@
         <dependency>
             <groupId>org.chtijbug.drools</groupId>
             <artifactId>drools-framework-loyalty-model</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -86,14 +87,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.chtijbug.drools</groupId>
-            <artifactId>drools-framework-loyalty-model</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
@@ -238,11 +231,6 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>1.4.0.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>1.4.0.RELEASE</version>
 
@@ -255,11 +243,6 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>4.3.1.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
                 <version>4.3.1.RELEASE</version>
             </dependency>
             <dependency>

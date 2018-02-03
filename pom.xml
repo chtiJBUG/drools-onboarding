@@ -259,11 +259,6 @@
             </dependency>
             <dependency>
                 <groupId>org.chtijbug.drools</groupId>
-                <artifactId>drools-framework-runtime-entity</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.chtijbug.drools</groupId>
                 <artifactId>drools-framework-kie-server-extension-interface</artifactId>
                 <version>${project.version}</version>
             </dependency>
