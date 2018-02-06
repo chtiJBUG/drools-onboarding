@@ -179,7 +179,7 @@ public class RuleBaseSingleton implements RuleBasePackage {
                 //_____ Now we can create a new stateful session using KnowledgeBase
                 KieSession newDroolsSession = null;
                 if (sessionName == null) {
-                    newDroolsSession = this.kieContainer.newKieSession();
+                    newDroolsSession = this.kieContainer.getKieBase().newKieSession();
                 } else {
                     newDroolsSession = this.kieContainer.newKieSession(sessionName);
                 }
