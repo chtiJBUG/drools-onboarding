@@ -21,7 +21,7 @@ public class KnowledgeModule {
     private final String artifactId;
     private final String version;
     private final KieServices kieServices;
-
+    private String ruleBaseName;
     private final KieResources kieResources;
     private final KieFileSystem kieFileSystem;
     private final KieRepository kieRepository;
@@ -45,6 +45,20 @@ public class KnowledgeModule {
         this.kieResources = kieServices.getResources();
         this.kieFileSystem = kieServices.newKieFileSystem();
         this.sharedCounter = sharedCounter;
+    }
+
+    public KnowledgeModule(String ruleBaseName, HistoryListener historyListener, EventCounter sharedCounter) {
+        this.ruleBaseName = ruleBaseName;
+        this.historyListener = historyListener;
+        this.groupId = null;
+        this.artifactId = null;
+        this.version = null;
+        this.kieServices = KieServices.Factory.get();
+        this.kieRepository = kieServices.getRepository();
+        this.kieResources = kieServices.getResources();
+        this.kieFileSystem = kieServices.newKieFileSystem();
+        this.sharedCounter = sharedCounter;
+        this.ruleBaseId = 1L;
     }
 
     public KnowledgeModule(Long ruleBaseId, HistoryListener historyListener, EventCounter sharedCounter) {

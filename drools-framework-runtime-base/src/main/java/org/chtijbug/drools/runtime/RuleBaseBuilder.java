@@ -100,4 +100,17 @@ public abstract class RuleBaseBuilder {
         }
     }
 
+    public static RuleBasePackage createRuleBasePackage(String rulebaseName, HistoryListener historyListener, ClassLoader... classLoader) throws DroolsChtijbugException {
+        logger.debug(">>createRuleBasePackage");
+
+        RuleBaseSingleton ruleBasePackage = new RuleBaseSingleton(rulebaseName, RuleBaseSingleton.DEFAULT_RULE_THRESHOLD, historyListener);
+        try {
+            ruleBasePackage.createKBase(classLoader);
+            //_____ Returning the result
+            return ruleBasePackage;
+        } finally {
+            logger.debug("<<createRuleBasePackage", ruleBasePackage);
+        }
+    }
+
 }

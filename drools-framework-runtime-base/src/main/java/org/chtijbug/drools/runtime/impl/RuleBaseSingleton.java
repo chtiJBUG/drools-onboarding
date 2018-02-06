@@ -59,6 +59,7 @@ public class RuleBaseSingleton implements RuleBasePackage {
     /**
      * Rule Base ID
      */
+    private String ruleBaseName;
     private Long ruleBaseID;
     private KieContainer kieContainer;
     private ReleaseId releaseId;
@@ -126,7 +127,19 @@ public class RuleBaseSingleton implements RuleBasePackage {
     }
 
 
-
+    public RuleBaseSingleton(String ruleBaseName, int maxNumberRulesToExecute, HistoryListener historyListener) throws DroolsChtijbugException {
+        this.ruleBaseName = ruleBaseName;
+        this.maxNumberRuleToExecute = maxNumberRulesToExecute;
+        this.historyListener = historyListener;
+        if (this.historyListener != null) {
+            KnowledgeBaseCreatedEvent knowledgeBaseCreatedEvent = new KnowledgeBaseCreatedEvent(eventCounter.next(), new Date(), ruleBaseID);
+            this.historyListener.fireEvent(knowledgeBaseCreatedEvent);
+        }
+        this.groupId = groupId;
+        this.artifactId = artifactId;
+        this.version = version;
+        this.knowledgeModule = new KnowledgeModule(this.ruleBaseName, this.historyListener, eventCounter);
+    }
     public RuleBaseSingleton(Long ruleBaseID, int maxNumberRulesToExecute, HistoryListener historyListener) throws DroolsChtijbugException {
         this.ruleBaseID = ruleBaseID;
         this.maxNumberRuleToExecute = maxNumberRulesToExecute;
@@ -179,7 +192,11 @@ public class RuleBaseSingleton implements RuleBasePackage {
                 //_____ Now we can create a new stateful session using KnowledgeBase
                 KieSession newDroolsSession = null;
                 if (sessionName == null) {
-                    newDroolsSession = this.kieContainer.getKieBase().newKieSession();
+                    if (ruleBaseName != null && ruleBaseName.length() > 0) {
+                        newDroolsSession = this.kieContainer.getKieBase(ruleBaseName).newKieSession();
+                    } else {
+                        newDroolsSession = this.kieContainer.getKieBase().newKieSession();
+                    }
                 } else {
                     newDroolsSession = this.kieContainer.newKieSession(sessionName);
                 }
