@@ -2,6 +2,7 @@ package org.chtijbug.drools.runtime.resource;
 
 import org.chtijbug.drools.entity.history.EventCounter;
 import org.chtijbug.drools.entity.history.knowledge.KnowledgeBaseAddResourceEvent;
+import org.chtijbug.drools.runtime.ChtiJbugKieServicesImpl;
 import org.chtijbug.drools.runtime.DroolsChtijbugException;
 import org.chtijbug.drools.runtime.listener.HistoryListener;
 import org.kie.api.KieServices;
@@ -40,7 +41,7 @@ public class KnowledgeModule {
         this.groupId = groupId;
         this.artifactId = artifactId;
         this.version = version;
-        this.kieServices = KieServices.Factory.get();
+        this.kieServices = new ChtiJbugKieServicesImpl();
         this.kieRepository = kieServices.getRepository();
         this.kieResources = kieServices.getResources();
         this.kieFileSystem = kieServices.newKieFileSystem();
@@ -53,7 +54,7 @@ public class KnowledgeModule {
         this.groupId = null;
         this.artifactId = null;
         this.version = null;
-        this.kieServices = KieServices.Factory.get();
+        this.kieServices = new ChtiJbugKieServicesImpl();
         this.kieRepository = kieServices.getRepository();
         this.kieResources = kieServices.getResources();
         this.kieFileSystem = kieServices.newKieFileSystem();
@@ -67,7 +68,7 @@ public class KnowledgeModule {
         this.groupId = null;
         this.artifactId = null;
         this.version = null;
-        this.kieServices = KieServices.Factory.get();
+        this.kieServices =  new ChtiJbugKieServicesImpl();
         this.kieRepository = kieServices.getRepository();
         this.kieResources = kieServices.getResources();
         this.kieFileSystem = kieServices.newKieFileSystem();
@@ -114,7 +115,6 @@ public class KnowledgeModule {
         return this.kieServices.getKieClasspathContainer(classLoader);
     }
     public KieContainer buildFromClassPath() {
-
         return this.kieServices.getKieClasspathContainer();
     }
 
