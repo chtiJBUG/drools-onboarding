@@ -293,14 +293,17 @@ public class RuleBaseSingleton implements RuleBasePackage {
         }
     }
 
-    public void createKBase() {
+    public void createKBase(ClassLoader... classLoaders) {
         try {
             if (this.historyListener != null) {
                 this.historyListener.fireEvent(new KnowledgeBaseInitialLoadEvent(eventCounter.next(), new Date(), this.ruleBaseID));
             }
             lockKbase.acquire();
-
-            kieContainer = this.knowledgeModule.buildFromClassPath();
+            if (classLoaders.length == 0) {
+                kieContainer = this.knowledgeModule.buildFromClassPath();
+            } else {
+                kieContainer = this.knowledgeModule.buildFromClassPath(classLoaders[0]);
+            }
             lockKbase.release();
         } catch (InterruptedException | DroolsChtijbugException e) {
             propagate(e);

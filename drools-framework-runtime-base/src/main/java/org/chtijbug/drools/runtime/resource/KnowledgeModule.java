@@ -96,8 +96,10 @@ public class KnowledgeModule {
         return this.kieServices.newKieContainer(releaseId);
     }
 
+    public KieContainer buildFromClassPath(ClassLoader classLoader) {
+        return this.kieServices.getKieClasspathContainer(classLoader);
+    }
     public KieContainer buildFromClassPath() {
-
 
         return this.kieServices.getKieClasspathContainer();
     }
