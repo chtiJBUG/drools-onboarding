@@ -1,6 +1,7 @@
 package org.chtijbug.drools.kieserver.drools.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.FileUtils;
 import org.chtijbug.drools.common.rest.InputElement;
 import org.chtijbug.drools.common.rest.MultipleInputs;
 import org.chtijbug.drools.kieserver.extension.KieServerAddOnElement;
@@ -15,9 +16,11 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 @Path("server/containers/instances/generic/")
 public class GenericResource {
@@ -159,6 +162,14 @@ public class GenericResource {
                         kieServerLoggingDefinition.OnFireAllrulesEnd(kci.getKieContainer().getReleaseId().getGroupId(), kci.getKieContainer().getReleaseId().getArtifactId(), kci.getKieContainer().getReleaseId().getVersion(), chtijbutObjectResponse.getObjectRequest(), chtijbutObjectResponse.getSessionLogging());
                     }
                 }
+
+                String fileTemp = System.getProperty("org.chtijbug.server.tracedir");
+                if (fileTemp != null) {
+                    String jsonInString = mapper.writeValueAsString(chtijbutObjectResponse.getSessionLogging());
+                    File traceFile = new File(fileTemp + "/" + UUID.randomUUID().toString());
+                    FileUtils.writeStringToFile(traceFile, jsonInString);
+                }
+
                 response = chtijbutObjectResponse.getObjectRequest();
             }
             //response.setSessionLogging(jsonInString);

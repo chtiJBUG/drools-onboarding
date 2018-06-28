@@ -79,7 +79,7 @@ public class MessageHandlerResolver {
                 try {
                     strategy.handleMessageInternally(historyEvent, sessionContext);
                 }catch (Exception e){
-                    logger.error("MessageHandle for class"+historyEvent.getClass().toString(),historyEvent);
+                    logger.error("MessageHandle for class" + historyEvent.getClass().toString(), historyEvent, e);
                 }
             }
         }
